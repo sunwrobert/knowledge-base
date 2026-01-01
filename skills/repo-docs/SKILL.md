@@ -11,24 +11,24 @@ Clone and sync documentation repositories to `~/.local/repos` for local referenc
 
 ```bash
 # Clone a repo (or pull if already exists)
-bun scripts/repo-docs.ts <url>
+bun scripts/repo-docs/repo-docs.ts <url>
 
 # Sync all repos in ~/.local/repos
-bun scripts/repo-docs.ts --sync-all
+bun scripts/repo-docs/repo-docs.ts --sync-all
 ```
 
 ## Examples
 
 ```bash
 # Clone Effect-TS for reference
-bun scripts/repo-docs.ts https://github.com/Effect-TS/effect
+bun scripts/repo-docs/repo-docs.ts https://github.com/Effect-TS/effect
 
 # Clone multiple repos
-bun scripts/repo-docs.ts https://github.com/anthropics/anthropic-sdk-typescript
-bun scripts/repo-docs.ts https://github.com/anthropics/courses
+bun scripts/repo-docs/repo-docs.ts https://github.com/anthropics/anthropic-sdk-typescript
+bun scripts/repo-docs/repo-docs.ts https://github.com/anthropics/courses
 
 # Update all cloned repos
-bun scripts/repo-docs.ts --sync-all
+bun scripts/repo-docs/repo-docs.ts --sync-all
 ```
 
 ## Behavior

@@ -6,7 +6,8 @@
     "prepare": "lefthook install && effect-language-service patch",
     "check": "biome check",
     "check-types": "tsgo --noEmit",
-    "fix": "biome check --write"
+    "fix": "biome check --write",
+    "test:unit": "vitest run"
   },
   "devDependencies": {
     "@biomejs/biome": "2.3.10",
@@ -14,7 +15,8 @@
     "@types/bun": "latest",
     "@typescript/native-preview": "7.0.0-dev.20251231.1",
     "lefthook": "2.0.13",
-    "ultracite": "6.5.1"
+    "ultracite": "6.5.1",
+    "vitest": "^4.0.16"
   },
   "peerDependencies": {
     "typescript": "^5"

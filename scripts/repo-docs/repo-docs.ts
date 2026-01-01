@@ -4,17 +4,13 @@ import * as FileSystem from "@effect/platform/FileSystem";
 import * as Path from "@effect/platform/Path";
 import { BunContext, BunRuntime } from "@effect/platform-bun";
 import { Array as Arr, Chunk, Console, Effect, Option, Stream } from "effect";
-
-type RepoParts = {
-  readonly org: string;
-  readonly repo: string;
-};
-
-type CommandOutput = {
-  readonly exitCode: number;
-  readonly stdout: string;
-  readonly stderr: string;
-};
+import {
+  type CommandOutput,
+  formatOutput,
+  parseRepoParts,
+  type RepoParts,
+  toErrorMessage,
+} from "./utils";
 
 type RepoTarget = RepoParts & {
   readonly url: string;
@@ -56,38 +52,6 @@ const makeGitCommand = (args: readonly string[], cwd?: string) => {
 const runGit = (args: readonly string[], cwd?: string) =>
   runCommand(makeGitCommand(args, cwd));
 
-const stripGitSuffix = (value: string) =>
-  value.endsWith(".git") ? value.slice(0, -4) : value;
-
-const extractPath = (raw: string) => {
-  if (raw.includes("://")) {
-    try {
-      return new URL(raw).pathname;
-    } catch {
-      return raw;
-    }
-  }
-  const colonIndex = raw.indexOf(":");
-  if (colonIndex > -1 && !raw.slice(0, colonIndex).includes("/")) {
-    return raw.slice(colonIndex + 1);
-  }
-  return raw;
-};
-
-const parseRepoParts = (raw: string): Option.Option<RepoParts> => {
-  const pathPart = extractPath(raw);
-  const segments = pathPart.split("/").filter((segment) => segment.length > 0);
-  if (segments.length < 2) {
-    return Option.none();
-  }
-  const repo = stripGitSuffix(segments.at(-1) ?? "");
-  const org = segments.at(-2) ?? "";
-  if (repo.length === 0 || org.length === 0) {
-    return Option.none();
-  }
-  return Option.some({ org, repo });
-};
-
 const baseDir = Effect.gen(function* () {
   const path = yield* Path.Path;
   const home = process.env.HOME;
@@ -120,21 +84,6 @@ const resolveTarget = (
       label: `${org}/${repo}`,
     };
   });
-
-const formatOutput = (result: CommandOutput) => {
-  const stdout = result.stdout.trim();
-  const stderr = result.stderr.trim();
-  if (stdout.length === 0 && stderr.length === 0) {
-    return "";
-  }
-  if (stdout.length === 0) {
-    return stderr;
-  }
-  if (stderr.length === 0) {
-    return stdout;
-  }
-  return `${stdout}\n${stderr}`;
-};
 
 const pullRepo = (repoDir: string) => runGit(["pull"], repoDir);
 
@@ -200,9 +149,6 @@ const syncSingle = (url: string) =>
     const exists = yield* fs.exists(target.dir);
     return yield* exists ? syncExistingRepo(target) : cloneNewRepo(target);
   });
-
-const toErrorMessage = (error: unknown) =>
-  error instanceof Error ? error.message : String(error);
 
 const pullWithSummary = (base: string, repoDir: string) =>
   Effect.gen(function* () {
