@@ -12,7 +12,7 @@ This is a **canonical knowledge base** for agent skills, scripts, and shared ins
 
 - `skills/` — Skill definitions (SKILL.md + optional scripts). Source of truth.
 - `.claude/skills/` — Symlinks to `skills/` to activate them in Claude Code.
-- `scripts/` — Portable, self-contained utility scripts (no external deps).
+- `scripts/` — Scripts to be run in the root of this repo.
 - `AGENTS.md` — Shared instructions; `CLAUDE.md` symlinks here.
 
 ### Skills Pattern
@@ -25,9 +25,10 @@ ln -s ../../skills/<name> .claude/skills/<name>
 
 ## Code Philosophy
 
-- Functional > imperative; avoid mutation; prefer pure functions.
+- Functional > imperative; avoid mutation; prefer pure functions. Leverage Effect-TS judiciously to help with this for example.
 - Modular, reusable, concise; no god functions.
 - Verifiable: lint, typecheck, test. CI must pass.
+- Before considering your work complete, you must run verifiable checks, such as `bun check` and `bun check-types`
 - Set up CI early; run all verifiable checks on every push.
 - Public functions testable by default; inject deps.
 - Types as documentation; make invalid states unrepresentable.

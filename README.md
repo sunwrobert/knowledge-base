@@ -20,7 +20,7 @@ knowledge-base/
 
 - Treat this repo as the canonical mirror for shared skills and instructions.
 - When editing skills or scripts here, sync changes to consuming repos.
-- Keep files dependency-free and portable: scripts must run in isolation.
+- Scripts are designed to run from this repo's root (not portable to other projects).
 
 ## Pointer-Style AGENTS.md
 
@@ -54,13 +54,13 @@ ln -s ../../skills/<skill-name> .claude/skills/<skill-name>
 
 ## Scripts
 
-Portable utility scripts. Run with Bun:
+Utility scripts meant to be run from this repo's root:
 
 ```bash
 bun scripts/<script>.ts
 ```
 
-Keep scripts self-contained with no external dependencies.
+Scripts may depend on this repo's dependencies and structure. They are not portable.
 
 ## Setup
 
