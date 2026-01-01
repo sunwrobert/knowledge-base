@@ -13,7 +13,7 @@ List of options:
 
 Web Frontend
 
-- TanStack Router (selected) - Modern type-safe router for React
+- TanStack Router - Modern type-safe router for React
 - React Router - Declarative routing for React
 - TanStack Start - Full-stack React and Solid framework powered by TanStack Router
 - Next.js - React framework with hybrid rendering
@@ -36,8 +36,8 @@ Backend
 - Express - Popular Node.js framework
 - Fastify - Fast, low-overhead web framework for Node.js
 - Convex - Reactive backend-as-a-service
-- Fullstack Next.js (unavailable) - Use Next.js built-in API routes
-- Fullstack TanStack Start (unavailable) - Use TanStack Start's built-in API routes
+- Fullstack Next.js - Use Next.js built-in API routes
+- Fullstack TanStack Start - Use TanStack Start's built-in API routes
 - No Backend - Skip backend integration (frontend only)
 
 Runtime
@@ -45,7 +45,7 @@ Runtime
 - Bun (selected) - Fast JavaScript runtime & toolkit
 - Node.js - JavaScript runtime environment
 - Cloudflare Workers - Serverless runtime for the edge
-- No Runtime (unavailable) - No specific runtime
+- No Runtime - No specific runtime
 
 Api
 
@@ -65,19 +65,19 @@ Orm
 
 - Drizzle (selected) - TypeScript ORM
 - Prisma - Next-gen ORM
-- Mongoose (unavailable) - Elegant object modeling tool
-- No ORM (unavailable) - Skip ORM integration
+- Mongoose - Elegant object modeling tool
+- No ORM - Skip ORM integration
 
 Db Setup
 
 - Turso - Distributed SQLite with edge replicas (libSQL)
-- Cloudflare D1 (unavailable) - Serverless SQLite-compatible database for Cloudflare Workers
-- Neon Postgres (unavailable) - Serverless Postgres with autoscaling and branching
-- Prisma PostgreSQL (unavailable) - Managed Postgres via Prisma Data Platform
-- MongoDB Atlas (unavailable) - Managed MongoDB clusters in the cloud
-- Supabase (unavailable) - Local Postgres stack via Supabase (Docker required)
-- PlanetScale (unavailable) - Postgres & Vitess (MySQL) on NVMe
-- Docker (unavailable) - Run Postgres/MySQL/MongoDB locally via Docker Compose
+- Cloudflare D1 - Serverless SQLite-compatible database for Cloudflare Workers
+- Neon Postgres - Serverless Postgres with autoscaling and branching
+- Prisma PostgreSQL - Managed Postgres via Prisma Data Platform
+- MongoDB Atlas - Managed MongoDB clusters in the cloud
+- Supabase - Local Postgres stack via Supabase (Docker required)
+- PlanetScale - Postgres & Vitess (MySQL) on NVMe
+- Docker - Run Postgres/MySQL/MongoDB locally via Docker Compose
 - Basic Setup (selected) - No cloud DB integration
 
 Web Deploy
@@ -87,13 +87,13 @@ Web Deploy
 
 Server Deploy
 
-- Cloudflare (unavailable) - Deploy to Cloudflare Workers using Alchemy
+- Cloudflare - Deploy to Cloudflare Workers using Alchemy
 - None (selected) - Skip deployment setup
 
 Auth
 
 - Better-Auth (selected) - The most comprehensive authentication framework for TypeScript
-- Clerk (unavailable) - More than authentication, Complete User Management
+- Clerk - More than authentication, Complete User Management
 - No Auth - Skip authentication
 
 Payments
@@ -165,7 +165,7 @@ If following Better T Stack scaffolding:
 `rm -rf apps/web/components.json apps/web/src/components/ui`
 
 ```
-cd apps/web && bunx --bun shadcn@latest create --preset "https://ui.shadcn.com/init?base=base&style=maia&baseColor=neutral&theme=neutral&iconLibrary=hugeicons&font=figtree&menuAccent=subtle&menuColor=default&radius=default&template=start" --template start
+cd apps/web && bunx --bun shadcn@latest create --preset "https://ui.shadcn.com/init?base=base&style=maia&baseColor=neutral&theme=neutral&iconLibrary=hugeicons&font=figtree&menuAccent=subtle&menuColor=default&radius=default&template=start" --template start .
 ```
 
 Add all ShadCN components
@@ -177,3 +177,60 @@ Add all ShadCN components
 Set up Storybook through their wizard
 
 `bunx create storybook@latest`
+
+## Linting
+
+If ultracite had troubles installing, run the following:
+
+`bunx ultracite init --pm bun --frameworks "react" --editors vscode --integrations lefthook`
+
+Add the following scripts to the root package.json:
+
+```
+"prepare": "lefthook install && effect-language-service patch",
+"check": "biome check",
+"check-types": "bun run --filter '*' check-types",
+"fix": "biome check --write",
+"test:unit": "bun run --filter '*' test:unit"
+```
+
+## Setup CI
+
+Sample Code Quality workflow:
+
+```
+name: Code Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Lint
+        run: bun run check
+
+      - name: Type check
+        run: bun run check-types
+
+      - name: Unit tests
+        run: bun run test:unit
+```
+
+## Gotchas
+
+If using Drizzle + Alchemy, be sure to run `bun db:generate` to generate the schema first.
