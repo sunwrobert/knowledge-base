@@ -1,0 +1,20 @@
+{
+  "name": "knowledge-base",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "prepare": "effect-language-service patch",
+    "typecheck": "tsgo --noEmit"
+  },
+  "devDependencies": {
+    "@effect/language-service": "^0.63.2",
+    "@types/bun": "latest",
+    "@typescript/native-preview": "^7.0.0-dev.20251231.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "effect": "^3.19.14"
+  }
+}
