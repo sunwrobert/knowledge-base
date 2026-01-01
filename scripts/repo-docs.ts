@@ -285,8 +285,8 @@ const syncAllRepos = Effect.gen(function* () {
 const url = Args.text({ name: "url" }).pipe(Args.optional);
 const syncAllFlag = Options.boolean("sync-all");
 
-const copyDocs = Command.make(
-  "copy-docs",
+const repoDocs = Command.make(
+  "repo-docs",
   { url, syncAll: syncAllFlag },
   ({ url, syncAll }) =>
     syncAll
@@ -298,8 +298,8 @@ const copyDocs = Command.make(
         })
 );
 
-const cli = Command.run(copyDocs, {
-  name: "copy-docs",
+const cli = Command.run(repoDocs, {
+  name: "repo-docs",
   version: "0.1.0",
 });
 
