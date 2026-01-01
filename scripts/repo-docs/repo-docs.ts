@@ -3,7 +3,15 @@ import * as PlatformCommand from "@effect/platform/Command";
 import * as FileSystem from "@effect/platform/FileSystem";
 import * as Path from "@effect/platform/Path";
 import { BunContext, BunRuntime } from "@effect/platform-bun";
-import { Array as Arr, Chunk, Console, Effect, Option, Stream } from "effect";
+import {
+  Array as Arr,
+  Chunk,
+  Console,
+  Data,
+  Effect,
+  Option,
+  Stream,
+} from "effect";
 import {
   type CommandOutput,
   formatOutput,
@@ -11,6 +19,24 @@ import {
   type RepoParts,
   toErrorMessage,
 } from "./utils";
+
+// Tagged errors for type-safe error handling
+class HomeNotSetError extends Data.TaggedError("HomeNotSetError") {}
+
+class InvalidUrlError extends Data.TaggedError("InvalidUrlError")<{
+  readonly url: string;
+}> {}
+
+class GitOperationError extends Data.TaggedError("GitOperationError")<{
+  readonly operation: string;
+  readonly label: string;
+}> {}
+
+class NotGitRepoError extends Data.TaggedError("NotGitRepoError")<{
+  readonly dir: string;
+}> {}
+
+class MissingArgumentError extends Data.TaggedError("MissingArgumentError") {}
 
 type RepoTarget = RepoParts & {
   readonly url: string;
@@ -56,24 +82,18 @@ const baseDir = Effect.gen(function* () {
   const path = yield* Path.Path;
   const home = process.env.HOME;
   if (!home) {
-    return yield* Effect.fail(
-      new Error("HOME is not set; cannot resolve ~/.local/repos")
-    );
+    return yield* Effect.fail(new HomeNotSetError());
   }
   return path.join(home, ".local", "repos");
 });
 
-const resolveTarget = (
-  url: string
-): Effect.Effect<RepoTarget, Error, Path.Path> =>
+const resolveTarget = (url: string) =>
   Effect.gen(function* () {
     const path = yield* Path.Path;
     const base = yield* baseDir;
     const parts = parseRepoParts(url);
     if (Option.isNone(parts)) {
-      return yield* Effect.fail(
-        new Error(`Could not derive org/repo from URL: ${url}`)
-      );
+      return yield* Effect.fail(new InvalidUrlError({ url }));
     }
     const { org, repo } = parts.value;
     return {
@@ -114,9 +134,7 @@ const handleGitResult = (
       yield* Console.log(`OK ${label}`);
       return;
     }
-    return yield* Effect.fail(
-      new Error(`git ${operation} failed for ${label}`)
-    );
+    return yield* Effect.fail(new GitOperationError({ operation, label }));
   });
 
 const syncExistingRepo = (target: RepoTarget) =>
@@ -126,9 +144,7 @@ const syncExistingRepo = (target: RepoTarget) =>
     const gitDir = path.join(target.dir, ".git");
     const isGit = yield* fs.exists(gitDir);
     if (!isGit) {
-      return yield* Effect.fail(
-        new Error(`Target exists but is not a git repo: ${target.dir}`)
-      );
+      return yield* Effect.fail(new NotGitRepoError({ dir: target.dir }));
     }
     yield* Console.log(`Pulling ${target.label}`);
     const result = yield* pullRepo(target.dir);
@@ -235,13 +251,15 @@ const repoDocs = Command.make(
   "repo-docs",
   { url, syncAll: syncAllFlag },
   ({ url, syncAll }) =>
-    syncAll
-      ? syncAllRepos
-      : Option.match(url, {
-          onNone: () =>
-            Effect.fail(new Error("Provide a repo URL or use --sync-all")),
-          onSome: (value) => syncSingle(value),
-        })
+    Effect.gen(function* () {
+      if (syncAll) {
+        return yield* syncAllRepos;
+      }
+      if (Option.isSome(url)) {
+        return yield* syncSingle(url.value);
+      }
+      return yield* Effect.fail(new MissingArgumentError());
+    })
 );
 
 const cli = Command.run(repoDocs, {

@@ -28,6 +28,28 @@ Search here for real implementations when docs aren't enough.
 
 ## Core patterns
 
+### Error handling - ALWAYS use TaggedError
+
+**Never use raw `Error` in Effect code.** Always use `Data.TaggedError` for typed, trackable errors:
+
+```typescript
+// ❌ BAD - raw Error loses type information
+Effect.fail(new Error("Something went wrong"));
+
+// ✅ GOOD - TaggedError is typed and trackable
+class MyError extends Data.TaggedError("MyError")<{
+  readonly reason: string;
+}> {}
+
+Effect.fail(new MyError({ reason: "Something went wrong" }));
+```
+
+Benefits:
+- Full type inference in error channel
+- Pattern matching with `Effect.catchTag`
+- Automatic `_tag` discriminator for union handling
+- Structured error data instead of string messages
+
 ### Pipes and composition
 
 ```typescript
