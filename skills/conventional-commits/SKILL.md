@@ -76,4 +76,9 @@ fix: stuff
 
 # Bad: too long (>50 chars in subject)
 feat: add a really long description that goes on and on about what was done
+
+# Bad: do not end your commit agent disclaimers
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>
 ```

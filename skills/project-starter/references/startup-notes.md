@@ -147,6 +147,8 @@ Select oxlint + oxfmt.
 
 Also add tsgolint `bun add -D oxlint-tsgolint@latest`
 
+Just a note that oxfmt respects .prettierignore
+
 Change `lefthook.yml` to just run `bun fix`
 
 Add these scripts to package.json
@@ -209,4 +211,68 @@ jobs:
 
       - name: Unit tests
         run: bun run test:unit
+```
+
+Can add a dummy test so CI runs. Prefer vitest for tests.
+
+Install Storybook
+
+`bun create storybook@latest` (minimal)
+
+Delete the `stories` folder, prefer stories as close to the component as possible.
+
+Add storybook to root package.json
+
+`"storybook": "bun run --filter web storybook"`
+
+Add storybook theme switcher: `@storybook/addon-themes`
+
+```
+import type { Preview } from "@storybook/react-vite";
+
+import { withThemeByClassName } from "@storybook/addon-themes";
+
+import "../src/index.css";
+
+const preview: Preview = {
+  decorators: [
+    withThemeByClassName({
+      themes: {
+        light: "",
+        dark: "dark",
+      },
+      defaultTheme: "light",
+      parentSelector: "html",
+    }),
+  ],
+  parameters: {
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/i,
+      },
+    },
+  },
+};
+
+export default preview;
+```
+
+Set it up for all your ShadCN components.
+
+Sync shadcn docs using `sync-shadcn-docs.sh` script.
+
+Then tell AI to create storybooks matching the shadcn demos.
+
+While respecting the current project's use of icons.
+
+Sample agent instructions:
+
+```
+- Create Storybook story files for all UI components in apps/web/src/components/ui/
+- Review documentation in docs/plans/ui
+- Check actual component props (since docs are Radix-based but components use @base-ui/react)
+- Use CSF3 format with satisfies Meta<typeof Component> and satisfies StoryObj<typeof meta>
+- Note that base-ui uses render prop instead of Radix's asChild
+- Ensure that you have fixed all type errors before deeming your work complete
 ```
