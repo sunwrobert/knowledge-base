@@ -360,7 +360,7 @@ config({ path: `../../apps/server/.env${envSuffix}` });
 
 After deploying, update `VITE_SERVER_URL` to match your worker URL.
 
-## Phase 8: Finalize
+## Phase 8: Init Agents
 
 1. Run `init-project.sh` from knowledge-base.
 
@@ -375,6 +375,166 @@ After deploying, update `VITE_SERVER_URL` to match your worker URL.
    ln -sf AGENTS.md CLAUDE.md
    ```
 
+## Phase 9: CI/CD Deployment
+
+### 1. Generate Required Tokens
+
+```bash
+# Generate ALCHEMY_PASSWORD (state encryption)
+openssl rand -base64 32
+
+# Generate ALCHEMY_STATE_TOKEN (must be same across all deployments)
+openssl rand -base64 32
+
+# Generate CLOUDFLARE_API_TOKEN (use Alchemy CLI for correct permissions)
+bunx alchemy util create-cloudflare-token
+```
+
+### 2. Configure GitHub Secrets
+
+Go to repository Settings → Secrets and variables → Actions, add:
+
+| Secret                 | Description                                           |
+| ---------------------- | ----------------------------------------------------- |
+| `ALCHEMY_PASSWORD`     | Encryption password for state                         |
+| `ALCHEMY_STATE_TOKEN`  | Token for Cloudflare state store (same for all)       |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare API token with Workers/D1 permissions      |
+| `BETTER_AUTH_SECRET`   | Auth secret (generate with `openssl rand -base64 32`) |
+
+Note: `GITHUB_TOKEN` is automatically provided by GitHub Actions. URL-based env vars (`VITE_SERVER_URL`, `CORS_ORIGIN`, `BETTER_AUTH_URL`) are generated dynamically in the workflow based on stage and Cloudflare subdomain.
+
+### 3. Update alchemy.run.ts for CI
+
+Add CloudflareStateStore and GitHubComment for PR previews:
+
+```typescript
+import alchemy from "alchemy";
+import { D1Database, TanStackStart, Worker } from "alchemy/cloudflare";
+import { GitHubComment } from "alchemy/github";
+import { CloudflareStateStore } from "alchemy/state";
+
+const app = await alchemy("my-app", {
+  stateStore: (scope) => new CloudflareStateStore(scope),
+});
+
+// ... your resources (db, web, server) ...
+
+// Add PR preview comment
+if (process.env.PULL_REQUEST) {
+  await GitHubComment("preview-comment", {
+    owner: "your-username",
+    repository: "your-repo",
+    issueNumber: Number(process.env.PULL_REQUEST),
+    body: `## Preview Deployed
+
+Your changes have been deployed to a preview environment:
+
+| Service | URL |
+|---------|-----|
+| Web | ${web.url} |
+| Server | ${server.url} |
+
+Built from commit ${process.env.GITHUB_SHA?.slice(0, 7)}
+
+---
+<sub>This comment updates automatically with each push.</sub>`,
+  });
+}
+
+await app.finalize();
+```
+
+### 4. Create Deploy Workflow
+
+Create `.github/workflows/deploy.yml`:
+
+```yaml
+name: Deploy Application
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  STAGE: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || (github.ref == 'refs/heads/main' && 'prod' || github.ref_name) }}
+  CF_SUBDOMAIN: your-subdomain # Your Cloudflare account subdomain
+
+jobs:
+  deploy:
+    if: ${{ github.event.action != 'closed' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Deploy
+        run: bun run deploy --stage ${{ env.STAGE }}
+        env:
+          ALCHEMY_PASSWORD: ${{ secrets.ALCHEMY_PASSWORD }}
+          ALCHEMY_STATE_TOKEN: ${{ secrets.ALCHEMY_STATE_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          VITE_SERVER_URL: https://todo-server-${{ env.STAGE }}.${{ env.CF_SUBDOMAIN }}.workers.dev
+          CORS_ORIGIN: https://todo-web-${{ env.STAGE }}.${{ env.CF_SUBDOMAIN }}.workers.dev
+          BETTER_AUTH_URL: https://todo-server-${{ env.STAGE }}.${{ env.CF_SUBDOMAIN }}.workers.dev
+          BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
+          PULL_REQUEST: ${{ github.event.number }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  cleanup:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' && github.event.action == 'closed' }}
+    permissions:
+      id-token: write
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Safety Check
+        run: |
+          if [ "${{ env.STAGE }}" = "prod" ]; then
+            echo "ERROR: Cannot destroy prod environment in cleanup job"
+            exit 1
+          fi
+
+      - name: Destroy Preview Environment
+        run: bun run destroy --stage ${{ env.STAGE }}
+        env:
+          ALCHEMY_PASSWORD: ${{ secrets.ALCHEMY_PASSWORD }}
+          ALCHEMY_STATE_TOKEN: ${{ secrets.ALCHEMY_STATE_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PULL_REQUEST: ${{ github.event.number }}
+```
+
+### CI/CD Behavior
+
+| Trigger           | Stage         | Action                             |
+| ----------------- | ------------- | ---------------------------------- |
+| Push to `main`    | `prod`        | Deploy production                  |
+| PR opened/updated | `pr-{number}` | Deploy preview + add comment to PR |
+| PR closed/merged  | `pr-{number}` | Destroy preview environment        |
+
 ## Verification Checklist
 
 - [ ] `bun check-types` passes
@@ -382,4 +542,7 @@ After deploying, update `VITE_SERVER_URL` to match your worker URL.
 - [ ] `bun dev` runs without errors
 - [ ] `bun storybook` launches
 - [ ] CI workflow passes
-- [ ] `bun alchemy deploy` succeeds
+- [ ] `bun run deploy` succeeds locally
+- [ ] GitHub secrets configured
+- [ ] PR preview deployment works
+- [ ] Main branch deploys to prod
