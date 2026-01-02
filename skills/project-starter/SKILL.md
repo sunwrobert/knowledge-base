@@ -401,7 +401,13 @@ Go to repository Settings → Secrets and variables → Actions, add:
 | `CLOUDFLARE_API_TOKEN` | Cloudflare API token with Workers/D1 permissions      |
 | `BETTER_AUTH_SECRET`   | Auth secret (generate with `openssl rand -base64 32`) |
 
-Note: `GITHUB_TOKEN` is automatically provided by GitHub Actions. URL-based env vars (`VITE_SERVER_URL`, `CORS_ORIGIN`, `BETTER_AUTH_URL`) are generated dynamically in the workflow based on stage and Cloudflare subdomain.
+Also add repository variable (Settings → Variables → Actions):
+
+| Variable       | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `CF_SUBDOMAIN` | Your Cloudflare account subdomain (e.g., `username`) |
+
+Note: `GITHUB_TOKEN` is automatically provided by GitHub Actions. URL-based env vars (`VITE_SERVER_URL`, `CORS_ORIGIN`, `BETTER_AUTH_URL`) are generated dynamically in the workflow based on stage and `CF_SUBDOMAIN`.
 
 ### 3. Update alchemy.run.ts for CI
 
@@ -463,7 +469,6 @@ concurrency:
 
 env:
   STAGE: ${{ github.event_name == 'pull_request' && format('pr-{0}', github.event.number) || (github.ref == 'refs/heads/main' && 'prod' || github.ref_name) }}
-  CF_SUBDOMAIN: your-subdomain # Your Cloudflare account subdomain
 
 jobs:
   deploy:
@@ -487,9 +492,9 @@ jobs:
           ALCHEMY_PASSWORD: ${{ secrets.ALCHEMY_PASSWORD }}
           ALCHEMY_STATE_TOKEN: ${{ secrets.ALCHEMY_STATE_TOKEN }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          VITE_SERVER_URL: https://todo-server-${{ env.STAGE }}.${{ env.CF_SUBDOMAIN }}.workers.dev
-          CORS_ORIGIN: https://todo-web-${{ env.STAGE }}.${{ env.CF_SUBDOMAIN }}.workers.dev
-          BETTER_AUTH_URL: https://todo-server-${{ env.STAGE }}.${{ env.CF_SUBDOMAIN }}.workers.dev
+          VITE_SERVER_URL: https://todo-server-${{ env.STAGE }}.${{ vars.CF_SUBDOMAIN }}.workers.dev
+          CORS_ORIGIN: https://todo-web-${{ env.STAGE }}.${{ vars.CF_SUBDOMAIN }}.workers.dev
+          BETTER_AUTH_URL: https://todo-server-${{ env.STAGE }}.${{ vars.CF_SUBDOMAIN }}.workers.dev
           BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
           PULL_REQUEST: ${{ github.event.number }}
           GITHUB_SHA: ${{ github.sha }}
