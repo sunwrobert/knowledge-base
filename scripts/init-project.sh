@@ -16,7 +16,6 @@ SKILLS=(
   conventional-commits
   effect-ts
   interview-spec
-  project-starter
   ultracite
 )
 
