@@ -45,6 +45,7 @@ Effect.fail(new MyError({ reason: "Something went wrong" }));
 ```
 
 Benefits:
+
 - Full type inference in error channel
 - Pattern matching with `Effect.catchTag`
 - Automatic `_tag` discriminator for union handling

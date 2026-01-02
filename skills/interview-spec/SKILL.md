@@ -24,12 +24,12 @@ Don't ask surface-level questions. Dig deeper:
 
 ### Cover all dimensions
 
-| Area | Example questions |
-|------|-------------------|
-| **Technical** | Data flow, state management, error handling, caching, offline behavior |
-| **UI/UX** | Edge cases, empty states, loading states, error states, accessibility |
-| **Tradeoffs** | Performance vs simplicity, flexibility vs consistency, build vs buy |
-| **Concerns** | Security implications, scalability limits, maintenance burden |
+| Area            | Example questions                                                         |
+| --------------- | ------------------------------------------------------------------------- |
+| **Technical**   | Data flow, state management, error handling, caching, offline behavior    |
+| **UI/UX**       | Edge cases, empty states, loading states, error states, accessibility     |
+| **Tradeoffs**   | Performance vs simplicity, flexibility vs consistency, build vs buy       |
+| **Concerns**    | Security implications, scalability limits, maintenance burden             |
 | **Integration** | How it affects existing features, migration path, backwards compatibility |
 
 ### Question patterns

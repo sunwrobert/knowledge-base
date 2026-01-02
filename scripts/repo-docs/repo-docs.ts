@@ -1,8 +1,8 @@
 import { Args, Command, Options } from "@effect/cli";
+import { BunContext, BunRuntime } from "@effect/platform-bun";
 import * as PlatformCommand from "@effect/platform/Command";
 import * as FileSystem from "@effect/platform/FileSystem";
 import * as Path from "@effect/platform/Path";
-import { BunContext, BunRuntime } from "@effect/platform-bun";
 import {
   Array as Arr,
   Chunk,
@@ -12,6 +12,7 @@ import {
   Option,
   Stream,
 } from "effect";
+
 import {
   type CommandOutput,
   formatOutput,

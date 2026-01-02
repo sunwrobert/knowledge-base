@@ -1115,7 +1115,7 @@ Without the server prefix, Claude may fail to locate the tool, especially when m
 
 Don't assume packages are available:
 
-````markdown
+`````markdown
 **Bad example: Assumes installation**:
 "Use the pdf library to process the file."
 
@@ -1128,8 +1128,9 @@ Then use it:
 from pypdf import PdfReader
 reader = PdfReader("file.pdf")
 ```"
-````
-````
+`````
+
+```
 
 ## Technical notes
 
@@ -1213,3 +1214,4 @@ Before sharing a Skill, verify:
     Upload and use Skills programmatically
   </Card>
 </CardGroup>
+```

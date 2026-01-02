@@ -9,18 +9,18 @@ Format: `type(scope): description`
 
 ## Types
 
-| Type | Use when |
-|------|----------|
-| `feat` | Adding new functionality |
-| `fix` | Fixing a bug |
+| Type       | Use when                                     |
+| ---------- | -------------------------------------------- |
+| `feat`     | Adding new functionality                     |
+| `fix`      | Fixing a bug                                 |
 | `refactor` | Restructuring code without changing behavior |
-| `docs` | Documentation only |
-| `test` | Adding or updating tests |
-| `chore` | Maintenance (deps, config, build) |
-| `style` | Formatting, whitespace, semicolons |
-| `perf` | Performance improvements |
-| `ci` | CI/CD changes |
-| `build` | Build system or dependencies |
+| `docs`     | Documentation only                           |
+| `test`     | Adding or updating tests                     |
+| `chore`    | Maintenance (deps, config, build)            |
+| `style`    | Formatting, whitespace, semicolons           |
+| `perf`     | Performance improvements                     |
+| `ci`       | CI/CD changes                                |
+| `build`    | Build system or dependencies                 |
 
 ## Rules
 

@@ -182,7 +182,7 @@ Set up Storybook through their wizard
 
 If ultracite had troubles installing, run the following:
 
-`bunx ultracite init --pm bun --frameworks "react" --editors vscode --integrations lefthook`
+`bunx ultracite@latest init --pm bun --frameworks "react" --editors vscode --integrations lefthook`
 
 Add the following scripts to the root package.json:
 
