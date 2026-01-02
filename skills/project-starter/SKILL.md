@@ -5,200 +5,275 @@ description: Invoke when asked to create a completely new project, NOT a feature
 
 Understand the full-scope of the spec, and interview the user to draft a complete spec.
 
-### Better T Stack
+# Project Startup Guide
 
-Recommend a config for solving this with https://www.better-t-stack.dev
+Reference for bootstrapping a Better-T-Stack project with Cloudflare Workers, Drizzle, and TanStack Start.
 
-List of options:
+## Phase 1: Scaffold Project
 
-Web Frontend
-
-- TanStack Router - Modern type-safe router for React
-- React Router - Declarative routing for React
-- TanStack Start - Full-stack React and Solid framework powered by TanStack Router
-- Next.js - React framework with hybrid rendering
-- Nuxt - Vue full-stack framework (SSR, SSG, hybrid)
-- Svelte - Cybernetically enhanced web apps
-- Solid - Simple and performant reactivity for building UIs
-- No Web Frontend - No web-based frontend
-
-Native Frontend
-
-- Expo + Bare (default) - Expo with StyleSheet (no styling library)
-- Expo + Uniwind - Fastest Tailwind bindings for React Native with HeroUI Native
-- Expo + Unistyles - Expo with Unistyles (type-safe styling)
-- No Native Frontend (selected) - No native mobile frontend
-
-Backend
-
-- Hono (selected) - Ultrafast web framework
-- Elysia - TypeScript web framework
-- Express - Popular Node.js framework
-- Fastify - Fast, low-overhead web framework for Node.js
-- Convex - Reactive backend-as-a-service
-- Fullstack Next.js - Use Next.js built-in API routes
-- Fullstack TanStack Start - Use TanStack Start's built-in API routes
-- No Backend - Skip backend integration (frontend only)
-
-Runtime
-
-- Bun (selected) - Fast JavaScript runtime & toolkit
-- Node.js - JavaScript runtime environment
-- Cloudflare Workers - Serverless runtime for the edge
-- No Runtime - No specific runtime
-
-Api
-
-- tRPC (selected) - End-to-end typesafe APIs
-- oRPC - Typesafe APIs Made Simple
-- No API - No API layer (API routes disabled)
-
-Database
-
-- SQLite (selected) - File-based SQL database
-- PostgreSQL - Advanced SQL database
-- MySQL - Popular relational database
-- MongoDB - NoSQL document database
-- No Database - Skip database integration
-
-Orm
-
-- Drizzle (selected) - TypeScript ORM
-- Prisma - Next-gen ORM
-- Mongoose - Elegant object modeling tool
-- No ORM - Skip ORM integration
-
-Db Setup
-
-- Turso - Distributed SQLite with edge replicas (libSQL)
-- Cloudflare D1 - Serverless SQLite-compatible database for Cloudflare Workers
-- Neon Postgres - Serverless Postgres with autoscaling and branching
-- Prisma PostgreSQL - Managed Postgres via Prisma Data Platform
-- MongoDB Atlas - Managed MongoDB clusters in the cloud
-- Supabase - Local Postgres stack via Supabase (Docker required)
-- PlanetScale - Postgres & Vitess (MySQL) on NVMe
-- Docker - Run Postgres/MySQL/MongoDB locally via Docker Compose
-- Basic Setup (selected) - No cloud DB integration
-
-Web Deploy
-
-- Cloudflare - Deploy to Cloudflare Workers using Alchemy
-- None (selected) - Skip deployment setup
-
-Server Deploy
-
-- Cloudflare - Deploy to Cloudflare Workers using Alchemy
-- None (selected) - Skip deployment setup
-
-Auth
-
-- Better-Auth (selected) - The most comprehensive authentication framework for TypeScript
-- Clerk - More than authentication, Complete User Management
-- No Auth - Skip authentication
-
-Payments
-
-- Polar - Turn your software into a business. 6 lines of code.
-- No Payments (selected) - Skip payments integration
-
-Package Manager
-
-- npm - Default package manager
-- pnpm - Fast, disk space efficient
-- bun (selected) - All-in-one toolkit
-
-Addons
-
-- PWA (Progressive Web App) - Make your app installable and work offline
-- Tauri - Build native desktop apps
-- Starlight - Build stellar docs with astro
-- Biome - Format, lint, and more
-- Husky - Modern native Git hooks made easy
-- Ultracite - Biome preset with AI integration
-- Fumadocs - Build excellent documentation site
-- Oxlint - Oxlint + Oxfmt (linting & formatting)
-- Ruler - Centralize your AI rules
-- OpenTUI - Build terminal user interfaces
-- WXT - Build browser extensions
-- Turborepo (selected) - High-performance build system
-
-Examples
-
-- Todo Example - Simple todo application
-- AI Example - AI integration example using AI SDK
-
-Git
-
-- Git (selected) - Initialize Git repository
-- No Git - Skip Git initialization
-
-Install
-
-- Install Dependencies (selected) - Install packages automatically
-- Skip Install - Skip dependency installation
-
-Prefer the following options unless there's a good reason not to:
-
-`bun create better-t-stack@latest my-better-t-app --frontend tanstack-start --backend hono --runtime workers --api trpc --auth better-auth --payments none --database sqlite --orm drizzle --db-setup d1 --package-manager bun --git --web-deploy cloudflare --server-deploy cloudflare --install --addons ultracite --examples none`
-
-Obviously, don't use certain options if they are not applicable to the spec. (e.g. selecting D1 when we have no need for a db)
-
-## Add Effect TS
-
-Add Effect TS to both backend and frontend services.
-
-https://www.effect.solutions/quick-start
-
-Copy the agent instructions and paste them into your agent.
-
-Your agent will guide you through setting up your repository with Effect best practices.
-
-- Setting up the Effect Language Service
-- Installing our effect-solutions cli
-- Refining your TypeScript configuration
-- Cloning the Effect repository to use as reference
-
-## Setup ShadCN UI
-
-If following Better T Stack scaffolding:
-
-`rm -rf apps/web/components.json apps/web/src/components/ui`
-
-```
-cd apps/web && bunx --bun shadcn@latest create --preset "https://ui.shadcn.com/init?base=base&style=maia&baseColor=neutral&theme=neutral&iconLibrary=hugeicons&font=figtree&menuAccent=subtle&menuColor=default&radius=default&template=start" --template start .
+```bash
+bun create better-t-stack@latest <project-name> \
+  --frontend tanstack-start \
+  --backend hono \
+  --runtime workers \
+  --database sqlite \
+  --orm drizzle \
+  --api orpc \
+  --auth better-auth \
+  --payments none \
+  --addons none \
+  --examples none \
+  --db-setup d1 \
+  --web-deploy cloudflare \
+  --server-deploy cloudflare \
+  --git \
+  --package-manager bun \
+  --install
 ```
 
-Add all ShadCN components
+Do NOT select ultracite during scaffolding—set it up manually in Phase 5.
 
-`bunx shadcn@latest add -a -o`
+## Phase 2: TypeScript Setup
 
-## Install Storybook
+1. Remove `bts.jsonc`:
 
-Set up Storybook through their wizard
+   ```bash
+   rm bts.jsonc
+   ```
 
-`bunx create storybook@latest`
+2. Add tsgo as dev dependency and catalog version:
 
-## Linting
+   ```bash
+   bun add -D @typescript/native-preview
+   ```
 
-If ultracite had troubles installing, run the following:
+3. Add `check-types` script to every `package.json`:
 
-`bunx ultracite@latest init --pm bun --frameworks "react" --editors vscode --integrations lefthook`
+   ```json
+   "check-types": "tsgo --noEmit"
+   ```
 
-Add the following scripts to the root package.json:
+4. Update `.vscode/settings.json`:
 
-```
-"prepare": "lefthook install && effect-language-service patch",
-"check": "biome check",
-"check-types": "bun run --filter '*' check-types",
-"fix": "biome check --write",
-"test:unit": "bun run --filter '*' test:unit"
-```
+   ```json
+   {
+     "typescript.tsdk": "node_modules/typescript/lib",
+     "typescript.enablePromptUseWorkspaceTsdk": true,
+     "typescript.experimental.useTsgo": true
+   }
+   ```
 
-## Setup CI
+5. Fix workers types in `packages/config/tsconfig.base.json`:
+   - Change `@cloudflare/workers-types` → `@cloudflare/workers-types/experimental`
 
-Sample Code Quality workflow:
+6. Generate initial database schema:
 
-```
+   ```bash
+   bun db:generate
+   ```
+
+7. Run dev to generate route tree:
+
+   ```bash
+   bun dev
+   ```
+
+   Note: Port 3000 must be free to avoid CORS issues.
+
+8. Verify types pass:
+   ```bash
+   bun check-types
+   ```
+
+## Phase 3: ShadCN Setup
+
+1. Remove existing config and reinitialize with preset:
+
+   ```bash
+   cd apps/web
+   rm components.json
+   bunx --bun shadcn@latest init --preset "https://ui.shadcn.com/init?base=base&style=maia&baseColor=neutral&theme=neutral&iconLibrary=hugeicons&font=figtree&menuAccent=subtle&menuColor=default&radius=default&template=start"
+   ```
+
+   **Alternative (manual setup):** Create `apps/web/components.json`:
+
+   ```json
+   {
+     "$schema": "https://ui.shadcn.com/schema.json",
+     "style": "base-maia",
+     "rsc": false,
+     "tsx": true,
+     "tailwind": {
+       "config": "",
+       "css": "src/index.css",
+       "baseColor": "neutral",
+       "cssVariables": true,
+       "prefix": ""
+     },
+     "iconLibrary": "hugeicons",
+     "aliases": {
+       "components": "@/components",
+       "utils": "@/lib/utils",
+       "ui": "@/components/ui",
+       "lib": "@/lib",
+       "hooks": "@/hooks"
+     },
+     "menuColor": "default",
+     "menuAccent": "subtle",
+     "registries": {}
+   }
+   ```
+
+   Then add font/icon dependencies to `apps/web/package.json`:
+
+   ```json
+   "@fontsource-variable/figtree": "^5.2.10",
+   "@hugeicons/core-free-icons": "^3.1.1",
+   "@hugeicons/react": "^1.1.4"
+   ```
+
+   And update `apps/web/src/index.css`:
+
+   ```css
+   @import "@fontsource-variable/figtree";
+   /* In :root */
+   --font-sans: 'Figtree Variable', sans-serif;
+   ```
+
+2. Add all ShadCN components:
+
+   ```bash
+   bunx --bun shadcn@latest add --all
+   ```
+
+3. Fix type errors from v3→v4 API changes (primarily `use-mobile` and `resizable`):
+   - Check component signatures and update to match v4 API
+   - Run `bun check-types` until clean
+
+## Phase 4: Storybook Setup
+
+1. Initialize Storybook (minimal preset):
+
+   ```bash
+   bun create storybook@latest
+   ```
+
+2. Delete default stories folder—colocate stories with components instead.
+
+3. Add to root `package.json`:
+
+   ```json
+   "storybook": "bun run --filter web storybook"
+   ```
+
+4. Install theme addon:
+
+   ```bash
+   bun add -D @storybook/addon-themes --filter web
+   ```
+
+5. Configure `.storybook/preview.ts`:
+
+   ```typescript
+   import type { Preview } from "@storybook/react-vite";
+   import { withThemeByClassName } from "@storybook/addon-themes";
+   import "../src/index.css";
+
+   const preview: Preview = {
+     decorators: [
+       withThemeByClassName({
+         themes: { light: "", dark: "dark" },
+         defaultTheme: "light",
+         parentSelector: "html",
+       }),
+     ],
+     parameters: {
+       controls: {
+         matchers: {
+           color: /(background|color)$/i,
+           date: /Date$/i,
+         },
+       },
+     },
+   };
+
+   export default preview;
+   ```
+
+6. Sync ShadCN documentation for reference:
+
+   ```bash
+   # From knowledge-base repo
+   ./scripts/sync-shadcn-docs.sh
+   ```
+
+   This populates `docs/plans/ui/` with component documentation.
+
+7. Create stories for all UI components. Agent instructions:
+   - Create Storybook story files for all UI components in `apps/web/src/components/ui/`
+   - Review documentation in `docs/plans/ui/` for component demos
+   - Check actual component props (docs are Radix-based but components may use `@base-ui/react`)
+   - Use CSF3 format with `satisfies Meta<typeof Component>` and `satisfies StoryObj<typeof meta>`
+   - Note: base-ui uses `render` prop instead of Radix's `asChild`
+   - Use project's icon library (hugeicons)
+   - Run `bun check-types` until all type errors are resolved
+
+8. Create example vitest unit test using `composeStories` (Button is a good candidate).
+
+## Phase 5: Linting Setup
+
+1. Initialize ultracite:
+
+   ```bash
+   bunx ultracite@latest init
+   ```
+
+   Select: oxlint + oxfmt
+
+2. Add tsgolint:
+
+   ```bash
+   bun add -D oxlint-tsgolint@latest
+   ```
+
+3. Add scripts to root `package.json`:
+
+   ```json
+   "check": "bun ultracite check --type-aware",
+   "fix": "bun ultracite fix --type-aware"
+   ```
+
+4. Configure `oxlintrc.json`:
+
+   ```json
+   {
+     "$schema": "./node_modules/oxlint/configuration_schema.json",
+     "extends": [
+       "ultracite/oxlint/core",
+       "ultracite/oxlint/react",
+       "ultracite/oxlint/remix"
+     ],
+     "rules": {
+       "typescript/unbound-method": "off"
+     }
+   }
+   ```
+
+5. Update `lefthook.yml` to run `bun fix`.
+
+6. Run fix and resolve remaining issues:
+   ```bash
+   bun fix
+   ```
+   Common fixes: floating promises (add `void`), restrict-template-expressions.
+
+Note: oxfmt respects `.prettierignore`.
+
+## Phase 6: CI Setup
+
+Create `.github/workflows/quality.yml`:
+
+```yaml
 name: Code Quality
 
 on:
@@ -231,6 +306,80 @@ jobs:
         run: bun run test:unit
 ```
 
-## Gotchas
+Add a placeholder test so CI passes initially. Prefer vitest for tests.
 
-If using Drizzle + Alchemy, be sure to run `bun db:generate` to generate the schema first.
+## Phase 7: Deployment Setup
+
+### Alchemy Configuration
+
+```bash
+bun alchemy configure
+bun alchemy login
+bun alchemy deploy
+```
+
+Default deployment uses `$USER` stage (personal).
+
+### Stage Strategy
+
+| Stage         | Trigger                          | Use Case             |
+| ------------- | -------------------------------- | -------------------- |
+| `$USER`       | `alchemy deploy` / `alchemy dev` | Personal development |
+| `pr-{number}` | PR deploy action                 | Pull request preview |
+| `prod`        | Main branch deploy               | Production           |
+
+### Environment Variables
+
+Generate secrets: `openssl rand -base64 32`
+
+| Variable             | Location           | Description       |
+| -------------------- | ------------------ | ----------------- |
+| `ALCHEMY_SECRET`     | `infra/.env`       | Alchemy auth      |
+| `VITE_SERVER_URL`    | `apps/web/.env`    | Server API URL    |
+| `CORS_ORIGIN`        | `apps/server/.env` | Allowed origin    |
+| `BETTER_AUTH_URL`    | `apps/server/.env` | Auth callback URL |
+| `BETTER_AUTH_SECRET` | `apps/server/.env` | Auth secret       |
+
+### Local vs Deployed Env Strategy
+
+Use `.env` for deployed stages, `.env.dev` for local development:
+
+```bash
+IS_DEV=true alchemy dev
+```
+
+Configure env loading in infra:
+
+```typescript
+const envSuffix = process.env.IS_DEV === "true" ? ".dev" : "";
+
+config({ path: `./.env${envSuffix}` });
+config({ path: `../../apps/web/.env${envSuffix}` });
+config({ path: `../../apps/server/.env${envSuffix}` });
+```
+
+After deploying, update `VITE_SERVER_URL` to match your worker URL.
+
+## Phase 8: Finalize
+
+1. Run `init-project.sh` from knowledge-base.
+
+2. Initialize CLAUDE.md with Opus 4.5:
+
+   ```bash
+   /init CLAUDE.md
+   ```
+
+3. Move content to `AGENTS.md` and symlink:
+   ```bash
+   ln -sf AGENTS.md CLAUDE.md
+   ```
+
+## Verification Checklist
+
+- [ ] `bun check-types` passes
+- [ ] `bun check` passes
+- [ ] `bun dev` runs without errors
+- [ ] `bun storybook` launches
+- [ ] CI workflow passes
+- [ ] `bun alchemy deploy` succeeds
