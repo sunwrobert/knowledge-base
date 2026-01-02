@@ -22,7 +22,7 @@ Update `.vscode/settings.json` to
 }
 ```
 
-Run `db:generate` to generate innitial schema
+Run `db:generate` to generate initial schema
 
 Now you can run `bun dev` without issues. NOTE: Make sure nothing else is running on port 3000 otherwise your server may run into CORS issues.
 
@@ -276,3 +276,9 @@ Sample agent instructions:
 - Note that base-ui uses render prop instead of Radix's asChild
 - Ensure that you have fixed all type errors before deeming your work complete
 ```
+
+Should also set up an example vitest unit test using composeStories. Button's a good candidate here.
+
+Now, you should be at a good point to init-project.sh
+
+Afterwards, would also be a great place to /init CLAUDE.md (using Opus 4.5), put that input into AGENTS.md, and then symlink CLAUDE.md to AGENTS.md
