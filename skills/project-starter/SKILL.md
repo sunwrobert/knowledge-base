@@ -540,6 +540,111 @@ jobs:
 | PR opened/updated | `pr-{number}` | Deploy preview + add comment to PR |
 | PR closed/merged  | `pr-{number}` | Destroy preview environment        |
 
+## Phase 10: E2E Testing
+
+E2E tests provide **verifiable feedback loops for agents**—critical for autonomous development. Tests run against deployed preview URLs after each deployment.
+
+### Structure
+
+```
+tests/
+└── e2e/
+    ├── package.json          # @todo/e2e workspace with @playwright/test
+    ├── playwright.config.ts
+    ├── pom/
+    │   ├── index.ts
+    │   ├── base.page.ts      # Abstract base with goto()
+    │   └── home.page.ts      # Page-specific locators as getters
+    └── home.spec.ts
+```
+
+Add `tests/*` to root workspaces and `"test:e2e": "bun run --filter @todo/e2e test"` script.
+
+### Key Patterns
+
+**1. Playwright config with dynamic BASE_URL:**
+
+```typescript
+const baseURL = process.env.BASE_URL || 'http://localhost:3001'
+const isLocalhost = baseURL.includes('localhost')
+
+export default defineConfig({
+  use: { baseURL },
+  // Only start dev server for localhost
+  ...(isLocalhost && {
+    webServer: { command: 'bun run --cwd ../.. dev', url: baseURL },
+  }),
+})
+```
+
+**2. POM with getters (not constructor instantiation):**
+
+```typescript
+export class HomePage extends BasePage {
+  async goto() { await this.page.goto('/') }
+
+  // Locators as getters - lazily evaluated
+  get signInButton() {
+    return this.page.getByRole('button', { name: 'Sign In' })
+  }
+
+  get connectedStatus() {
+    return this.page.getByText('Connected')
+  }
+
+  // Actions
+  async waitForApiStatus() {
+    await this.connectedStatus.or(this.disconnectedStatus).waitFor({ timeout: 15000 })
+  }
+}
+```
+
+**3. Tests use POM:**
+
+```typescript
+test.beforeEach(async ({ page }) => {
+  homePage = new HomePage(page)
+  await homePage.goto()
+})
+
+test('should show connected status', async () => {
+  await homePage.waitForApiStatus()
+  await expect(homePage.connectedStatus).toBeVisible()
+})
+```
+
+### CI Integration
+
+**1. Deploy workflow emits `deployment_status`:**
+
+Add `deployments: write` permission, then use `chrnorm/deployment-action@v2` before deploy and `chrnorm/deployment-status@v2` after to create GitHub deployment records.
+
+**2. E2E workflow triggers on deployment success:**
+
+```yaml
+on:
+  deployment_status:
+
+jobs:
+  e2e:
+    if: github.event.deployment_status.state == 'success'
+    steps:
+      # ... setup ...
+      - name: Run E2E tests
+        run: bun run test:e2e
+        env:
+          BASE_URL: ${{ github.event.deployment_status.environment_url }}
+```
+
+### Why This Matters for Agents
+
+1. Agent makes changes → PR deployed to preview URL
+2. `deployment_status` triggers E2E workflow
+3. Tests run against actual deployed app
+4. Failures provide actionable feedback for iteration
+
+Agents can't visually inspect UIs, but can run tests against deployed URLs to verify changes work.
+
 ## Verification Checklist
 
 - [ ] `bun check-types` passes
@@ -551,3 +656,5 @@ jobs:
 - [ ] GitHub secrets configured
 - [ ] PR preview deployment works
 - [ ] Main branch deploys to prod
+- [ ] `bun run test:e2e` passes locally
+- [ ] E2E tests run after deployment in CI
