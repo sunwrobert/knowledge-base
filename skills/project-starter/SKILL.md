@@ -148,6 +148,10 @@ Do NOT select ultracite during scaffolding—set it up manually in Phase 5.
 
 3. Fix type errors from v3→v4 API changes (primarily `use-mobile` and `resizable`):
    - Check component signatures and update to match v4 API
+   - Fixed resizable.tsx: Changed PanelGroup → Group, PanelResizeHandle → Separator
+   - Created use-mobile.ts hook for sidebar component
+   - Fixed spinner.tsx: Made strokeWidth prop optional with default value
+   - Removed unused React import from scroll-area.tsx
    - Run `bun check-types` until clean
 
 ## Phase 4: Storybook Setup
@@ -243,15 +247,15 @@ Do NOT select ultracite during scaffolding—set it up manually in Phase 5.
    "fix": "bun ultracite fix --type-aware"
    ```
 
-4. Configure `oxlintrc.json`:
+4. Configure `.oxlintrc.json`:
 
    ```json
    {
      "$schema": "./node_modules/oxlint/configuration_schema.json",
      "extends": [
-       "ultracite/oxlint/core",
-       "ultracite/oxlint/react",
-       "ultracite/oxlint/remix"
+        "./node_modules/ultracite/config/oxlint/core/.oxlintrc.json",
+        "./node_modules/ultracite/config/oxlint/react/.oxlintrc.json",
+        "./node_modules/ultracite/config/oxlint/remix/.oxlintrc.json"
      ],
      "rules": {
        "typescript/unbound-method": "off"
