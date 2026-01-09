@@ -271,7 +271,7 @@ Do NOT select ultracite during scaffolding—set it up manually in Phase 5.
    ```
    Common fixes: floating promises (add `void`), restrict-template-expressions.
 
-Note: oxfmt respects `.prettierignore`.
+Note: oxfmt respects `.prettierignore`. You should ignore routeTree.gen.ts
 
 ## Phase 6: CI Setup
 
