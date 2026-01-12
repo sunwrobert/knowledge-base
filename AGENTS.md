@@ -20,7 +20,7 @@ bun run fix                    # Auto-fix lint/format issues
 bun scripts/<file>.ts          # Run utility scripts
 
 # Single test file
-bun run test:unit <path>       # e.g., bun run test:unit scripts/repo-docs/utils.test.ts
+bun run test:unit <path>       # Run a single test file
 ```
 
 ## Architecture
