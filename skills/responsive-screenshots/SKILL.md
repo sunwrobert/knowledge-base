@@ -30,13 +30,14 @@ Capture screenshots at Tailwind CSS breakpoints using agent-browser.
 
 ```bash
 agent-browser open <url>
+agent-browser wait 2000  # wait for page to load
 
-agent-browser set viewport 375 812 && agent-browser screenshot <dir>/01-xs-375.png --full
-agent-browser set viewport 640 800 && agent-browser screenshot <dir>/02-sm-640.png --full
-agent-browser set viewport 768 1024 && agent-browser screenshot <dir>/03-md-768.png --full
-agent-browser set viewport 1024 768 && agent-browser screenshot <dir>/04-lg-1024.png --full
-agent-browser set viewport 1280 800 && agent-browser screenshot <dir>/05-xl-1280.png --full
-agent-browser set viewport 1536 864 && agent-browser screenshot <dir>/06-2xl-1536.png --full
+agent-browser set viewport 375 812 && agent-browser wait 1000 && agent-browser screenshot <dir>/01-xs-375.png --full
+agent-browser set viewport 640 800 && agent-browser wait 1000 && agent-browser screenshot <dir>/02-sm-640.png --full
+agent-browser set viewport 768 1024 && agent-browser wait 1000 && agent-browser screenshot <dir>/03-md-768.png --full
+agent-browser set viewport 1024 768 && agent-browser wait 1000 && agent-browser screenshot <dir>/04-lg-1024.png --full
+agent-browser set viewport 1280 800 && agent-browser wait 1000 && agent-browser screenshot <dir>/05-xl-1280.png --full
+agent-browser set viewport 1536 864 && agent-browser wait 1000 && agent-browser screenshot <dir>/06-2xl-1536.png --full
 
 agent-browser close
 ```
