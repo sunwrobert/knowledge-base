@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create PR"
+  short_description: "Create PRs with diagrams and embedded PNG proof"
+  default_prompt: "Use $create-pr to create a PR with show-me visuals and embedded PNGs rendered from a code-diagram-html explainer."

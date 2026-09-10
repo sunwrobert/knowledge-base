@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ship With Proof"
+  short_description: "Take a change through review and recorded proof"
+  default_prompt: "Use $ship-with-proof to implement this change and finish its PR with visual documentation, end-to-end evidence, CI, and review."

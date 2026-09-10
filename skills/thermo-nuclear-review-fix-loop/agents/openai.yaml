@@ -1,0 +1,4 @@
+interface:
+  display_name: "Thermo-Nuclear Review Fix Loop"
+  short_description: "Review and fix repeatedly until clean"
+  default_prompt: "Use $thermo-nuclear-review-fix-loop to review this work, fix every finding, and repeat until the review is clean."

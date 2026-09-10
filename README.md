@@ -1,6 +1,6 @@
 # Knowledge Base
 
-Canonical repository for scripts and shared instructions. Use this as the source of truth for all projects. This is a living document for how I like to build projects and write code.
+Canonical repository for agent skills, scripts, and shared instructions. Use this as the source of truth for all projects. This is a living document for how I like to build projects and write code.
 
 ## Structure
 
@@ -8,7 +8,8 @@ Canonical repository for scripts and shared instructions. Use this as the source
 knowledge-base/
 ├── AGENTS.md              # Shared agent instructions (code philosophy, etc.)
 ├── CLAUDE.md -> AGENTS.md # Symlink for Claude Code compatibility
-└── scripts/               # Utility scripts
+├── scripts/               # Utility scripts
+└── skills/                # Portable agent skills
 ```
 
 ## Syncing With Other Repos

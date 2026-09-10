@@ -1,6 +1,6 @@
 # Knowledge Base Agent Instructions
 
-Canonical repository for scripts and shared instructions. This is the source of truth for coding standards.
+Canonical repository for agent skills, scripts, and shared instructions. This is the source of truth for coding standards.
 
 ## Commands
 
@@ -27,6 +27,7 @@ bun run test:unit <path>       # Run a single test file
 
 ```
 knowledge-base/
+├── skills/                    # Portable skill definitions and agent metadata
 ├── scripts/                   # Utility scripts (run from repo root)
 ├── AGENTS.md                  # Shared agent instructions
 └── CLAUDE.md -> AGENTS.md     # Symlink for Claude Code

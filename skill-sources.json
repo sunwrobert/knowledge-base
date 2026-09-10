@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "note": "Verified upstream comparison revisions, not claims about original install revisions. Personal skill bodies are preserved; localBodyDiffers marks differences against upstream. Only skills already in this repository receive frontmatter here; the catalog records the other personal skills without vendoring them. System and bundled skills are excluded.",
+  "skills": [
+    {
+      "name": "agent-browser",
+      "source": "https://github.com/vercel-labs/agent-browser",
+      "path": "skills/agent-browser",
+      "comparisonCommit": "a156ff5760414dc7bfc1d9c074b9eb6441a79b4f",
+      "treeSha": "82def67855a0d2aad7794207951820fa5422fdb0",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "agents-sdk",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/agents-sdk",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "6960162efc4b6fea7bae6963a45527a7783901c2",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "babysit-pr",
+      "source": "https://github.com/openai/codex",
+      "path": ".codex/skills/babysit-pr",
+      "comparisonCommit": "ddea03ad049142943bdbf13e937b1d67e8c1ba0c",
+      "treeSha": "930db390730c900f644d054e4a322fc865437c34",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "caveman-review",
+      "source": "https://github.com/juliusbrussee/caveman",
+      "path": "skills/caveman-review",
+      "comparisonCommit": "15581d14007fd01fb3f132016741962f34936ca2",
+      "treeSha": "515d07fbd383fb9a15ad94647d133f681dc56197",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "cloudflare",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/cloudflare",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "34386215892a8255fba7112d1a2a3e5ff40150e8",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "cloudflare-email-service",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/cloudflare-email-service",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "8b632c63261e4658200960df9be24080660ab3e3",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "cloudflare-one",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/cloudflare-one",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "a8a51a262e27978faa5bf754d2b3529adcac7008",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "cloudflare-one-migrations",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/cloudflare-one-migrations",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "096965163ff9024abb4f179290fd446249be64e6",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "code-diagram-html",
+      "status": "local-or-unverified",
+      "note": "No verified external upstream; not overwritten or attributed speculatively."
+    },
+    {
+      "name": "create-pr",
+      "status": "local-or-unverified",
+      "note": "No verified external upstream; not overwritten or attributed speculatively."
+    },
+    {
+      "name": "durable-objects",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/durable-objects",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "ca4497e4bfa069d2d06e14440b78c81eccd8c5f0",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "find-skills",
+      "source": "https://github.com/vercel-labs/skills",
+      "path": "skills/find-skills",
+      "comparisonCommit": "80feb48868972d518436f26711509bc78595b5cb",
+      "treeSha": "76a98a285cb0434f3d39e1a873823556330e398b",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "gh-stack",
+      "source": "https://github.com/github/gh-stack",
+      "path": "skills/gh-stack",
+      "comparisonCommit": "2bd699a544a09cb5c45a013d03416e0894b0454e",
+      "treeSha": "6bfe555e89a6b264e09d5ece7c4040226458c8e5",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "git-commit",
+      "source": "https://github.com/github/awesome-copilot",
+      "path": "skills/git-commit",
+      "comparisonCommit": "7568a482ce2df38f8965ab5336a3220db796a4ba",
+      "treeSha": "883a6a7466f55a9cd9f22cf1cce2d9333fc9b998",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "grill-me",
+      "source": "https://github.com/mattpocock/skills",
+      "path": "skills/productivity/grill-me",
+      "comparisonCommit": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "treeSha": "3df14e2d3a89459bf300614be9247e3ce74798f8",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "herdr",
+      "source": "https://github.com/ogulcancelik/herdr",
+      "path": "skills/herdr",
+      "comparisonCommit": "120c682008a85dc17d7a13cc619a2fd5d25f3924",
+      "treeSha": "b9dcfddcfa7ce43e2e4cf60e724c519be553f149",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "herdr-council",
+      "status": "local-or-unverified",
+      "note": "No verified external upstream; not overwritten or attributed speculatively."
+    },
+    {
+      "name": "humanizer",
+      "source": "https://github.com/blader/humanizer",
+      "path": ".",
+      "comparisonCommit": "9862685f575c65a8247f90369951df1b3416e3d6",
+      "treeSha": "5a7260aab6ed0b28f1f464f1757f4704d3a7ab5c",
+      "trackingMethod": "verified-github-api (CLI root-skill discovery unsupported)",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "i-have-adhd",
+      "source": "https://github.com/ayghri/i-have-adhd",
+      "path": "skills/i-have-adhd",
+      "comparisonCommit": "ff690b6fbd3383e4fce6a7e50c7b409ca9a6a804",
+      "treeSha": "88c570cdd38e1e3881545e6dce91bf3f6468eec7",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "orchestrate-parallel-pr-tasks",
+      "status": "local-or-unverified",
+      "note": "No verified external upstream; not overwritten or attributed speculatively."
+    },
+    {
+      "name": "perry-devin-review",
+      "status": "local-or-unverified",
+      "note": "No verified external upstream; not overwritten or attributed speculatively."
+    },
+    {
+      "name": "perry-review",
+      "status": "local-or-unverified",
+      "note": "No verified external upstream; not overwritten or attributed speculatively."
+    },
+    {
+      "name": "ponytail",
+      "source": "https://github.com/dietrichgebert/ponytail",
+      "path": "skills/ponytail",
+      "comparisonCommit": "356918eba965ee1eac64bd3a7f0dd02108350de5",
+      "treeSha": "cb6e53477eaf04e6daeca22feacb85f9ce20d40c",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "pr-merge-tracker",
+      "status": "local-or-unverified",
+      "note": "No verified external upstream; not overwritten or attributed speculatively."
+    },
+    {
+      "name": "sandbox-sdk",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/sandbox-sdk",
+      "comparisonCommit": "d3113039790f64e052ff80f351190da65e9b7510",
+      "treeSha": "f26fcb245b044c68bcde819618924f8c18e97c1c",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "ship-with-proof",
+      "status": "local-or-unverified",
+      "note": "No verified external upstream; not overwritten or attributed speculatively."
+    },
+    {
+      "name": "show-me",
+      "source": "https://github.com/humanlayer/skills",
+      "path": "plugins/show-me/skills/show-me",
+      "comparisonCommit": "3c2629142c5d437428269b1b722b08c0b87f574d",
+      "treeSha": "0bdb821a21e793a4f6f82a7078c052154447e5cc",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "tech-spec",
+      "source": "https://github.com/dmmulroy/skills",
+      "path": "tech-spec",
+      "comparisonCommit": "8603380821fee6a77c82639f364ce8fe4f5a92be",
+      "treeSha": "83764b4b41ec03cae1860a3dae247b85eba42e46",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "thermo-nuclear-code-quality-review",
+      "source": "https://github.com/cursor/plugins",
+      "path": "cursor-team-kit/skills/thermo-nuclear-code-quality-review",
+      "comparisonCommit": "7366ac128bdf95f45e6734f412b49a4031800169",
+      "treeSha": "d9c8935dd560b3b6f5941247d04a1843f8c7cc35",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "thermo-nuclear-review-fix-loop",
+      "status": "local-or-unverified",
+      "note": "No verified external upstream; not overwritten or attributed speculatively."
+    },
+    {
+      "name": "turnstile-spin",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/turnstile-spin",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "e7caf01b8e769234af3e3d4750726aac30b4a624",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "wayfinder",
+      "source": "https://github.com/mattpocock/skills",
+      "path": "skills/engineering/wayfinder",
+      "comparisonCommit": "3cca18b368ae95cdbdebbff572ccafa662551015",
+      "treeSha": "8ec0462658381bd1606d3f9db14ffc67df6a2a43",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "web-perf",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/web-perf",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "c4c15a909ae86c00d4fbf841238bbf56eb505ac8",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "workers-best-practices",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/workers-best-practices",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "2b353123539948ca95c757166437c1fc5eefc208",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "wrangler",
+      "source": "https://github.com/cloudflare/skills",
+      "path": "skills/wrangler",
+      "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
+      "treeSha": "d87d80a0c3f0a3c2d38222b02d459ef85af60320",
+      "trackingMethod": "gh skills add",
+      "localBodyDiffers": true,
+      "inKnowledgeBase": false
+    }
+  ]
+}
