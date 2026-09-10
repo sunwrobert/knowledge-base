@@ -47,6 +47,8 @@ Make the layout work on desktop and narrow screens. Stack comparison panels on m
 
 Open the page with an available browser or preview tool. Inspect desktop and narrow layouts for clipped text, disconnected branches, overlapping labels, and unreadable contrast. Recheck claims against the final source. If browser verification is unavailable, say so rather than claiming the page was visually checked.
 
+When invoked by `$create-pr`, PNG rendering and embedding in the PR body are mandatory; follow its upload and rendered-body verification requirements. For standalone HTML requests, PNG export remains optional.
+
 For a PNG, use the available screenshot tool to capture the full document, preferably at 2x scale. Do not assume a fixed CDP endpoint, browser port, agent host, or repository-local rendering script. Inspect the resulting image, fix layout problems, and render again if needed.
 
 Return or open the HTML artifact. When sharing through GitHub or chat, keep a concise native-format explanation alongside it: those surfaces generally cannot render the HTML inline. Attach or link the PNG and downloadable HTML through supported artifact tools. Publish to Slack or another external channel only when the user authorized that destination, and use that channel's native formatting.
