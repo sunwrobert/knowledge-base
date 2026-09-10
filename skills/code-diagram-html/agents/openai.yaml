@@ -1,0 +1,4 @@
+interface:
+  display_name: "Code Diagram HTML"
+  short_description: "Explain code changes in a standalone HTML diagram"
+  default_prompt: "Use $code-diagram-html to explain this change in a self-contained HTML diagram."
