@@ -7,7 +7,7 @@ description: Create or update a GitHub PR with a diff-grounded visual explanatio
 
 Load `$show-me` and `$code-diagram-html`. Read the repository PR guidance, template, actual diff, and relevant source. Reuse the existing PR; for a stack, explain each layer against its immediate base using `$gh-stack`.
 
-Lead with the concrete problem and resulting behavior. Make the body understandable inline with a compact Mermaid diagram, before/after diff, pseudocode, or component sketch. Use verified identifiers, preserve required template fields and issue links, and report validation accurately.
+Lead with the concrete problem and resulting behavior. Make the body understandable inline with a compact Mermaid diagram, before/after diff, pseudocode, or component sketch. Use little fenced `diff` code blocks to help illustrate what changes; pseudocode is fine. Keep each block focused on the relevant before/after behavior. Use verified identifiers, preserve required template fields and issue links, and report validation accurately.
 
 Create a self-contained HTML explainer using `$code-diagram-html`. When rendering and a supported private/reviewer-accessible artifact host are available, render it to PNG and **post Markdown image embeds in the PR body** under `## Visualization`, plus a downloadable HTML link when available. Prefer APIs and CLI tools. Do not expose private artifacts publicly, invent URLs, or use local paths/data URLs in GitHub bodies. Do not add artifact commits merely to work around missing hosting for a body-only request.
 
