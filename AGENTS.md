@@ -1,6 +1,6 @@
 # Knowledge Base Agent Instructions
 
-Canonical repository for agent skills, scripts, and shared instructions. This is the source of truth for coding standards.
+Canonical repository for scripts and shared instructions. This is the source of truth for coding standards.
 
 ## Commands
 
@@ -27,20 +27,9 @@ bun run test:unit <path>       # Run a single test file
 
 ```
 knowledge-base/
-├── skills/                    # Skill definitions (source of truth)
-│   └── <skill>/SKILL.md       # Skill instructions + optional refs/scripts
-├── .claude/skills/            # Symlinks to skills/ (activates them)
 ├── scripts/                   # Utility scripts (run from repo root)
 ├── AGENTS.md                  # Shared agent instructions
 └── CLAUDE.md -> AGENTS.md     # Symlink for Claude Code
-```
-
-### Skills Pattern
-
-Skills in `skills/<name>/SKILL.md` are templates. Symlink to activate:
-
-```bash
-ln -s ../../skills/<skill> .claude/skills/<skill>
 ```
 
 ## Code Style
