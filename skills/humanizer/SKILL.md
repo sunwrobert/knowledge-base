@@ -7,7 +7,14 @@ description: |
   voice, filler, or chatbot artifacts. Based on Wikipedia's "Signs of AI writing."
 license: MIT
 metadata:
-  version: "2.11.2"
+  version: 2.11.2
+  github-path: .
+  github-pinned: 9862685f575c65a8247f90369951df1b3416e3d6
+  github-ref: 9862685f575c65a8247f90369951df1b3416e3d6
+  github-repo: https://github.com/blader/humanizer
+  github-tree-sha: 5a7260aab6ed0b28f1f464f1757f4704d3a7ab5c
+  upstream-comparison-commit: 9862685f575c65a8247f90369951df1b3416e3d6
+  local-body-modified: 'true'
 ---
 
 # Humanizer: remove AI writing patterns

@@ -7,7 +7,14 @@ description: >
   branch layers, dependent PRs, or gh stack; or when a stack is checked out.
 metadata:
   author: github
-  version: "0.1.0"
+  version: 0.1.0
+  github-path: skills/gh-stack
+  github-pinned: 2bd699a544a09cb5c45a013d03416e0894b0454e
+  github-ref: 2bd699a544a09cb5c45a013d03416e0894b0454e
+  github-repo: https://github.com/github/gh-stack
+  github-tree-sha: 6bfe555e89a6b264e09d5ece7c4040226458c8e5
+  upstream-comparison-commit: 2bd699a544a09cb5c45a013d03416e0894b0454e
+  local-body-modified: 'true'
 ---
 
 # gh-stack

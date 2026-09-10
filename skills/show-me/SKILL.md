@@ -1,6 +1,14 @@
 ---
 name: show-me
 description: Help the user understand the current topic visually with concise diagrams, code-shape sketches, and focused HTML artifacts.
+metadata:
+  github-path: plugins/show-me/skills/show-me
+  github-pinned: 3c2629142c5d437428269b1b722b08c0b87f574d
+  github-ref: 3c2629142c5d437428269b1b722b08c0b87f574d
+  github-repo: https://github.com/humanlayer/skills
+  github-tree-sha: 0bdb821a21e793a4f6f82a7078c052154447e5cc
+  upstream-comparison-commit: 3c2629142c5d437428269b1b722b08c0b87f574d
+  local-body-modified: 'false'
 ---
 
 Help the user understand the current topic of conversation visually. Skip the preamble and keep prose brief. Pick the smallest view that makes the key point clear.

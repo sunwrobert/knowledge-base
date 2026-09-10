@@ -5,9 +5,20 @@ disable-model-invocation: true
 license: MIT
 metadata:
   hermes:
-    tags: [ADHD, Output Style, Productivity, Formatting]
+    tags:
+    - ADHD
+    - Output Style
+    - Productivity
+    - Formatting
     category: productivity
     related_skills: []
+  github-path: skills/i-have-adhd
+  github-pinned: ff690b6fbd3383e4fce6a7e50c7b409ca9a6a804
+  github-ref: ff690b6fbd3383e4fce6a7e50c7b409ca9a6a804
+  github-repo: https://github.com/ayghri/i-have-adhd
+  github-tree-sha: 88c570cdd38e1e3881545e6dce91bf3f6468eec7
+  upstream-comparison-commit: ff690b6fbd3383e4fce6a7e50c7b409ca9a6a804
+  local-body-modified: 'true'
 ---
 
 # i-have-adhd

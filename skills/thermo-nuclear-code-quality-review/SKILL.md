@@ -2,6 +2,14 @@
 name: thermo-nuclear-code-quality-review
 description: Run an extremely strict maintainability review for abstraction quality, giant files, and spaghetti-condition growth. Use for a thermo-nuclear code quality review, thermonuclear review, deep code quality audit, or especially harsh maintainability review.
 disable-model-invocation: true
+metadata:
+  github-path: cursor-team-kit/skills/thermo-nuclear-code-quality-review
+  github-pinned: 7366ac128bdf95f45e6734f412b49a4031800169
+  github-ref: 7366ac128bdf95f45e6734f412b49a4031800169
+  github-repo: https://github.com/cursor/plugins
+  github-tree-sha: d9c8935dd560b3b6f5941247d04a1843f8c7cc35
+  upstream-comparison-commit: 7366ac128bdf95f45e6734f412b49a4031800169
+  local-body-modified: 'false'
 ---
 
 # Thermo-Nuclear Code Quality Review
