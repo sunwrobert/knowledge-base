@@ -7,7 +7,7 @@
     "check": "bun ultracite check --type-aware",
     "check-types": "tsgo --noEmit",
     "fix": "bun ultracite fix --type-aware",
-    "test:unit": "vitest run"
+    "test:unit": "vitest run --passWithNoTests"
   },
   "dependencies": {
     "@effect/cli": "0.73.0",
