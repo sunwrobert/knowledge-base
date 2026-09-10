@@ -30,20 +30,6 @@ READ ~/Repositories/knowledge-base/AGENTS.md BEFORE ANYTHING (skip if missing).
 
 This keeps instructions centralized. Edit once here; all repos inherit updates.
 
-## Skills
-
-| Skill                                                                                    | Purpose                                                              |
-| ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| [thermo-nuclear-code-quality-review](skills/thermo-nuclear-code-quality-review/SKILL.md) | Strict maintainability and structural review                         |
-| [thermo-nuclear-review-fix-loop](skills/thermo-nuclear-review-fix-loop/SKILL.md)         | Repeat full reviews and fixes until clean; requires the review skill |
-| [agent-browser](skills/agent-browser/SKILL.md)                                           | Browser automation through the installed agent-browser CLI           |
-| [humanizer](skills/humanizer/SKILL.md)                                                   | Rewrite AI-sounding prose while preserving meaning                   |
-| [i-have-adhd](skills/i-have-adhd/SKILL.md)                                               | Shape responses for ADHD readers                                     |
-| [show-me](skills/show-me/SKILL.md)                                                       | Explain with diagrams and focused visual artifacts                   |
-| [pr-merge-tracker](skills/pr-merge-tracker/SKILL.md)                                     | Rank PR readiness in the current or requested GitHub repository      |
-
-Copy a skill directory into your agent's skill location, or symlink it from a local checkout. Install both thermo-nuclear skills together for the fix loop. The browser skill requires `agent-browser`; the PR tracker requires an authenticated `gh` CLI. Agent metadata is included where available. Humanizer's MIT license is preserved alongside the skill.
-
 ## Scripts
 
 Utility scripts meant to be run from this repo's root:
