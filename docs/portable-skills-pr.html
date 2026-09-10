@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Portable skills · PR 2</title>
+    <style>
+      *{box-sizing:border-box}body{margin:0;background:#f8fafc;color:#0f172a;font:17px/1.5 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:32px}header{border-bottom:2px solid #cbd5e1;padding-bottom:20px}small{color:#475569;font-weight:650;letter-spacing:.08em}h1{font-size:36px;line-height:1.15;margin:10px 0}h2{font-size:22px;margin:24px 0 12px}p{margin:8px 0}code{font:13px/1.4 ui-monospace,monospace;overflow-wrap:anywhere}.flow{display:grid;gap:8px}.node{background:white;border:1px solid #cbd5e1;border-radius:10px;padding:14px 18px}.active{border:2px solid #2563eb}.arrow{text-align:center;color:#2563eb;font-size:20px;line-height:1}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.ref{display:block;color:#475569;margin-top:6px;font-size:12px}.note{background:#eff6ff;border-left:4px solid #2563eb;padding:12px 16px;margin-top:16px}.muted{color:#475569}footer{border-top:1px solid #cbd5e1;margin-top:22px;padding-top:12px;font-size:13px;color:#475569}@media(max-width:600px){main{padding:18px}.grid{grid-template-columns:1fr}h1{font-size:29px}}@media print{body{background:white}main{padding:0}.node{break-inside:avoid}}
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <small>KNOWLEDGE BASE · PR #2</small>
+        <h1>Reusable skills, visible proof</h1>
+        <p>
+          Twelve portable skills now cover review, writing, browser work, and PR
+          delivery. The new PR workflow turns a code-grounded HTML explanation
+          into images reviewers can read directly on GitHub.
+        </p>
+      </header>
+      <h2>How create-pr builds the body</h2>
+      <div class="flow">
+        <div class="node">
+          <strong>Read the actual PR diff</strong>
+          <p>
+            Resolve its base and repository rules. Use real symbols and paths.
+          </p>
+          <code class="ref"
+            >skills/create-pr/SKILL.md · Compose from the actual change</code
+          >
+        </div>
+        <div class="arrow" aria-label="then">↓</div>
+        <div class="grid">
+          <div class="node">
+            <strong>show-me → inline explanation</strong>
+            <p>Choose a compact diff, tree, pseudocode, or Mermaid diagram.</p>
+            <code class="ref">skills/show-me/SKILL.md</code>
+          </div>
+          <div class="node">
+            <strong>code-diagram-html → HTML</strong>
+            <p>
+              Explain the flow in one standalone page with project or neutral
+              styling.
+            </p>
+            <code class="ref">skills/code-diagram-html/SKILL.md</code>
+          </div>
+        </div>
+        <div class="arrow" aria-label="then">↓</div>
+        <div class="node active">
+          <strong>Render PNG → host → embed → verify</strong>
+          <p>
+            Inspect the image, embed it under Visualization, and check the
+            published PR in a browser. Missing rendering or hosting blocks
+            completion.
+          </p>
+          <code class="ref"
+            >skills/create-pr/SKILL.md · Render and embed the PNGs</code
+          >
+        </div>
+      </div>
+      <h2>How the broader workflow uses it</h2>
+      <div class="node">
+        <strong>ship-with-proof</strong>
+        <p>
+          Implement and test → thermo review and fixes → end-to-end evidence →
+          visual PR → CI and review resolution.
+        </p>
+        <p class="muted">
+          At most four thermo rounds. Unmet gates remain incomplete. No merging;
+          generated evidence stays out of Git in this workflow.
+        </p>
+        <code class="ref"
+          >skills/ship-with-proof/SKILL.md · Run the thermo loop / Keep evidence
+          current</code
+        >
+      </div>
+      <div class="grid">
+        <section>
+          <h2>Portable scope</h2>
+          <p>
+            The PR tracker resolves repository and author dynamically. No fixed
+            reviewer bot. HTML diagrams use project styling or neutral defaults.
+          </p>
+          <code class="ref"
+            >skills/pr-merge-tracker/SKILL.md · Resolve scope</code
+          >
+        </section>
+        <section>
+          <h2>CI adjustment</h2>
+          <p>
+            <code>vitest run --passWithNoTests</code> allows this repository's
+            empty suite. Actual failing tests still fail.
+          </p>
+          <code class="ref">package.json · scripts.test:unit</code>
+        </section>
+      </div>
+      <div class="note">
+        These files define agent workflows. A skill's requirements describe what
+        future runs must do; they are not evidence that every workflow has been
+        executed.
+      </div>
+      <footer>
+        Source: PR #2 skill definitions and package.json · 10 September 2026
+      </footer>
+    </main>
+  </body>
+</html>
