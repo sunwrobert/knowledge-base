@@ -1,38 +1,16 @@
 ---
 name: create-pr
-description: Create or update a GitHub pull request whose body combines show-me visuals with embedded PNGs rendered from a self-contained code-diagram-html explainer grounded in the actual diff.
+description: Create or update a GitHub PR with a diff-grounded visual explanation and embedded PNGs when rendering and hosting are available.
 ---
 
 # Create PR
 
-Make the PR body a visual explanation of the change using both `$show-me` and `$code-diagram-html`. Load those skills before composing the description. Install both alongside this skill; if either is unavailable, identify the missing dependency rather than claiming its workflow ran.
+Load `$show-me` and `$code-diagram-html`. Read the repository PR guidance, template, actual diff, and relevant source. Reuse the existing PR; for a stack, explain each layer against its immediate base using `$gh-stack`.
 
-## Compose from the actual change
+Lead with the concrete problem and resulting behavior. Make the body understandable inline with a compact Mermaid diagram, before/after diff, pseudocode, or component sketch. Use little fenced `diff` code blocks to help illustrate what changes; pseudocode is fine. Keep each block focused on the relevant before/after behavior. Use verified identifiers, preserve required template fields and issue links, and report validation accurately.
 
-Read the repository's PR guidance and template, resolve the correct base branch, and inspect the full PR diff and relevant source. For a stacked PR, explain only its layer relative to its immediate base. Reuse an existing PR for the branch instead of creating a duplicate.
+Create a self-contained HTML explainer using `$code-diagram-html`. When rendering and a supported private/reviewer-accessible artifact host are available, render it to PNG and **post Markdown image embeds in the PR body** under `## Visualization`, plus a downloadable HTML link when available. Prefer APIs and CLI tools. Do not expose private artifacts publicly, invent URLs, or use local paths/data URLs in GitHub bodies. Do not add artifact commits merely to work around missing hosting for a body-only request.
 
-Lead with one or two sentences describing the concrete problem and resulting behavior. Make the core of the body `$show-me` output: choose a Mermaid flow or sequence, a before/after diff, pseudocode, a call tree, or a component sketch that makes the change clear. Use verified identifiers and paths, and put short explanations next to the visuals. Avoid a generic inventory of changed files.
+If PNG rendering or hosting is unavailable, publish the complete inline visual body and briefly report the limitation; PNG delivery must not block the body update. Browser/computer use and visual verification of hosted images are optional, never required. Do not launch a browser solely to verify raster rendering unless asked.
 
-Also apply `$code-diagram-html` to create one self-contained HTML explainer of the same change in a temporary artifact directory outside the repository. Upload it through a supported attachment or artifact mechanism and link it as downloadable HTML. Never commit generated HTML, PNGs, recordings, or other PR evidence to any repository branch to host them. If no supported upload path is available, retain the local artifacts and report the delivery blocker.
-
-GitHub PR bodies do not render arbitrary HTML, CSS, local filesystem links, or embedded data-URL images. The body must remain understandable without opening the HTML. Use GitHub-rendered Mermaid or fenced sketches inline. Render the HTML explainer to PNG and embed the resulting images in the PR body; this is required, not an optional attachment. Never invent an upload URL or imply that a repository HTML blob link is a live preview.
-
-Include concise validation results and any material limitations. Preserve required template fields and issue links. State exactly what ran, what passed or failed, and what remains unverified; do not claim screenshots or checks that were not performed.
-
-## Render and embed the PNGs
-
-Use `$code-diagram-html` to render the complete explainer, preferably at 2x scale. Inspect the PNG for clipped text, disconnected branches, and unreadable labels. Fix and re-render any problems. Split a tall render into readable sections when necessary, preserving the full explanation and its order.
-
-Upload the PNGs through a supported attachment or artifact mechanism. Never use committed files or raw Git URLs as an image-hosting workaround. Use image URLs that GitHub can render and reviewers can access. Never expose private artifacts through a public host just to obtain an image URL. Local paths and data URLs are not valid delivery substitutes; `gh pr create` and `gh pr edit` do not upload files referenced in Markdown.
-
-Add a `## Visualization` section to the PR body containing Markdown image embeds (`![Descriptive alt text](verified-image-url)`) for every rendered section, followed by the downloadable HTML link. A PNG link alone, an image in a comment, the HTML attachment, or a Mermaid block does not satisfy the embedded-PNG requirement.
-
-If rendering or image hosting is unavailable, preserve the completed draft and report the specific blocker. Do not silently downgrade to an HTML-only or Mermaid-only body, or claim this workflow is complete without the PNGs.
-
-## Publish and verify
-
-Follow the user's authorization and the repository's commit, push, and verification rules. A request to create a PR authorizes creating it; a request only to draft a body does not authorize publication. Use `$gh-stack` when the branch is in a stack, then edit that layer's generated PR body.
-
-Write the complete body to a temporary UTF-8 file and use `gh pr create --body-file <file>` or `gh pr edit <number> --body-file <file>`, with explicit repository and base/head scope as appropriate. Do not interpolate the body into shell code.
-
-Read back the published body and check artifact links. Open the PR in a browser and confirm the PNGs actually render in the body and remain legible at GitHub’s displayed width. A successful body update or image URL fetch alone does not prove rendering. If browser verification is unavailable, report the rendering check as unverified. Verify that diagram labels still match the final diff, after the final code changes. Return the PR URL and report any remaining delivery or validation limitations.
+Write the body to a temporary UTF-8 file and publish with `gh pr create --body-file`, `gh pr edit --body-file`, or a structured API request. Creating/updating a PR requires user authorization; draft-only requests stay local. Read back the published body through the API, verify its content and any artifact links, and return the PR URLs with any delivery limitations. Do not claim browser verification or PNG delivery unless performed.
