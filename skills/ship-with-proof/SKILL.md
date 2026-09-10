@@ -56,7 +56,7 @@ Use `$code-diagram-html` and `$show-me` to produce a self-contained `<change-slu
 
 Use inline CSS and SVG, no network assets or build step. Follow the project's visual conventions or the HTML skill's neutral defaults. Verify desktop and narrow layouts. Render the page at approximately 2x scale with an available browser tool, inspect the PNG, and split tall images if that is needed for readable text.
 
-Do not commit generated evidence HTML, PNGs, or recordings. This overrides `$create-pr`'s option to commit its HTML explainer. Upload through an authorized, supported artifact mechanism that gives reviewers usable URLs. Check access and link validity. If no such mechanism is available, retain local evidence and report the delivery gate as blocked; never manufacture a URL or assume a local Markdown path uploads a file.
+Do not commit generated evidence HTML, PNGs, or recordings. Upload through an authorized, supported artifact mechanism that gives reviewers usable URLs. Check access and link validity. If no such mechanism is available, retain local evidence and report the delivery gate as blocked; never manufacture a URL or assume a local Markdown path uploads a file.
 
 Put the HTML URL and uploaded PNGs under a separate `## Visualization` section. GitHub does not render arbitrary HTML or inline SVG in PR bodies. Keep the `## Show me` blocks readable independently of the attachment. For a change too small to benefit from an HTML artifact, state the reason in the PR; the inline visual remains required.
 

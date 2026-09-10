@@ -7,7 +7,7 @@ description: Build a self-contained HTML diagram explaining a code change, its c
 
 Build one self-contained HTML page that gives a reviewer a working mental model of a code change without opening the source. Preserve the project's visual identity when one exists; otherwise use the neutral defaults below. This skill has no organization-specific branding, paths, services, or browser infrastructure requirements.
 
-Save to the repository's documentation or artifact location, defaulting to `docs/<short-slug>.html`. Outside a repository, use a writable artifact directory and return its absolute path. Creating a local artifact does not by itself require committing it. When used by `$create-pr`, follow that skill's reviewer-accessible delivery workflow.
+Save generated explainers and images in a writable artifact directory outside the repository. Never commit generated PR evidence as a hosting workaround. Return the local path and, when sharing, upload through a supported attachment mechanism. When used by `$create-pr`, follow its attachment delivery workflow.
 
 ## Ground the explanation
 
