@@ -1,7 +1,8 @@
 // Reference only: what to set up again in Executor. Not loaded by the CLI.
 // Format: @executor-js/config ExecutorFileConfig (v1.6.x).
 // OAuth integrations omit "auth": sign in again after import (datadog, granola, linear, notion, posthog).
-// Devin uses an API key (Authorization: Bearer <key>), added via the web UI.
+// Devin uses a personal access token (Authorization: Bearer cog_...), added via the web UI.
+// PATs need X-Org-Id (Settings > Devin API); legacy apk_user_ keys do not work with the MCP.
 {
   "integrations": [
     {
@@ -15,7 +16,8 @@
         "Authorization": {
           "value": "secret-public-ref:devin-api-key",
           "prefix": "Bearer "
-        }
+        },
+        "X-Org-Id": "<DEVIN_ORG_ID>"
       }
     },
     {
