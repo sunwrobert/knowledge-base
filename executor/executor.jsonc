@@ -1,0 +1,72 @@
+// Reference only: what to set up again in Executor. Not loaded by the CLI.
+// Format: @executor-js/config ExecutorFileConfig (v1.6.x).
+// OAuth integrations omit "auth": sign in again after import (datadog, granola, linear, notion, posthog).
+// Devin uses an API key (Authorization: Bearer <key>), added via the web UI.
+{
+  "integrations": [
+    {
+      "kind": "mcp",
+      "transport": "remote",
+      "name": "Devin",
+      "endpoint": "https://mcp.devin.ai/mcp",
+      "remoteTransport": "streamable-http",
+      "namespace": "devin",
+      "headers": {
+        "Authorization": {
+          "value": "secret-public-ref:devin-api-key",
+          "prefix": "Bearer "
+        }
+      }
+    },
+    {
+      "kind": "mcp",
+      "transport": "remote",
+      "name": "Datadog",
+      "endpoint": "https://mcp.us5.datadoghq.com/v1/mcp",
+      "remoteTransport": "auto",
+      "namespace": "datadog"
+    },
+    {
+      "kind": "mcp",
+      "transport": "remote",
+      "name": "Granola",
+      "endpoint": "https://mcp.granola.ai/mcp",
+      "remoteTransport": "auto",
+      "namespace": "granola"
+    },
+    {
+      "kind": "mcp",
+      "transport": "remote",
+      "name": "Linear",
+      "endpoint": "https://mcp.linear.app/mcp",
+      "remoteTransport": "auto",
+      "namespace": "linear"
+    },
+    {
+      "kind": "mcp",
+      "transport": "remote",
+      "name": "Notion",
+      "endpoint": "https://mcp.notion.com/mcp",
+      "remoteTransport": "streamable-http",
+      "namespace": "notion"
+    },
+    {
+      "kind": "mcp",
+      "transport": "remote",
+      "name": "PostHog",
+      "endpoint": "https://mcp.posthog.com/mcp",
+      "remoteTransport": "streamable-http",
+      "namespace": "posthog"
+    },
+    {
+      "kind": "mcp",
+      "transport": "stdio",
+      "name": "Slack local bridge",
+      "command": "node",
+      "args": [
+        "<HOME>/.local/share/slack-mcp-claude-auth/dist/index.js"
+      ],
+      "namespace": "slack_local"
+    }
+  ]
+}
