@@ -1,0 +1,11 @@
+{
+  "name": "spotlight-scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "bun render.ts"
+  },
+  "dependencies": {
+    "shiki": "4.5.0"
+  }
+}

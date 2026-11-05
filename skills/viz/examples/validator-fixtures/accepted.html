@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en" data-viz-kind="diagram">
+  <body>
+    <style>
+      body {
+        font-family: var(--font-sans);
+      }
+      .area-fill {
+        fill-opacity: 0.12;
+      }
+      .faint-text {
+        color: var(--text-faint);
+      }
+      .accent-surface {
+        border-color: hsl(var(--primary));
+        background: color-mix(in srgb, hsl(var(--accent)) 12%, transparent);
+      }
+      .micro-label {
+        font-family: var(--font-mono);
+      }
+      .grid-path {
+        stroke: none;
+      }
+      .grid-panel {
+        background-color: hsl(var(--background));
+      }
+      .axis-label {
+        fill: hsl(var(--foreground));
+      }
+      .translucent-structure {
+        stroke: hsl(var(--border) / 0.12);
+        fill: hsl(var(--muted-foreground) / 0.28);
+      }
+      .translucent-accent {
+        border-color: hsl(var(--accent) / 0.12);
+        color: hsl(var(--accent-foreground) / 0.6);
+      }
+      .area-fill-percent {
+        fill-opacity: 12%;
+      }
+      .bar-general-opacity {
+        fill-opacity: 0.3;
+      }
+      .safe-background-image {
+        background-image: linear-gradient(hsl(var(--border)), transparent);
+      }
+      .fragment-paint {
+        fill: url(#deadbeef);
+      }
+      .fragment-paint-mixed {
+        fill: url(#deadbeef-gradient);
+      }
+      .local-neutral {
+        --local-neutral: hsl(var(--border));
+        color: var(--local-neutral);
+      }
+      .series-point {
+        fill: var(--chart-1);
+        fill-opacity: 0.28;
+      }
+      .ring-point {
+        fill: var(--chart-1);
+        stroke: var(--chart-1);
+        stroke-opacity: 1;
+      }
+    </style>
+    <svg aria-label="Blue label remains content">
+      <defs>
+        <linearGradient id="hero-fade">
+          <stop offset="0%" stop-opacity="0.35"></stop>
+          <stop offset="100%" stop-opacity="0"></stop>
+        </linearGradient>
+      </defs>
+      <text class="series-blue">Blue</text>
+      <text class="axis-label">Axis label</text>
+      <path class="grid-path"></path>
+      <rect class="grid-panel"></rect>
+      <circle class="series-point"></circle>
+      <circle class="ring-point"></circle>
+      <path class="area" style="fill-opacity: 0.12"></path>
+      <path class="area-band" style="fill-opacity: 0.12"></path>
+      <path style="fill-opacity: 0.3"></path>
+      <path class="data-attribute" data-opacity="0.08"></path>
+      <path class="fragment-paint"></path>
+      <path class="fragment-paint-mixed"></path>
+      <defs><linearGradient id="deadbeef"></linearGradient></defs>
+      <rect
+        data-viz-exception="palette-swatch"
+        data-viz-exception-reason="The literal is the specimen content, not product chrome."
+        style="fill: #4F46E5"
+      ></rect>
+    </svg>
+    <p data-viz-source>Source: Example internal data, Aug 2026</p>
+  </body>
+</html>

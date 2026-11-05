@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" data-viz-kind="marketing">
+  <head>
+    <style>
+      body {
+        font-family: var(--font-sans);
+      }
+      .subject {
+        border-color: hsl(var(--accent));
+        background: color-mix(in srgb, hsl(var(--accent)) 12%, transparent);
+      }
+      .frontier {
+        stroke: hsl(var(--muted-foreground));
+      }
+    </style>
+  </head>
+  <body>
+    <svg>
+      <circle class="subject" data-viz-subject="focus"></circle>
+      <text class="subject" data-viz-subject="focus">Focus</text>
+      <path class="frontier"></path>
+      <circle class="neutral"></circle>
+    </svg>
+    <p data-viz-source>Source: Example internal data, Aug 2026</p>
+  </body>
+</html>

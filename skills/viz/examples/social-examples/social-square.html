@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en" data-viz-kind="chart">
+  <head>
+    <meta charset="utf-8" />
+    <title>Social square example</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: var(--font-sans);
+      }
+      .dark {
+        color-scheme: dark;
+      }
+      body {
+        width: 1080px;
+        height: 1080px;
+        margin: 0;
+        overflow: hidden;
+        background: transparent;
+        color: hsl(var(--foreground));
+        font-family: var(--font-sans);
+      }
+      .frame {
+        position: relative;
+        box-sizing: border-box;
+        height: 100%;
+        padding: 96px 64px 56px;
+      }
+      .eyebrow {
+        color: hsl(var(--muted-foreground));
+        font-family: var(--font-mono);
+        font-size: 21px;
+      }
+      h1 {
+        margin: 14px 0 0;
+        max-width: 940px;
+        font-size: 58px;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+      }
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 26px;
+        margin: 24px 0 0;
+        padding: 0;
+        list-style: none;
+        font-family: var(--font-mono);
+        font-size: 22px;
+        color: hsl(var(--foreground));
+      }
+      .legend li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .swatch {
+        width: 18px;
+        height: 18px;
+        border-radius: 999px;
+      }
+      .plot {
+        margin-top: 26px;
+        width: 952px;
+        height: 600px;
+        overflow: visible;
+      }
+      .plot-tall {
+        height: 760px;
+      }
+      .marker-rule {
+        stroke: hsl(var(--muted-foreground));
+        stroke-width: 3;
+        stroke-dasharray: 12 8;
+      }
+      .gridline {
+        stroke: hsl(var(--muted-foreground));
+        stroke-width: 1.5;
+        stroke-dasharray: 5 6;
+      }
+      .axis-line {
+        stroke: hsl(var(--border));
+      }
+      .axis-label {
+        fill: hsl(var(--muted-foreground));
+        font-family: var(--font-mono);
+        font-size: 24px;
+      }
+      .value-label {
+        fill: hsl(var(--foreground));
+        font-size: 46px;
+        font-weight: 700;
+      }
+      .callout {
+        fill: hsl(var(--foreground));
+        font-size: 30px;
+        font-weight: 700;
+      }
+      .b0 { background: var(--chart-1); }
+      .b1 { background: var(--chart-2); }
+      .b2 { background: var(--chart-3); }
+      .b3 { background: var(--chart-4); }
+      .b-neutral { background: var(--chart-other); }
+      .s0 { fill: var(--chart-1); }
+      .s1 { fill: var(--chart-2); }
+      .s2 { fill: var(--chart-3); }
+      .s3 { fill: var(--chart-4); }
+      .s-neutral { fill: var(--chart-other); }
+      .band-total {
+        fill: var(--chart-1);
+        fill-opacity: 40%;
+      }
+      .edge-total {
+        fill: none;
+        stroke: var(--chart-1);
+        stroke-width: 6;
+      }
+      .dot-total { fill: var(--chart-1); }
+      .footer-link {
+        position: absolute;
+        right: 64px;
+        bottom: 48px;
+        color: hsl(var(--foreground));
+        font-family: var(--font-mono);
+        font-size: 22px;
+      }
+      .source-line {
+        position: absolute;
+        left: 64px;
+        bottom: 48px;
+        color: hsl(var(--muted-foreground));
+        font-family: var(--font-mono);
+        font-size: 21px;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="frame">
+      <div class="eyebrow">
+        Requests per week | Sep 1, 2025 &mdash; Aug 30, 2026
+      </div>
+      <h1>4x in a year.</h1>
+      <svg
+        class="plot plot-tall"
+        viewBox="0 0 952 760"
+        role="img"
+        aria-label="Total requests per week over the last twelve months"
+      >
+        <text class="axis-label" x="66" y="683.0" text-anchor="end">0</text>
+        <line class="gridline" x1="82" y1="384.0" x2="880" y2="384.0"></line>
+        <text class="axis-label" x="66" y="393.0" text-anchor="end">50M</text>
+        <line class="gridline" x1="82" y1="94.0" x2="880" y2="94.0"></line>
+        <text class="axis-label" x="66" y="103.0" text-anchor="end">100M</text>
+        <line class="axis-line" x1="82" y1="94.0" x2="82" y2="674.0"></line>
+        <line class="axis-line" x1="82" y1="674.0" x2="880" y2="674.0"></line>
+        <polygon
+          class="band-total"
+          points="82,674.0 82.0,562.1 97.6,550.7 113.3,524.2 128.9,523.7 144.6,500.6 160.2,494.0 175.9,492.6 191.5,475.8 207.2,482.5 222.8,471.1 238.5,478.9 254.1,479.2 269.8,473.0 285.4,465.5 301.1,483.4 316.7,482.0 332.4,472.2 348.0,462.8 363.6,467.4 379.3,465.5 394.9,443.9 410.6,455.1 426.2,424.1 441.9,423.6 457.5,412.2 473.2,397.4 488.8,377.5 504.5,350.8 520.1,351.5 535.8,329.6 551.4,317.4 567.1,314.8 582.7,304.1 598.4,310.9 614.0,308.4 629.6,304.3 645.3,293.8 660.9,301.2 676.6,305.6 692.2,301.0 707.9,305.1 723.5,308.4 739.2,295.2 754.8,293.7 770.5,298.5 786.1,282.9 801.8,274.0 817.4,253.9 833.1,243.8 848.7,239.4 864.4,208.0 880.0,198.4 880,674.0"
+        ></polygon>
+        <polyline
+          class="edge-total"
+          points="82.0,562.1 97.6,550.7 113.3,524.2 128.9,523.7 144.6,500.6 160.2,494.0 175.9,492.6 191.5,475.8 207.2,482.5 222.8,471.1 238.5,478.9 254.1,479.2 269.8,473.0 285.4,465.5 301.1,483.4 316.7,482.0 332.4,472.2 348.0,462.8 363.6,467.4 379.3,465.5 394.9,443.9 410.6,455.1 426.2,424.1 441.9,423.6 457.5,412.2 473.2,397.4 488.8,377.5 504.5,350.8 520.1,351.5 535.8,329.6 551.4,317.4 567.1,314.8 582.7,304.1 598.4,310.9 614.0,308.4 629.6,304.3 645.3,293.8 660.9,301.2 676.6,305.6 692.2,301.0 707.9,305.1 723.5,308.4 739.2,295.2 754.8,293.7 770.5,298.5 786.1,282.9 801.8,274.0 817.4,253.9 833.1,243.8 848.7,239.4 864.4,208.0 880.0,198.4"
+        ></polyline>
+        <circle class="dot-total" cx="82.0" cy="562.1" r="10"></circle>
+        <text class="callout" x="100.0" y="542.1">19M</text>
+        <circle class="dot-total" cx="817.4" cy="253.9" r="10"></circle>
+        <line class="marker-rule" x1="82" y1="253.9" x2="880" y2="253.9"></line>
+        <text class="callout" x="98" y="201.9">72M</text>
+        <text class="axis-label" x="98" y="233.9">four weeks ago</text>
+        <circle class="dot-total" cx="880.0" cy="198.4" r="13"></circle>
+        <text class="value-label" x="900.0" y="214.4">82M</text>
+        <text class="axis-label" x="82.0" y="722" text-anchor="middle">
+          Sep 1
+        </text>
+        <text class="axis-label" x="285.4" y="722" text-anchor="middle">
+          Dec 1
+        </text>
+        <text class="axis-label" x="488.8" y="722" text-anchor="middle">
+          Mar 2
+        </text>
+        <text class="axis-label" x="692.2" y="722" text-anchor="middle">
+          Jun 1
+        </text>
+        <text class="axis-label" x="880.0" y="722" text-anchor="middle">
+          Aug 24
+        </text>
+      </svg>
+      <div class="footer-link">example.com/stats</div>
+      <div class="source-line" data-viz-source>Source: Illustrative data</div>
+    </main>
+  </body>
+</html>
