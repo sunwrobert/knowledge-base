@@ -83,8 +83,8 @@ One sentence of evidence instead of a paragraph of caveats (audit-trail section)
 Say what the page shows instead of an unverifiable blanket claim (collection outro).
 
 ```diff
-- Each one handles code generation, debugging, refactoring, and agentic coding workflows across popular languages and frameworks.
-+ Each listing shows the model's context length and its input and output price per million tokens, so you can weigh cost against usage before you pick one.
+- Each one handles every kind of parcel, from envelopes to pallets, anywhere in the world.
++ Each listing shows the carrier's maximum parcel weight, its delivery window, and its price per kilogram, so you can weigh cost against speed before you pick one.
 ```
 
 ## Server-rendered and translated copy

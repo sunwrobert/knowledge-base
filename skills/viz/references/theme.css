@@ -32,10 +32,10 @@
   --chart-other: #94a3b8;
 
   /* Ordered ramp, theme-specific so small value labels keep AA contrast */
-  --chart-ramp-1: #2563eb;
-  --chart-ramp-2: #0f766e;
-  --chart-ramp-3: #b45309;
-  --chart-ramp-4: #a21caf;
+  --chart-ramp-1: #6b8fd6;
+  --chart-ramp-2: #4a6fc0;
+  --chart-ramp-3: #2f52a3;
+  --chart-ramp-4: #1c3577;
 
   /* Status: only for series that encode good, bad, or caution */
   --positive: #16a34a;
@@ -59,10 +59,10 @@
   --accent-foreground: 234 89% 74%;
   --text-faint: #f8fafc6e;
 
-  --chart-ramp-1: #60a5fa;
-  --chart-ramp-2: #2dd4bf;
-  --chart-ramp-3: #fbbf24;
-  --chart-ramp-4: #e879f9;
+  --chart-ramp-1: #5b7fc7;
+  --chart-ramp-2: #7d9de0;
+  --chart-ramp-3: #a3bcef;
+  --chart-ramp-4: #ccdaf8;
 
   --positive-text: #4ade80;
   --negative-text: #f87171;

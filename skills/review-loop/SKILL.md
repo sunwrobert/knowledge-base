@@ -55,6 +55,7 @@ Take each from the repository's `AGENTS.md`, `CONTRIBUTING.md`, `CODEOWNERS` or 
    - More than one PR at a step is a fork. Ask which branch to follow; send nothing.
    - Exclude closed and merged PRs; include drafts.
    - Several PRs named together are a stack, not an ambiguity.
+   - Branch-name prefixes need not match across layers.
    - `--head` matches the exact branch name, so a branch renamed after a restack stops the walk early. Check `gh stack view` or base-branch history before reporting a shorter stack than expected.
 4. Order bottom-up from the base branches, never from the order the user typed.
 5. One PR: use the single-PR request. Otherwise, if the reviewer has a stack shape, send one request listing every layer bottom-up; if not, send one request per layer, bottom-up, in the same channel.
@@ -87,6 +88,7 @@ Prefer one stack request plus in-session fixes over driving several layers in pa
 ## Rules
 
 - One request per invocation per PR or stack; no unsolicited follow-ups beyond the single 30-minute nudge. A review the reviewer itself reports as failed may be re-requested once, after confirming the PR carries no review.
+- Do not poll for the verdict beyond the pickup check; handle review comments if they arrive as notifications.
 - Request mode does not check out the repo, inspect diffs, run CI, restack, or touch threads.
 - Never request review while CI is red or threads are unresolved, never after approval, never more than three re-reviews per session. Every re-review follows a pushed change.
 - Do not batch-resolve threads without verified fixes, do not modify tests to make them pass, and do not merge, enqueue, or enable auto-merge.

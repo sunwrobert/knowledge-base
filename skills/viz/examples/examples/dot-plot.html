@@ -15,12 +15,12 @@
       .axis-label, .legend, .entity-label { fill: hsl(var(--muted-foreground)); font-size: 14px; }
       .axis-label, .value-labels { text-anchor: middle; }
       .progression-line { stroke: hsl(var(--muted-foreground)); stroke-width: 2; }
-      .point-single { fill: var(--chart-ramp-1); } .point-short { fill: var(--chart-ramp-2); }
-      .point-core { fill: var(--chart-ramp-3); } .point-long { fill: var(--chart-ramp-4); }
-      .value-single { fill: var(--chart-ramp-1); } .value-short { fill: var(--chart-ramp-2); }
-      .value-core { fill: var(--chart-ramp-3); } .value-long { fill: var(--chart-ramp-4); }
-      .legend-single { fill: var(--chart-ramp-1); } .legend-short { fill: var(--chart-ramp-2); }
-      .legend-core { fill: var(--chart-ramp-3); } .legend-long { fill: var(--chart-ramp-4); }
+      .point-q1 { fill: var(--chart-ramp-1); } .point-q2 { fill: var(--chart-ramp-2); }
+      .point-q3 { fill: var(--chart-ramp-3); } .point-q4 { fill: var(--chart-ramp-4); }
+      .value-q1 { fill: var(--chart-ramp-1); } .value-q2 { fill: var(--chart-ramp-2); }
+      .value-q3 { fill: var(--chart-ramp-3); } .value-q4 { fill: var(--chart-ramp-4); }
+      .legend-q1 { fill: var(--chart-ramp-1); } .legend-q2 { fill: var(--chart-ramp-2); }
+      .legend-q3 { fill: var(--chart-ramp-3); } .legend-q4 { fill: var(--chart-ramp-4); }
     </style>
   </head>
   <body>
@@ -101,49 +101,49 @@
             x2="922"
             y2="390"
           ></line>
-          <circle class="point-single" cx="345" cy="90" r="8"></circle>
-          <circle class="point-short" cx="540" cy="90" r="8"></circle>
-          <circle class="point-core" cx="711" cy="90" r="8"></circle>
-          <circle class="point-long" cx="875" cy="90" r="8"></circle>
-          <circle class="point-single" cx="392" cy="190" r="8"></circle>
-          <circle class="point-short" cx="571" cy="190" r="8"></circle>
-          <circle class="point-core" cx="688" cy="190" r="8"></circle>
-          <circle class="point-long" cx="828" cy="190" r="8"></circle>
-          <circle class="point-single" cx="298" cy="290" r="8"></circle>
-          <circle class="point-short" cx="493" cy="290" r="8"></circle>
-          <circle class="point-core" cx="633" cy="290" r="8"></circle>
-          <circle class="point-long" cx="758" cy="290" r="8"></circle>
-          <circle class="point-single" cx="446" cy="390" r="8"></circle>
-          <circle class="point-short" cx="610" cy="390" r="8"></circle>
-          <circle class="point-core" cx="782" cy="390" r="8"></circle>
-          <circle class="point-long" cx="922" cy="390" r="8"></circle>
+          <circle class="point-q1" cx="345" cy="90" r="8"></circle>
+          <circle class="point-q2" cx="540" cy="90" r="8"></circle>
+          <circle class="point-q3" cx="711" cy="90" r="8"></circle>
+          <circle class="point-q4" cx="875" cy="90" r="8"></circle>
+          <circle class="point-q1" cx="392" cy="190" r="8"></circle>
+          <circle class="point-q2" cx="571" cy="190" r="8"></circle>
+          <circle class="point-q3" cx="688" cy="190" r="8"></circle>
+          <circle class="point-q4" cx="828" cy="190" r="8"></circle>
+          <circle class="point-q1" cx="298" cy="290" r="8"></circle>
+          <circle class="point-q2" cx="493" cy="290" r="8"></circle>
+          <circle class="point-q3" cx="633" cy="290" r="8"></circle>
+          <circle class="point-q4" cx="758" cy="290" r="8"></circle>
+          <circle class="point-q1" cx="446" cy="390" r="8"></circle>
+          <circle class="point-q2" cx="610" cy="390" r="8"></circle>
+          <circle class="point-q3" cx="782" cy="390" r="8"></circle>
+          <circle class="point-q4" cx="922" cy="390" r="8"></circle>
         </g>
         <g class="value-labels">
-          <text class="value-single" x="345" y="72">16</text>
-          <text class="value-short" x="540" y="72">41</text>
-          <text class="value-core" x="711" y="72">63</text>
-          <text class="value-long" x="875" y="72">84</text>
-          <text class="value-single" x="392" y="172">22</text>
-          <text class="value-short" x="571" y="172">45</text>
-          <text class="value-core" x="688" y="172">60</text>
-          <text class="value-long" x="828" y="172">78</text>
-          <text class="value-single" x="298" y="272">10</text>
-          <text class="value-short" x="493" y="272">35</text>
-          <text class="value-core" x="633" y="272">53</text>
-          <text class="value-long" x="758" y="272">69</text>
-          <text class="value-single" x="446" y="372">29</text>
-          <text class="value-short" x="610" y="372">50</text>
-          <text class="value-core" x="782" y="372">72</text>
-          <text class="value-long" x="922" y="372">90</text>
+          <text class="value-q1" x="345" y="72">16</text>
+          <text class="value-q2" x="540" y="72">41</text>
+          <text class="value-q3" x="711" y="72">63</text>
+          <text class="value-q4" x="875" y="72">84</text>
+          <text class="value-q1" x="392" y="172">22</text>
+          <text class="value-q2" x="571" y="172">45</text>
+          <text class="value-q3" x="688" y="172">60</text>
+          <text class="value-q4" x="828" y="172">78</text>
+          <text class="value-q1" x="298" y="272">10</text>
+          <text class="value-q2" x="493" y="272">35</text>
+          <text class="value-q3" x="633" y="272">53</text>
+          <text class="value-q4" x="758" y="272">69</text>
+          <text class="value-q1" x="446" y="372">29</text>
+          <text class="value-q2" x="610" y="372">50</text>
+          <text class="value-q3" x="782" y="372">72</text>
+          <text class="value-q4" x="922" y="372">90</text>
         </g>
         <g class="legend">
-          <circle class="legend-single" cx="240" cy="20" r="7"></circle>
+          <circle class="legend-q1" cx="240" cy="20" r="7"></circle>
           <text x="256" y="25">Q1</text>
-          <circle class="legend-short" cx="340" cy="20" r="7"></circle>
+          <circle class="legend-q2" cx="340" cy="20" r="7"></circle>
           <text x="356" y="25">Q2</text>
-          <circle class="legend-core" cx="440" cy="20" r="7"></circle>
+          <circle class="legend-q3" cx="440" cy="20" r="7"></circle>
           <text x="456" y="25">Q3</text>
-          <circle class="legend-long" cx="540" cy="20" r="7"></circle>
+          <circle class="legend-q4" cx="540" cy="20" r="7"></circle>
           <text x="556" y="25">Q4</text>
         </g>
       </svg>

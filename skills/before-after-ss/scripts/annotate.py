@@ -4,7 +4,7 @@
 Usage:
   annotate.py --before-url URL --after-url URL --selector CSS_OR_ROLE \
     --out-dir DIR --slug SLUG [--viewport 1280x900] [--shape box|circle] \
-    [--cdp http://localhost:29229] [--wait-selector CSS] [--scroll-y N] [--full-page] \
+    [--cdp URL | --launch] [--wait-selector CSS] [--scroll-y N] [--full-page] \
     [--wait-until load|domcontentloaded|networkidle] [--ready-selector CSS] [--setup FILE.py] \
     [--themes light,dark] [--no-theme-check]
 
@@ -45,8 +45,8 @@ it has visited. Open each capture origin once in Chrome before running when
 the login lives in localStorage.
 
 Requires: python3, playwright (`pip install playwright`), Pillow, and a
-Chrome exposing CDP (default http://localhost:29229) or `playwright install
-chromium` for --launch mode.
+A Chrome exposing CDP (--cdp, or the CDP_ENDPOINT env var) or `playwright
+install chromium`; with neither, it launches headless Chromium.
 """
 
 from __future__ import annotations
@@ -54,6 +54,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import os
 import sys
 from collections.abc import Callable
 from pathlib import Path
@@ -229,9 +230,11 @@ def main() -> None:
     ap.add_argument("--setup", help="Python file defining setup(page), run on both sides after load to reach the captured state")
     ap.add_argument("--themes", default="light,dark", help="comma-separated themes to capture; each gets its own before/after pair")
     ap.add_argument("--no-theme-check", action="store_true", help="skip the <html class=dark> check for surfaces themed by media query or a data attribute")
-    ap.add_argument("--cdp", default="http://localhost:29229")
+    ap.add_argument("--cdp", default=os.environ.get("CDP_ENDPOINT"), help="Chrome DevTools endpoint; defaults to $CDP_ENDPOINT")
     ap.add_argument("--launch", action="store_true", help="launch headless chromium instead of attaching over CDP")
     args = ap.parse_args()
+    if not args.cdp:
+        args.launch = True
 
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)

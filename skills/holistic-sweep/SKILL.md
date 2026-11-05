@@ -37,7 +37,7 @@ The three principles each set a rule for the sweep:
 5. **Spawn one child session per PR.** Each child prompt is self-contained and includes:
    - the inventory attachment and the child's exact file list and line references from it;
    - the target primitive, the exceptions it must leave alone, and their reasons;
-   - `@skills:ship-with-proof` (or the Ship With Proof playbook), which brings review approval, light and dark [`before-after-ss`](../before-after-ss/SKILL.md), and a recording;
+   - `@skills:ship-with-proof`, which brings review approval, light and dark [`before-after-ss`](../before-after-ss/SKILL.md), and a recording;
    - a required `Not converted` section in the PR body listing every inventoried site the child deliberately left, each with a reason;
    - its starting point: latest main for an independent child, or the parent layer's branch head for a dependent stack layer.
 

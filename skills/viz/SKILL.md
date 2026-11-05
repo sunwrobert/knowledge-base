@@ -23,7 +23,7 @@ Ask what the series _is_, in this order. Stop at the first match.
 1. **Is it a named metric the project already colors?** (cost, requests, tokens, credits, and so on.) Then it uses that metric's **semantic role token**. A metric keeps its color on every surface, so it is the same color in a deck as in the product.
 2. **Does it encode good, bad, or caution?** Uptime health, a budget over threshold, an error rate. Then, and only then, a **status color** (`--positive`, `--negative`, `--warning`). Status colors are never generic series colors.
 3. **Is it an identifiable entity?** A model, provider, customer, service. Then a **categorical slot** (`--chart-1`…`--chart-N`), assigned by stable hash so the entity keeps its color across filters, queries, and surfaces. A curated pinned map is fine if every hue comes from the categorical set and the map is stable app-wide.
-4. **Is it an ordered sequence?** (session length buckets, severity tiers.) An ordered ramp (`--chart-ramp-*` in the defaults). Ramps may be theme-specific so their value labels keep AA contrast.
+4. **Is it an ordered sequence?** (severity tiers, size bands.) An ordered ramp (`--chart-ramp-*` in the defaults). Ramps may be theme-specific so their value labels keep AA contrast.
 5. **A category with fixed meaning?** (content type, modality.) Fixed slot assignments, never hash-picked, and never carried by color alone: always an icon and a visible label or tooltip.
 6. **Anything else, genuinely anonymous series.** Sequential cycling through the categorical slots.
 7. **The aggregate "other" or "rest of" bucket, or a flat no-change sparkline?** The neutral series color (`--chart-other`).
@@ -66,7 +66,7 @@ No other alphas. The allowlist is discrete, not a range; nearby values in existi
 - **A degraded or failing path may use a status color**, because it encodes bad. Nothing else in a diagram may.
 - **The accent is allowed on a diagram**, unlike a chart, but only as identity or emphasis on one surface, never as one of several comparable elements. Three peer boxes with one accented reads as "selected".
 - **Standalone marketing assets may declare `data-viz-kind="marketing"`** and use the accent for at most one subject, marked with `data-viz-subject` and targeted by that attribute or the marked element's class or id. Keep non-focus points neutral and frontier connectors neutral.
-- Every asset declares exactly one `data-viz-kind`: `chart`, `diagram`, or `marketing`.
+- Every asset declares exactly one `data-viz-kind`: `chart`, `diagram`, or `marketing`. The marker makes the semantic checks explicit and cannot be omitted to bypass them.
 
 Every diagram must be intelligible without color. Labels, arrowheads, and baselines, always.
 
