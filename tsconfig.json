@@ -28,5 +28,7 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "noPropertyAccessFromIndexSignature": false
-  }
+  },
+  // Skills bundle scripts with their own runtimes, deps and test runners.
+  "exclude": ["node_modules", "skills"]
 }

@@ -1,0 +1,54 @@
+{
+  "title": "Small fixes",
+  "subtitle": "A selection of 2 fixes from a sweep of API parameter gaps.",
+  "repo": {
+    "name": "your-org/your-repo",
+    "url": "https://github.com/your-org/your-repo"
+  },
+  "date": "12 September 2026",
+  "author": {
+    "name": "Author Name",
+    "url": "https://github.com/<handle>"
+  },
+  "footer": [
+    "Each fix closes a gap between what an upstream API accepts and what the client forwarded for it. The excerpts are trimmed from the pull requests; tests and fixtures are omitted."
+  ],
+  "fixes": [
+    {
+      "id": "max-completion-tokens-alias",
+      "title": "max_completion_tokens as an alias",
+      "pr": {
+        "number": 101,
+        "url": "https://github.com/your-org/your-repo/pull/101"
+      },
+      "tags": "routing · parameter matching",
+      "description": "Backends advertised <code>max_tokens</code>, but a request that named the same cap as <code>max_completion_tokens</code> failed the parameter filter and was routed away. Both names are canonicalized before the set lookup, so a backend advertising either one matches either one.",
+      "file": "src/routing/filter.ts",
+      "diff": "@@ -100,6 +102,6 @@\n   parameters: readonly string[],\n ): boolean {\n-  const supported = new Set(backend.supportedParameters);\n-  return parameters.every((parameter) => supported.has(parameter));\n+  const supported = new Set(backend.supportedParameters.map(canonicalizeParameter));\n+  return parameters.every((parameter) => supported.has(canonicalizeParameter(parameter)));\n }\n@@ -148,13 +150,18 @@\n+function canonicalizeParameter(parameter: string): string {\n+  return parameter === 'max_completion_tokens' ? 'max_tokens' : parameter;\n+}"
+    },
+    {
+      "id": "tool-choice-values",
+      "title": "tool_choice none and required",
+      "pr": {
+        "number": 102,
+        "url": "https://github.com/your-org/your-repo/pull/102"
+      },
+      "tags": "adapters · tool calling",
+      "description": "The adapter rejected any <code>tool_choice</code> other than <code>auto</code> with a 400, although the upstream API also takes <code>none</code> and <code>required</code>. The three documented strings pass through. Named-function objects and unknown strings are still rejected.",
+      "file": "src/adapters/example-adapter.ts",
+      "diff": "@@ -30,4 +30,6 @@\n+const SUPPORTED_TOOL_CHOICES: ReadonlySet<unknown> = new Set(['auto', 'none', 'required']);\n@@ -59,8 +61,8 @@\n     const { tool_choice, ...rest } = request;\n \n-    if (tool_choice != null && tool_choice !== 'auto') {\n+    if (tool_choice != null && !SUPPORTED_TOOL_CHOICES.has(tool_choice)) {\n       return err({\n-        message: 'Tool choice must be auto',\n+        message: 'Tool choice must be auto, none, or required',\n         status: 400,\n       });",
+      "wire": [
+        {
+          "label": "Client response · tool_choice: \"required\"",
+          "before": "HTTP 400\n{\n  \"error\": { \"message\": \"Tool choice must be auto\" }\n}",
+          "after": "HTTP 200\n{\n  \"choices\": [{ \"message\": { \"tool_calls\": [ ... ] } }]\n}"
+        },
+        {
+          "label": "Upstream request",
+          "before": "(request rejected before it is sent)",
+          "after": "{\n  \"model\": \"example-model\",\n  \"messages\": [ ... ],\n  \"tools\": [ ... ],\n  \"tool_choice\": \"required\"\n}"
+        }
+      ]
+    }
+  ]
+}

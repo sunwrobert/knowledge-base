@@ -1,0 +1,70 @@
+/*
+ * Neutral default viz tokens. Replace with the project's own token stylesheet
+ * (VIZ_TOKEN_SOURCE) when it has one; keep the token names.
+ *
+ * Chrome tokens are HSL channel triples, consumed as hsl(var(--token)).
+ * Chart, status, and --text-faint tokens are complete colors, consumed bare.
+ */
+:root {
+  /* Chrome */
+  --background: 0 0% 100%; /* #FFFFFF */
+  --foreground: 222 47% 11%; /* #111827 */
+  --muted-foreground: 222 47% 11% / 0.66;
+  --border: 222 47% 11% / 0.12;
+  --primary: 243 75% 59%; /* #4F46E5 */
+  --accent: 243 75% 59% / 0.08;
+  --accent-foreground: 243 75% 59%;
+  --text-faint: #1118276e;
+
+  /* Categorical: d3 schemeTableau10, same hex in both themes */
+  --chart-1: #4e79a7;
+  --chart-2: #f28e2b;
+  --chart-3: #e15759;
+  --chart-4: #76b7b2;
+  --chart-5: #59a14f;
+  --chart-6: #edc948;
+  --chart-7: #b07aa1;
+  --chart-8: #ff9da7;
+  --chart-9: #9c755f;
+  --chart-10: #bab0ac;
+
+  /* Neutral series: the aggregate "other" bucket and flat no-change lines */
+  --chart-other: #94a3b8;
+
+  /* Ordered ramp, theme-specific so small value labels keep AA contrast */
+  --chart-ramp-1: #6b8fd6;
+  --chart-ramp-2: #4a6fc0;
+  --chart-ramp-3: #2f52a3;
+  --chart-ramp-4: #1c3577;
+
+  /* Status: only for series that encode good, bad, or caution */
+  --positive: #16a34a;
+  --positive-text: #15803d;
+  --positive-bg: #16a34a14;
+  --negative: #dc2626;
+  --negative-text: #b91c1c;
+  --negative-bg: #dc262614;
+  --warning: #d97706;
+  --warning-text: #92400e;
+  --warning-bg: #d9770614;
+}
+
+:is(.dark) {
+  --background: 222 47% 7%; /* #090E1A */
+  --foreground: 210 40% 98%; /* #F8FAFC */
+  --muted-foreground: 210 40% 98% / 0.62;
+  --border: 210 40% 98% / 0.12;
+  --primary: 234 89% 74%; /* #818CF8 */
+  --accent: 234 89% 74% / 0.08;
+  --accent-foreground: 234 89% 74%;
+  --text-faint: #f8fafc6e;
+
+  --chart-ramp-1: #5b7fc7;
+  --chart-ramp-2: #7d9de0;
+  --chart-ramp-3: #a3bcef;
+  --chart-ramp-4: #ccdaf8;
+
+  --positive-text: #4ade80;
+  --negative-text: #f87171;
+  --warning-text: #fbbf24;
+}

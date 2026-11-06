@@ -23,6 +23,72 @@
       "inKnowledgeBase": false
     },
     {
+      "name": "ai-seo",
+      "source": "https://github.com/coreyhaines31/marketingskills",
+      "path": "skills/ai-seo",
+      "comparisonCommit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "treeSha": "a9dd55de5fac849e776b97e8d66c2f04f41ae158",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "animate",
+      "source": "https://github.com/emilkowalski/skills",
+      "path": "skills/animate",
+      "comparisonCommit": "d23d7f88a2e21c9e4b1418c7abe420f5c1052ba7",
+      "treeSha": "adf23358fac7bdce5febcb85d7fd985407ead56f",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "animated-explainer",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "animation-vocabulary",
+      "source": "https://github.com/emilkowalski/skills",
+      "path": "skills/animation-vocabulary",
+      "comparisonCommit": "85e8e2363b713506e1d5b6e07a0eb2da66be1bc3",
+      "treeSha": "d49565744427887a1f719de1ceee04d941d4e681",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "architect",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/architect",
+      "comparisonCommit": "e5a8186d7b43be8d6ac4452440fbead5f1a51c70",
+      "treeSha": "0f150e66a3af501fa7f759b6b27814ad6732142f",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "arena",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/arena",
+      "comparisonCommit": "e5a8186d7b43be8d6ac4452440fbead5f1a51c70",
+      "treeSha": "051012b3fd378ad46410ee3f2dcf779a819fd297",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "automate-me",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/automate-me",
+      "comparisonCommit": "bb68f2365eceafa0cb2d253112f675acf5f144cc",
+      "treeSha": "7d67c5679fbfc6b18cb582f1915be5a98f8e0d5f",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
       "name": "babysit-pr",
       "source": "https://github.com/openai/codex",
       "path": ".codex/skills/babysit-pr",
@@ -31,6 +97,54 @@
       "trackingMethod": "gh skills add",
       "localBodyDiffers": true,
       "inKnowledgeBase": false
+    },
+    {
+      "name": "before-after-ss",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "benchmark-checklist",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/benchmark-checklist",
+      "comparisonCommit": "e5a8186d7b43be8d6ac4452440fbead5f1a51c70",
+      "treeSha": "dc1ce4af2fc97f35575f2f05d00ea0850f06528b",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "bing-webmaster",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "blast-radius",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/blast-radius",
+      "comparisonCommit": "b1695c2019b650ca5d4a66a6a6d805233c806d6d",
+      "treeSha": "9437b18aef01b61d24b57d0fd3de24386398b643",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "bro",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/bro",
+      "comparisonCommit": "12d587dfb20741cafc376c42c696c5f6e2a64487",
+      "treeSha": "53c3b2c5dc11fe0ee4156468da27505df9239dc6",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "bulk-review-html",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
     },
     {
       "name": "caveman-review",
@@ -43,14 +157,54 @@
       "inKnowledgeBase": false
     },
     {
+      "name": "clickhouse-architecture-advisor",
+      "source": "https://github.com/ClickHouse/agent-skills",
+      "path": "skills/clickhouse-architecture-advisor",
+      "comparisonCommit": "356a8c1b9a7392adb389a132f5ad3fec38532a03",
+      "treeSha": "f72f55eef7d5c980ad141910862a5af9dca0ef23",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "clickhouse-best-practices",
+      "source": "https://github.com/ClickHouse/agent-skills",
+      "path": "skills/clickhouse-best-practices",
+      "comparisonCommit": "356a8c1b9a7392adb389a132f5ad3fec38532a03",
+      "treeSha": "2a8db28b640349bec00c258b77840928ced7f187",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "clickhouse-js-node-coding",
+      "source": "https://github.com/ClickHouse/agent-skills",
+      "path": "skills/clickhouse-js-node-coding",
+      "comparisonCommit": "356a8c1b9a7392adb389a132f5ad3fec38532a03",
+      "treeSha": "d238122e9cb302a3f3bdd51224bead4e4e549aa1",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "clickhouse-js-node-troubleshooting",
+      "source": "https://github.com/ClickHouse/agent-skills",
+      "path": "skills/clickhouse-js-node-troubleshooting",
+      "comparisonCommit": "356a8c1b9a7392adb389a132f5ad3fec38532a03",
+      "treeSha": "31d54557719c0732360a55cde30924cd5f7471c7",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
       "name": "cloudflare",
       "source": "https://github.com/cloudflare/skills",
       "path": "skills/cloudflare",
       "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
       "treeSha": "34386215892a8255fba7112d1a2a3e5ff40150e8",
-      "trackingMethod": "gh skills add",
-      "localBodyDiffers": true,
-      "inKnowledgeBase": false
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
     },
     {
       "name": "cloudflare-email-service",
@@ -85,12 +239,112 @@
     {
       "name": "code-diagram-html",
       "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively."
+      "note": "No verified external upstream; not overwritten or attributed speculatively.",
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "correct",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/correct",
+      "comparisonCommit": "e5a8186d7b43be8d6ac4452440fbead5f1a51c70",
+      "treeSha": "2396c1bb5426e7344846a524342d120b2f29f8da",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "council",
+      "source": "https://github.com/t3dotgg/tstack",
+      "path": "skills/council",
+      "comparisonCommit": "1085050f3baed1ac724caa4a8166145fb2ac88af",
+      "treeSha": "ed352dce7c3f58076bdd0723927a308e284c3031",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "council-devin",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "create-formal-verification-skill",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/create-formal-verification-skill",
+      "comparisonCommit": "f9be7aa00c2b2bf4b13562143a6918445e06b99d",
+      "treeSha": "3030f36000a0f2c51a1ab0a356568ea862e11b0d",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
     },
     {
       "name": "create-pr",
       "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively."
+      "note": "No verified external upstream; not overwritten or attributed speculatively.",
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "datadog-dashboard",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "dd-apm",
+      "source": "https://github.com/datadog-labs/agent-skills",
+      "path": "dd-apm",
+      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
+      "treeSha": "4a5bfa8db79ddea7c666f2beeeff4e325a7feccd",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "dd-docs",
+      "source": "https://github.com/datadog-labs/agent-skills",
+      "path": "dd-docs",
+      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
+      "treeSha": "654bbbb1e0fa0553dd691b1c3c9785ff2a326553",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "dd-logs",
+      "source": "https://github.com/datadog-labs/agent-skills",
+      "path": "dd-logs",
+      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
+      "treeSha": "f6aea9148d2fea3ba15e56f98888a4763577f14d",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "dd-monitors",
+      "source": "https://github.com/datadog-labs/agent-skills",
+      "path": "dd-monitors",
+      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
+      "treeSha": "113e883977ec9f9335a157b1d16901a00a6ba7b0",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "dd-pup",
+      "source": "https://github.com/datadog-labs/agent-skills",
+      "path": "dd-pup",
+      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
+      "treeSha": "e5bec3501a18a6dc479cf0d1292987ec70389cfe",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "deslop-micro",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
     },
     {
       "name": "durable-objects",
@@ -98,9 +352,35 @@
       "path": "skills/durable-objects",
       "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
       "treeSha": "ca4497e4bfa069d2d06e14440b78c81eccd8c5f0",
-      "trackingMethod": "gh skills add",
-      "localBodyDiffers": true,
-      "inKnowledgeBase": false
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "emil-design-eng",
+      "source": "https://github.com/emilkowalski/skills",
+      "path": "skills/emil-design-eng",
+      "comparisonCommit": "85e8e2363b713506e1d5b6e07a0eb2da66be1bc3",
+      "treeSha": "db7a20dc1d8ad26a0307dcb45ebc79fc372f5c69",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "equivalence-review",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "find-animation-opportunities",
+      "source": "https://github.com/emilkowalski/skills",
+      "path": "skills/find-animation-opportunities",
+      "comparisonCommit": "d23d7f88a2e21c9e4b1418c7abe420f5c1052ba7",
+      "treeSha": "502f891c05c9cade7e7bd815e3f228fdd20b61b6",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
     },
     {
       "name": "find-skills",
@@ -111,6 +391,24 @@
       "trackingMethod": "gh skills add",
       "localBodyDiffers": false,
       "inKnowledgeBase": false
+    },
+    {
+      "name": "ga4",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "gauge",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "gauge-cli",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
     },
     {
       "name": "gh-stack",
@@ -131,6 +429,18 @@
       "trackingMethod": "gh skills add",
       "localBodyDiffers": false,
       "inKnowledgeBase": true
+    },
+    {
+      "name": "google-search-console",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "green-stack",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
     },
     {
       "name": "grill-me",
@@ -155,7 +465,24 @@
     {
       "name": "herdr-council",
       "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively."
+      "note": "No verified external upstream; not overwritten or attributed speculatively.",
+      "inKnowledgeBase": false
+    },
+    {
+      "name": "holistic-sweep",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "how",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/how",
+      "comparisonCommit": "e5a8186d7b43be8d6ac4452440fbead5f1a51c70",
+      "treeSha": "12b9ed018673a72573574ca5304fc1503a7d16d7",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
     },
     {
       "name": "humanizer",
@@ -178,19 +505,46 @@
       "inKnowledgeBase": true
     },
     {
+      "name": "improve-animations",
+      "source": "https://github.com/emilkowalski/skills",
+      "path": "skills/improve-animations",
+      "comparisonCommit": "85e8e2363b713506e1d5b6e07a0eb2da66be1bc3",
+      "treeSha": "cf1f7aabac34c08f2cf833f039fa99af2f415183",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "interrogate",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/interrogate",
+      "comparisonCommit": "e5a8186d7b43be8d6ac4452440fbead5f1a51c70",
+      "treeSha": "708db3e62cd0225367d6fd8841dc38fdb5f1112d",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "makefaster",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "merge-risk",
+      "source": "https://github.com/warpdotdev/common-skills",
+      "path": ".agents/skills/merge-risk",
+      "comparisonCommit": "8792394ff1b655e0af451b8fabb68ef0cfcbd208",
+      "treeSha": "5c76f952405b020e9a1c9acfa86bcee99645c953",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
       "name": "orchestrate-parallel-pr-tasks",
       "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively."
-    },
-    {
-      "name": "perry-devin-review",
-      "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively."
-    },
-    {
-      "name": "perry-review",
-      "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively."
+      "note": "No verified external upstream; not overwritten or attributed speculatively.",
+      "inKnowledgeBase": false
     },
     {
       "name": "ponytail",
@@ -205,7 +559,118 @@
     {
       "name": "pr-merge-tracker",
       "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively."
+      "note": "No verified external upstream; not overwritten or attributed speculatively.",
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "pr-watchdog-devin",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "principle-build-the-lever",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-build-the-lever",
+      "comparisonCommit": "ecc249f1e306fc64ddf83c7bed16cacf7c2239db",
+      "treeSha": "3fb3e945049f52b6a721e329901995fa6289221e",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "principle-fix-root-causes",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-fix-root-causes",
+      "comparisonCommit": "ecc249f1e306fc64ddf83c7bed16cacf7c2239db",
+      "treeSha": "0ec22d21fffd180573f49ea239ee76083d6a6f40",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "principle-prove-it-works",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-prove-it-works",
+      "comparisonCommit": "df581122cde17e6e27686b5a448bde23e4ad4318",
+      "treeSha": "41e2142b6479db1dfdb9c2a3b856a895af61089d",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "principle-redesign-from-first-principles",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-redesign-from-first-principles",
+      "comparisonCommit": "12d587dfb20741cafc376c42c696c5f6e2a64487",
+      "treeSha": "7d6b29659ee81f3e4ce5475b868bf891a8041e7c",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "principle-test-behavior-not-implementation",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/principle-test-behavior-not-implementation",
+      "comparisonCommit": "fadd23794c0075468eb8964b0fd93e06e09486ad",
+      "treeSha": "4c5cb15166bd6bcc5023e3180ed0105ea4a6e06a",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "prod-bug-bash",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "programmatic-seo",
+      "source": "https://github.com/coreyhaines31/marketingskills",
+      "path": "skills/programmatic-seo",
+      "comparisonCommit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "treeSha": "afbffddf471de4fc36f31fb0e502be1d79a3cf1d",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "prose-pass",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "recall",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/recall",
+      "comparisonCommit": "b1695c2019b650ca5d4a66a6a6d805233c806d6d",
+      "treeSha": "4dd0f8b495008fc106b2314401f91bc9cf96ed7f",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "restate",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "review-animations",
+      "source": "https://github.com/emilkowalski/skills",
+      "path": "skills/review-animations",
+      "comparisonCommit": "85e8e2363b713506e1d5b6e07a0eb2da66be1bc3",
+      "treeSha": "0e0d3cb3e07ca307fe946ccaf57f6c82eb75124a",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "review-loop",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
     },
     {
       "name": "sandbox-sdk",
@@ -218,9 +683,42 @@
       "inKnowledgeBase": false
     },
     {
+      "name": "seo",
+      "source": "https://github.com/addyosmani/web-quality-skills",
+      "path": "skills/seo",
+      "comparisonCommit": "afa8da942115f2961fdbfa80807ea0b232ff6c00",
+      "treeSha": "da1d9c981518b28eded931b8680c2e4c631740af",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "seo-aeo",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "seo-audit",
+      "source": "https://github.com/coreyhaines31/marketingskills",
+      "path": "skills/seo-audit",
+      "comparisonCommit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
+      "treeSha": "88e419e823dc951fc243243ec91e888c5088f7f1",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "seo-content",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
       "name": "ship-with-proof",
       "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively."
+      "note": "No verified external upstream; not overwritten or attributed speculatively.",
+      "inKnowledgeBase": true
     },
     {
       "name": "show-me",
@@ -229,6 +727,88 @@
       "comparisonCommit": "3c2629142c5d437428269b1b722b08c0b87f574d",
       "treeSha": "0bdb821a21e793a4f6f82a7078c052154447e5cc",
       "trackingMethod": "gh skills add",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "show-me-your-work",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/show-me-your-work",
+      "comparisonCommit": "df581122cde17e6e27686b5a448bde23e4ad4318",
+      "treeSha": "5ecdc5d5f4b2126b2d28f0bbb091bd5454d7086e",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "sol-loop",
+      "source": "https://github.com/t3dotgg/tstack",
+      "path": "skills/sol-loop",
+      "comparisonCommit": "1085050f3baed1ac724caa4a8166145fb2ac88af",
+      "treeSha": "9d2b1c1b00bf54e1b4e6e6243aec6d39037ce624",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "sol-loop-devin",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "solar-burn",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "solar-climb",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "solar-loop",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "solar-loop-scout",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "solar-mode",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "spotlight",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "statechart",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/statechart",
+      "comparisonCommit": "1ba91fc25c0977741dd0e267849e6234b037ed0a",
+      "treeSha": "a79a48c6970be3b63d6efefb0a306b7c87de88d0",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "teach",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/teach",
+      "comparisonCommit": "b1695c2019b650ca5d4a66a6a6d805233c806d6d",
+      "treeSha": "3ee517292dae0476dc516f9f3805c08fb943c6ff",
+      "trackingMethod": "gh skill install",
       "localBodyDiffers": false,
       "inKnowledgeBase": true
     },
@@ -243,6 +823,18 @@
       "inKnowledgeBase": false
     },
     {
+      "name": "telemetry-hunt",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
+      "name": "thermo-fix-loop",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
+    },
+    {
       "name": "thermo-nuclear-code-quality-review",
       "source": "https://github.com/cursor/plugins",
       "path": "cursor-team-kit/skills/thermo-nuclear-code-quality-review",
@@ -255,7 +847,18 @@
     {
       "name": "thermo-nuclear-review-fix-loop",
       "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively."
+      "note": "No verified external upstream; not overwritten or attributed speculatively.",
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "transitions-dev",
+      "source": "https://github.com/Jakubantalik/transitions.dev",
+      "path": "skills/transitions-dev",
+      "comparisonCommit": "598d3d6ad89dabb4bdf742fd2e887ca53914a888",
+      "treeSha": "26c67bda945b1397fb48dfbaee9d03696ca5854b",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
     },
     {
       "name": "turnstile-spin",
@@ -266,6 +869,42 @@
       "trackingMethod": "gh skills add",
       "localBodyDiffers": true,
       "inKnowledgeBase": false
+    },
+    {
+      "name": "unslop",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/unslop",
+      "comparisonCommit": "e8d856f0273b42ebafe0ec3546bd645709e7c1b0",
+      "treeSha": "e19dcc9c531f4609df38bc86c62cf0e8b6d8f444",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "vercel-composition-patterns",
+      "source": "https://github.com/vercel-labs/agent-skills",
+      "path": "skills/composition-patterns",
+      "comparisonCommit": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "treeSha": "bf90d0a4b83ea054653350f9c67f6de235d3a368",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "vercel-react-best-practices",
+      "source": "https://github.com/vercel-labs/agent-skills",
+      "path": "skills/react-best-practices",
+      "comparisonCommit": "063bee94c3f4df8453406c830b0a7df0f2860278",
+      "treeSha": "343db72180d05814949fef7d46be96b5c6ee86b3",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
+      "name": "viz",
+      "status": "local-or-unverified",
+      "inKnowledgeBase": true,
+      "note": "Personal skill; no external upstream."
     },
     {
       "name": "wayfinder",
@@ -288,14 +927,24 @@
       "inKnowledgeBase": false
     },
     {
+      "name": "why",
+      "source": "https://github.com/cursor/plugins",
+      "path": "pstack/skills/why",
+      "comparisonCommit": "e5a8186d7b43be8d6ac4452440fbead5f1a51c70",
+      "treeSha": "95da26ff7fe7b8fe70022d19064bd1a9f9e27127",
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
+    },
+    {
       "name": "workers-best-practices",
       "source": "https://github.com/cloudflare/skills",
       "path": "skills/workers-best-practices",
       "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
       "treeSha": "2b353123539948ca95c757166437c1fc5eefc208",
-      "trackingMethod": "gh skills add",
-      "localBodyDiffers": true,
-      "inKnowledgeBase": false
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
     },
     {
       "name": "wrangler",
@@ -303,9 +952,9 @@
       "path": "skills/wrangler",
       "comparisonCommit": "b052c32bab7dd493513260228a36c88294f343f1",
       "treeSha": "d87d80a0c3f0a3c2d38222b02d459ef85af60320",
-      "trackingMethod": "gh skills add",
-      "localBodyDiffers": true,
-      "inKnowledgeBase": false
+      "trackingMethod": "gh skill install",
+      "localBodyDiffers": false,
+      "inKnowledgeBase": true
     }
   ]
 }

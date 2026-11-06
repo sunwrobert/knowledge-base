@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en" data-viz-kind="chart">
+  <head>
+    <meta charset="utf-8" />
+    <title>Stacked ranking example</title>
+    <style>
+      :root { color-scheme: light; font-family: var(--font-sans); }
+      body { width: 1280px; height: 720px; margin: 0; overflow: hidden; background: transparent; color: hsl(var(--foreground)); font-family: var(--font-sans); }
+      .frame { position: relative; box-sizing: border-box; height: 100%; padding: 96px 80px 32px; }
+      .source-line { position: absolute; bottom: 32px; left: 80px; color: hsl(var(--muted-foreground)); font-family: var(--font-mono); font-size: 12px; line-height: 1.2; }
+      .eyebrow { color: hsl(var(--muted-foreground)); font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+      h1 { margin: 8px 0 20px; font-size: 42px; letter-spacing: -.03em; }
+      .plot { width: 1120px; height: 470px; }
+      .gridline { stroke: hsl(var(--border)); stroke-dasharray: 3 3; }
+      .axis-label, .legend { fill: hsl(var(--muted-foreground)); font-size: 14px; }
+      .bar-a { fill: var(--chart-1); stroke: var(--chart-1); }
+      .bar-b { fill: var(--chart-2); stroke: var(--chart-2); }
+      .bar-c { fill: var(--chart-3); stroke: var(--chart-3); }
+      .bar-d { fill: var(--chart-4); stroke: var(--chart-4); }
+      .legend-a { fill: var(--chart-1); } .legend-b { fill: var(--chart-2); }
+      .legend-c { fill: var(--chart-3); } .legend-d { fill: var(--chart-4); }
+    </style>
+  </head>
+  <body>
+    <main class="frame">
+      <div class="eyebrow">Provider share over time</div>
+      <h1>Ranking mix stays balanced</h1>
+      <svg
+        class="plot"
+        viewBox="0 0 1120 470"
+        role="img"
+        aria-label="One hundred percent stacked provider share chart"
+      >
+        <g class="gridlines">
+          <line class="gridline" x1="90" y1="30" x2="1030" y2="30"></line>
+          <line class="gridline" x1="90" y1="110" x2="1030" y2="110"></line>
+          <line class="gridline" x1="90" y1="190" x2="1030" y2="190"></line>
+          <line class="gridline" x1="90" y1="270" x2="1030" y2="270"></line>
+          <line class="gridline" x1="90" y1="350" x2="1030" y2="350"></line>
+        </g>
+        <g class="axis-labels">
+          <text class="axis-label" x="76" y="355" text-anchor="end">0%</text>
+          <text class="axis-label" x="76" y="275" text-anchor="end">25%</text>
+          <text class="axis-label" x="76" y="195" text-anchor="end">50%</text>
+          <text class="axis-label" x="76" y="115" text-anchor="end">75%</text>
+          <text class="axis-label" x="76" y="35" text-anchor="end">100%</text>
+          <text class="axis-label" x="146" y="380" text-anchor="middle">
+            Jan
+          </text>
+          <text class="axis-label" x="380" y="380" text-anchor="middle">
+            Apr
+          </text>
+          <text class="axis-label" x="614" y="380" text-anchor="middle">
+            Jul
+          </text>
+          <text class="axis-label" x="848" y="380" text-anchor="middle">
+            Oct
+          </text>
+        </g>
+        <g class="bars">
+          <rect class="bar-a" x="110" y="222" width="72" height="128"></rect>
+          <rect class="bar-b" x="110" y="142" width="72" height="80"></rect>
+          <rect class="bar-c" x="110" y="78" width="72" height="64"></rect>
+          <rect class="bar-d" x="110" y="30" width="72" height="48"></rect>
+          <rect class="bar-a" x="188" y="234" width="72" height="116"></rect>
+          <rect class="bar-b" x="188" y="150" width="72" height="84"></rect>
+          <rect class="bar-c" x="188" y="82" width="72" height="68"></rect>
+          <rect class="bar-d" x="188" y="30" width="72" height="52"></rect>
+          <rect class="bar-a" x="266" y="210" width="72" height="140"></rect>
+          <rect class="bar-b" x="266" y="134" width="72" height="76"></rect>
+          <rect class="bar-c" x="266" y="78" width="72" height="56"></rect>
+          <rect class="bar-d" x="266" y="30" width="72" height="48"></rect>
+          <rect class="bar-a" x="344" y="230" width="72" height="120"></rect>
+          <rect class="bar-b" x="344" y="142" width="72" height="88"></rect>
+          <rect class="bar-c" x="344" y="78" width="72" height="64"></rect>
+          <rect class="bar-d" x="344" y="30" width="72" height="48"></rect>
+          <rect class="bar-a" x="422" y="218" width="72" height="132"></rect>
+          <rect class="bar-b" x="422" y="134" width="72" height="84"></rect>
+          <rect class="bar-c" x="422" y="74" width="72" height="60"></rect>
+          <rect class="bar-d" x="422" y="30" width="72" height="44"></rect>
+          <rect class="bar-a" x="500" y="226" width="72" height="124"></rect>
+          <rect class="bar-b" x="500" y="134" width="72" height="92"></rect>
+          <rect class="bar-c" x="500" y="74" width="72" height="60"></rect>
+          <rect class="bar-d" x="500" y="30" width="72" height="44"></rect>
+          <rect class="bar-a" x="578" y="206" width="72" height="144"></rect>
+          <rect class="bar-b" x="578" y="134" width="72" height="72"></rect>
+          <rect class="bar-c" x="578" y="78" width="72" height="56"></rect>
+          <rect class="bar-d" x="578" y="30" width="72" height="48"></rect>
+          <rect class="bar-a" x="656" y="230" width="72" height="120"></rect>
+          <rect class="bar-b" x="656" y="138" width="72" height="92"></rect>
+          <rect class="bar-c" x="656" y="74" width="72" height="64"></rect>
+          <rect class="bar-d" x="656" y="30" width="72" height="44"></rect>
+          <rect class="bar-a" x="734" y="214" width="72" height="136"></rect>
+          <rect class="bar-b" x="734" y="134" width="72" height="80"></rect>
+          <rect class="bar-c" x="734" y="74" width="72" height="60"></rect>
+          <rect class="bar-d" x="734" y="30" width="72" height="44"></rect>
+          <rect class="bar-a" x="812" y="222" width="72" height="128"></rect>
+          <rect class="bar-b" x="812" y="138" width="72" height="84"></rect>
+          <rect class="bar-c" x="812" y="74" width="72" height="64"></rect>
+          <rect class="bar-d" x="812" y="30" width="72" height="44"></rect>
+          <rect class="bar-a" x="890" y="210" width="72" height="140"></rect>
+          <rect class="bar-b" x="890" y="134" width="72" height="76"></rect>
+          <rect class="bar-c" x="890" y="74" width="72" height="60"></rect>
+          <rect class="bar-d" x="890" y="30" width="72" height="44"></rect>
+          <rect class="bar-a" x="968" y="226" width="72" height="124"></rect>
+          <rect class="bar-b" x="968" y="134" width="72" height="92"></rect>
+          <rect class="bar-c" x="968" y="74" width="72" height="60"></rect>
+          <rect class="bar-d" x="968" y="30" width="72" height="44"></rect>
+        </g>
+        <g class="legend">
+          <circle class="legend-a" cx="110" cy="420" r="7"></circle>
+          <text x="126" y="425">Atlas</text>
+          <circle class="legend-b" cx="220" cy="420" r="7"></circle>
+          <text x="236" y="425">Beacon</text>
+          <circle class="legend-c" cx="340" cy="420" r="7"></circle>
+          <text x="356" y="425">Cedar</text>
+          <circle class="legend-d" cx="450" cy="420" r="7"></circle>
+          <text x="466" y="425">Delta</text>
+        </g>
+      </svg>
+      <div class="source-line" data-viz-source>
+        Source: Example internal data, Aug 2026
+      </div>
+    </main>
+  </body>
+</html>

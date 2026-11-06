@@ -12,6 +12,23 @@ knowledge-base/
 └── skills/                # Portable agent skills
 ```
 
+## Skills
+
+`skills/` holds 94 skills. Link them at user scope so every agent (Claude Code, Codex, Cursor, Pi) picks them up. The loop skips any name that already exists, so an employer's internal version of a skill keeps precedence on a work machine:
+
+```bash
+mkdir -p ~/.agents/skills ~/.claude/skills
+for d in "$HOME"/Repositories/knowledge-base/skills/*/; do
+  n=$(basename "$d")
+  [ -e ~/.agents/skills/"$n" ] || ln -s "${d%/}" ~/.agents/skills/"$n"
+  [ -e ~/.claude/skills/"$n" ] || ln -s ../../.agents/skills/"$n" ~/.claude/skills/"$n"
+done
+```
+
+- Skills with `metadata.github-repo` in their frontmatter are installed with `gh skill install <owner>/<repo> <path> --pin <sha> --dir skills` and stay byte-identical to that pin. Refresh them by reinstalling at a new pin, never by hand-editing. `.prettierignore` keeps the formatter off them.
+- The rest are personal skills. `skill-sources.json` records the source of every skill.
+- Start with `solar-mode` for the working style; it routes each step to the skill that owns it.
+
 ## Syncing With Other Repos
 
 - Treat this repo as the canonical mirror for shared scripts and instructions.
