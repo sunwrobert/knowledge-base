@@ -1,0 +1,63 @@
+tap "hashicorp/tap"
+tap "infisical/get-cli"
+tap "oven-sh/bun"
+tap "speakeasy-api/tap"
+tap "withgraphite/tap"
+
+# Languages and package managers
+brew "fnm"
+brew "mise"
+brew "oven-sh/bun/bun"
+brew "pnpm"
+brew "uv"
+
+# Git
+brew "git"
+brew "gh"
+brew "withgraphite/tap/graphite"
+brew "gnupg"
+
+# Shell utilities
+brew "jq"
+brew "hurl"
+brew "hyperfine"
+brew "k6"
+brew "ffmpeg"
+brew "imagemagick"
+
+# Infrastructure
+brew "tilt"
+brew "helm"
+brew "argocd"
+brew "opentofu"
+brew "hashicorp/tap/terraform"
+brew "infisical/get-cli/infisical"
+brew "stripe-cli"
+brew "speakeasy-api/tap/speakeasy"
+brew "postgresql@18"
+
+# Command line casks
+cask "1password-cli"
+cask "gcloud-cli"
+cask "orbstack"
+
+# Apps
+cask "1password"
+cask "caffeine"
+cask "cap"
+cask "chatgpt"
+cask "claude"
+cask "conductor"
+cask "cursor"
+cask "discord"
+cask "ghostty"
+cask "google-chrome"
+cask "granola"
+cask "linear-linear"
+cask "notion"
+cask "obsidian"
+cask "raycast"
+cask "slack"
+cask "t3-code@nightly"
+cask "yaak"
+cask "zed@preview"

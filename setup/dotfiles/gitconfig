@@ -1,0 +1,24 @@
+[alias]
+	co = checkout
+	cob = checkout -b
+	sw = switch
+	swc = switch -c
+	br = branch
+	st = status --short --branch
+	aa = add --all
+	ap = add --patch
+	ci = commit
+	cm = commit -m
+	ca = commit --amend
+	df = diff
+	ds = diff --staged
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	lg = log --graph --pretty=format:%C(auto)%h%C(reset) %C(auto)%d%C(reset) %s %C(dim white)- %an, %ar%C(reset) --all
+	rb = rebase
+	rbi = rebase --interactive
+	cp = cherry-pick
+	aliases = !git config --get-regexp \"^alias\\\\.\"
+[user]
+	name = sunwrobert
+	email = sunwrobert@gmail.com
