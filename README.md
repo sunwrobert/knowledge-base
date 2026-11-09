@@ -9,6 +9,7 @@ knowledge-base/
 ├── AGENTS.md              # Shared agent instructions (code philosophy, etc.)
 ├── CLAUDE.md -> AGENTS.md # Symlink for Claude Code compatibility
 ├── scripts/               # Utility scripts
+├── setup/                 # New Mac setup: Brewfile, dotfiles, setup.sh
 └── skills/                # Portable agent skills
 ```
 
