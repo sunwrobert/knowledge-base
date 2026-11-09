@@ -22,10 +22,11 @@ The script is safe to run again. Existing dotfiles are moved to `<name>.backup.<
 
 1. Sign in to 1Password and turn on its SSH agent.
 2. Run `gh auth login`, `gh auth setup-git`, `gt auth` and `gcloud auth login`.
-3. Put secrets in `~/.zshrc.local`, for example `OPENROUTER_API_KEY`.
-4. Install the apps with no Homebrew cask: Devin, Hex, Magnet, Ports, PR Review, Readout, Grok Bot, Rex Beta and Xcode.
-5. Install the command line tools with no package: `herdr`, `fx` and `devin`.
+3. Install the command line tools with no package: `ori`, `herdr`, `fx` and `devin`.
+4. Run `ori login`, then `ori alias` so plain `pi`, `claude`, `codex` and `omp` run through Ori. No OpenRouter key goes in the shell config.
+5. Install the apps with no Homebrew cask: Devin, Hex, Magnet, Ports, PR Review, Readout, Grok Bot, Rex Beta and Xcode.
 6. Import Raycast settings.
+7. Put any other secrets in `~/.zshrc.local`, which the script creates and git never sees.
 
 ## Not Included
 

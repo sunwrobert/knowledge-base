@@ -64,7 +64,7 @@ git config --global --get-all include.path | grep -qxF "$DOTFILES/gitconfig" ||
 link "$DOTFILES/zed/settings.json" "$HOME/.config/zed/settings.json"
 link "$DOTFILES/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 if [ ! -f "$HOME/.zshrc.local" ]; then
-  printf '# Secrets and machine-specific settings. Never commit this file.\n# export OPENROUTER_API_KEY=""\n' >"$HOME/.zshrc.local"
+  printf '# Secrets and machine-specific settings. Never commit this file.\n' >"$HOME/.zshrc.local"
   chmod 600 "$HOME/.zshrc.local"
   echo "created ~/.zshrc.local"
 fi

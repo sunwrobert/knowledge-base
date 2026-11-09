@@ -24,6 +24,7 @@ Set up this Mac from my knowledge-base repo.
 
 - Never write a secret, API key or token to any file in the repo. Secrets go in `~/.zshrc.local` only, and I enter them myself.
 - Do not log in to any account for me. List the login commands I need to run.
+- Do not put an OpenRouter key in any shell file. Agents get their credential from `ori login`.
 - Do not install or remove employer-managed software such as device management, security or compliance agents.
 - Do not commit or push changes to the repo unless I ask.
 - Do not delete the `.backup.<timestamp>` files the script creates.
