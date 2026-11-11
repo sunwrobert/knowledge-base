@@ -61,7 +61,6 @@ link "$DOTFILES/zprofile" "$HOME/.zprofile"
 # Included, not linked, so tools that write to ~/.gitconfig leave the repo clean.
 git config --global --get-all include.path | grep -qxF "$DOTFILES/gitconfig" ||
   git config --global --add include.path "$DOTFILES/gitconfig"
-link "$DOTFILES/zed/settings.json" "$HOME/.config/zed/settings.json"
 link "$DOTFILES/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 if [ ! -f "$HOME/.zshrc.local" ]; then
   printf '# Secrets and machine-specific settings. Never commit this file.\n' >"$HOME/.zshrc.local"

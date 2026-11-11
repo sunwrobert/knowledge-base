@@ -15,7 +15,7 @@ Set up this Mac from my knowledge-base repo.
 5. Verify the result:
    - `brew bundle check --file setup/Brewfile` passes.
    - `git`, `gh`, `gt`, `bun`, `pnpm`, `node`, `uv`, `tilt`, `tofu`, `infisical`, `pi`, `codex`, `claude`, `omp` and `agent-browser` all resolve in a new login shell (`zsh -lic 'command -v <name>'`).
-   - `~/.zshrc`, `~/.zprofile`, `~/.config/zed/settings.json` and `~/.config/herdr/config.toml` are symlinks into `setup/dotfiles`.
+   - `~/.zshrc`, `~/.zprofile` and `~/.config/herdr/config.toml` are symlinks into `setup/dotfiles`.
    - `git config --global --get-all include.path` lists `setup/dotfiles/gitconfig`.
    - `~/.agents/skills` contains the skills from the repo.
 6. Report what was installed, what failed, and the manual steps from `setup/README.md` that are still open.
