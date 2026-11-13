@@ -2,12 +2,16 @@
 name: ship-with-proof
 description: "Take one change in any repo to a merge-ready PR: every changed behavior proven by unit, integration, and e2e tests where applicable on the local stack, a thermo-nuclear fix loop, a Sol correctness loop, the repository's required approval, a merge-risk section, a recorded e2e video of the change and an adjacent flow, and before-after-ss screenshots for UI changes. Use for 'ship with proof' or a PR with full evidence. Never merges."
 metadata:
-  version: 1.17.0
+  version: 1.19.0
 ---
 
 # Ship With Proof
 
 Run every gate in this session. A behavioral fix invalidates the evidence for the code it touches; re-run the gates that covered it. A caller may add requirements, never remove a gate. Report a gate you can't satisfy; never skip it.
+
+## Completion checklist
+
+Keep one checklist of the gates below in the PR body, with status, evidence links and verified commit. Reload it on resume and before CI repair; preserve unfinished gates when narrowing tasks.
 
 ## Needed from the caller
 
@@ -57,7 +61,7 @@ Commands, paths, test skills, the reviewer, and the review channel come from the
 12. While review runs, get CI green and threads resolved with the available GitHub tools and the repo's review-thread skill when it has one. If CI stays blocked, keep the review loop going and report the CI blocker separately.
 13. Handle review comments yourself: fix or refute, push, reply on the thread, record a fresh request time and re-request in the same conversation, until approval. Never re-request after approval; a rebase or base merge needs no re-approval unless the repo dismisses stale approvals.
 14. After approval, green CI, and all threads resolved, run [`merge-risk`](../merge-risk/SKILL.md) on the final head and append its output verbatim as the PR body's last section, `## Merge risk`, replacing any earlier one; `prose-pass` leaves it as is. Any later push re-runs it.
-15. Report the PR link, approval state, CI state, merge-risk level, artifact URL, and recording, naming anything untested and why. A should-fix, follow-up, "before X", or "not modeled" item you could do yourself, inside the scope the caller gave, is unfinished work, not a report line: do it first. This overrides step 3's PR-growth skips and declined nits; an item that needs product judgment or outlasted a review budget is a question to the caller, never a deferral you decide. Step 2's over-budget model fallback is a stated outcome, not a "not modeled" item, when reducing would drop a relevant case. If a caller owns the final report, hand it these facts instead of ending the session.
+15. Check the checklist against the live PR's current head, required evidence sections, artifact links, CI, approvals and unresolved threads before reporting completion. Report the PR link, approval state, CI state, merge-risk level, artifact URL, and recording, naming anything untested and why. A should-fix, follow-up, "before X", or "not modeled" item you could do yourself, inside the scope the caller gave, is unfinished work, not a report line: do it first. This overrides step 3's PR-growth skips and declined nits; an item that needs product judgment or outlasted a review budget is a question to the caller, never a deferral you decide. Step 2's over-budget model fallback is a stated outcome, not a "not modeled" item, when reducing would drop a relevant case. If a caller owns the final report, hand it these facts instead of ending the session.
 
 ## Done means
 

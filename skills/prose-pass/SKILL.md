@@ -3,7 +3,7 @@ name: prose-pass
 description: >-
   One editing pass of humanizer (structural AI tells) then unslop (word-level tells) over pasted text, a file, or a tree of docs and user-facing strings, with fixed conflict rules and one report. Use for "/prose-pass", "prose pass", "run humanizer and unslop", "plain-language pass", a big copy pass over a dashboard, docs set, or PR body, UI copy or content design for product pages, forms, and status screens, or embedded mode before posting human-read text.
 metadata:
-  version: 1.5.0
+  version: 1.7.0
 ---
 
 # Prose pass
@@ -31,7 +31,18 @@ A user-supplied writing sample sets sentence length, word choice, openings, and 
 
 ## UI copy mode
 
-For strings a user reads in the product: pages, forms, statuses, tasks. This is content design, not technical writing. The order of work above only removes; this mode also adds.
+For strings a user reads in the product: pages, forms, statuses, tasks. This is content design, not technical writing.
+
+First read the repo's own copy rules (`AGENTS.md`, `REVIEW.md`, `DESIGN.md`, a content guide) and apply them alongside this mode; a repo rule wins where they differ.
+
+Every string earns its keep. Before rewriting anything, read every string in scope, not only the ones that read badly, on its screen. Delete it unless it tells the reader something the screen does not already say. Delete a string that:
+
+- restates its heading, button, field label, or the visible state ("Review your answers" over "Check your answers, then submit");
+- tells the reader to do what the UI plainly lets them do ("Fill in the form below");
+- reassures or introduces without a fact ("We're here to help you get started");
+- repeats another string on the same screen.
+
+Never delete a control's own label or accessible name, the only copy of a control, legal text, or a value another screen shares through the same key; check its other uses first. A string you cannot see on a screen is judged by reading the code that renders it, and the report says so. Keep a string that carries a constraint, a consequence, who sees the answer, what happens next and when, or why we ask. Only then run the steps below on what is left. Deleting wins over rewriting: when a string fails this test, do not improve it.
 
 1. Write a voice chart before editing: 3 or 4 traits, each "we are X, not Y" with one example string (Torrey Podmajersky, _Strategic Writing for UX_). Add a glossary of the product's real terms, taken from the code and the UI, one name per thing. Get the owner's approval before rewriting, unless the repo already has an approved chart. Embedded mode with no approved chart skips this step, runs steps 2 to 5, and notes that no chart exists. Pasted text with no code or UI to read: take the glossary from the text and the user, and say so in the report.
 2. Give each surface its job and judge strings against it:
@@ -40,8 +51,8 @@ For strings a user reads in the product: pages, forms, statuses, tasks. This is 
    - Status or task page: reassure. Say where they are, what happens next, and who is waiting on whom.
    - Legal text: never touch.
 3. B2B products speak platform to business, as the [Shopify Polaris content guidelines](https://polaris.shopify.com/content) and Stripe Connect onboarding do: "you" is the business, we say what we need and why, with no hype and no apology.
-4. Add as well as cut. From [cursor/plugins `technical-writing`](https://github.com/cursor/plugins/blob/main/pstack/skills/technical-writing/SKILL.md): vary the rhythm (short sentences land a point, longer ones carry a fact with its condition), and be specific over sterile. A sentence that follows every rule and sounds like a machine wrote it has failed.
-5. Judge each changed string on a screenshot of its screen, read with its heading, label, and button, not in a list. A string that repeats its neighbour or argues with its button fails even when it passes every rule. With no screenshot (pasted text, a state you cannot reach), ask for one; if none comes, report this check as not done.
+4. Rewrite the strings that survive, and add only what the reader is missing. From [cursor/plugins `technical-writing`](https://github.com/cursor/plugins/blob/main/pstack/skills/technical-writing/SKILL.md): vary the rhythm (short sentences land a point, longer ones carry a fact with its condition), and be specific over sterile. A sentence that follows every rule and sounds like a machine wrote it has failed.
+5. Judge every string that remains on a screenshot of its screen, read with its heading, label, and button, not in a list. A string that repeats its neighbour or argues with its button fails even when it passes every rule. With no screenshot (pasted text, a state you cannot reach), ask for one; if none comes, report this check as not done.
 
 ## Conflict rules
 
@@ -59,7 +70,7 @@ For strings a user reads in the product: pages, forms, statuses, tasks. This is 
 - Pasted text: the final text, then the changes grouped by cited rule. No intermediate drafts unless asked.
 - File mode: write only the final prose to the file, then a short summary with rule tallies.
 - Embedded mode (solar-mode, ship-with-proof): return only the final text. Run it on every such text, not only text that reads badly. For product UI strings, apply the repo's approved voice chart if one exists; draft one only in a dedicated copy pass.
-- Big pass: one PR whose description carries the inventory (in scope, skipped and why), one row per changed string or paragraph (file, before, after, rules), and a count per rule. In UI copy mode, also include the voice chart and glossary, a screen column in each row, and before/after screenshots of each screen. Flag any row whose meaning changed, even slightly, as `meaning`. Commit as `copy(<area>): <what the pass did>`.
+- Big pass: one PR whose description carries the inventory (in scope, skipped and why), one row per changed string or paragraph (file, before, after, rules), and a count per rule. In UI copy mode, put a Deleted table first (string, screen, which earn-its-keep test it failed) and lead the counts with deletions; a pass that deletes nothing must say why every string stayed. Also include the voice chart and glossary, a screen column in each row, and before/after screenshots of each screen. Flag any row whose meaning changed, even slightly, as `meaning`. Commit as `copy(<area>): <what the pass did>`.
 
 ## When not to act
 
