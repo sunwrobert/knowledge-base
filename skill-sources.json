@@ -23,16 +23,6 @@
       "inKnowledgeBase": false
     },
     {
-      "name": "ai-seo",
-      "source": "https://github.com/coreyhaines31/marketingskills",
-      "path": "skills/ai-seo",
-      "comparisonCommit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
-      "treeSha": "a9dd55de5fac849e776b97e8d66c2f04f41ae158",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
       "name": "animate",
       "source": "https://github.com/emilkowalski/skills",
       "path": "skills/animate",
@@ -121,12 +111,6 @@
       "inKnowledgeBase": true
     },
     {
-      "name": "bing-webmaster",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
       "name": "blast-radius",
       "source": "https://github.com/cursor/plugins",
       "path": "pstack/skills/blast-radius",
@@ -161,46 +145,6 @@
       "trackingMethod": "gh skills add",
       "localBodyDiffers": false,
       "inKnowledgeBase": false
-    },
-    {
-      "name": "clickhouse-architecture-advisor",
-      "source": "https://github.com/ClickHouse/agent-skills",
-      "path": "skills/clickhouse-architecture-advisor",
-      "comparisonCommit": "356a8c1b9a7392adb389a132f5ad3fec38532a03",
-      "treeSha": "f72f55eef7d5c980ad141910862a5af9dca0ef23",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "clickhouse-best-practices",
-      "source": "https://github.com/ClickHouse/agent-skills",
-      "path": "skills/clickhouse-best-practices",
-      "comparisonCommit": "356a8c1b9a7392adb389a132f5ad3fec38532a03",
-      "treeSha": "2a8db28b640349bec00c258b77840928ced7f187",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "clickhouse-js-node-coding",
-      "source": "https://github.com/ClickHouse/agent-skills",
-      "path": "skills/clickhouse-js-node-coding",
-      "comparisonCommit": "356a8c1b9a7392adb389a132f5ad3fec38532a03",
-      "treeSha": "d238122e9cb302a3f3bdd51224bead4e4e549aa1",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "clickhouse-js-node-troubleshooting",
-      "source": "https://github.com/ClickHouse/agent-skills",
-      "path": "skills/clickhouse-js-node-troubleshooting",
-      "comparisonCommit": "356a8c1b9a7392adb389a132f5ad3fec38532a03",
-      "treeSha": "31d54557719c0732360a55cde30924cd5f7471c7",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
     },
     {
       "name": "cloudflare",
@@ -269,12 +213,6 @@
       "inKnowledgeBase": true
     },
     {
-      "name": "council-devin",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
       "name": "create-formal-verification-skill",
       "source": "https://github.com/cursor/plugins",
       "path": "pstack/skills/create-formal-verification-skill",
@@ -289,68 +227,6 @@
       "status": "local-or-unverified",
       "note": "No verified external upstream; not overwritten or attributed speculatively.",
       "inKnowledgeBase": true
-    },
-    {
-      "name": "datadog-dashboard",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
-      "name": "dd-apm",
-      "source": "https://github.com/datadog-labs/agent-skills",
-      "path": "dd-apm",
-      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
-      "treeSha": "4a5bfa8db79ddea7c666f2beeeff4e325a7feccd",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "dd-docs",
-      "source": "https://github.com/datadog-labs/agent-skills",
-      "path": "dd-docs",
-      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
-      "treeSha": "654bbbb1e0fa0553dd691b1c3c9785ff2a326553",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "dd-logs",
-      "source": "https://github.com/datadog-labs/agent-skills",
-      "path": "dd-logs",
-      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
-      "treeSha": "f6aea9148d2fea3ba15e56f98888a4763577f14d",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "dd-monitors",
-      "source": "https://github.com/datadog-labs/agent-skills",
-      "path": "dd-monitors",
-      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
-      "treeSha": "113e883977ec9f9335a157b1d16901a00a6ba7b0",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "dd-pup",
-      "source": "https://github.com/datadog-labs/agent-skills",
-      "path": "dd-pup",
-      "comparisonCommit": "bef9c48ffd53675194e8c69f2f5d0049e4b39ff7",
-      "treeSha": "e5bec3501a18a6dc479cf0d1292987ec70389cfe",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "deslop-micro",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
     },
     {
       "name": "durable-objects",
@@ -411,24 +287,6 @@
       "note": "Personal skill; no external upstream."
     },
     {
-      "name": "ga4",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
-      "name": "gauge",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
-      "name": "gauge-cli",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
       "name": "gh-stack",
       "source": "https://github.com/github/gh-stack",
       "path": "skills/gh-stack",
@@ -447,12 +305,6 @@
       "trackingMethod": "gh skills add",
       "localBodyDiffers": false,
       "inKnowledgeBase": true
-    },
-    {
-      "name": "google-search-console",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
     },
     {
       "name": "green-stack",
@@ -509,16 +361,6 @@
       "comparisonCommit": "9862685f575c65a8247f90369951df1b3416e3d6",
       "treeSha": "5a7260aab6ed0b28f1f464f1757f4704d3a7ab5c",
       "trackingMethod": "verified-github-api (CLI root-skill discovery unsupported)",
-      "localBodyDiffers": true,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "i-have-adhd",
-      "source": "https://github.com/ayghri/i-have-adhd",
-      "path": "skills/i-have-adhd",
-      "comparisonCommit": "ff690b6fbd3383e4fce6a7e50c7b409ca9a6a804",
-      "treeSha": "88c570cdd38e1e3881545e6dce91bf3f6468eec7",
-      "trackingMethod": "gh skills add",
       "localBodyDiffers": true,
       "inKnowledgeBase": true
     },
@@ -595,12 +437,6 @@
       "status": "local-or-unverified",
       "note": "No verified external upstream; not overwritten or attributed speculatively.",
       "inKnowledgeBase": true
-    },
-    {
-      "name": "pr-watchdog-devin",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
     },
     {
       "name": "principle-build-the-lever",
@@ -686,16 +522,6 @@
       "note": "Personal skill; no external upstream."
     },
     {
-      "name": "programmatic-seo",
-      "source": "https://github.com/coreyhaines31/marketingskills",
-      "path": "skills/programmatic-seo",
-      "comparisonCommit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
-      "treeSha": "afbffddf471de4fc36f31fb0e502be1d79a3cf1d",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
       "name": "prose-pass",
       "status": "local-or-unverified",
       "inKnowledgeBase": true,
@@ -744,38 +570,6 @@
       "inKnowledgeBase": false
     },
     {
-      "name": "seo",
-      "source": "https://github.com/addyosmani/web-quality-skills",
-      "path": "skills/seo",
-      "comparisonCommit": "afa8da942115f2961fdbfa80807ea0b232ff6c00",
-      "treeSha": "da1d9c981518b28eded931b8680c2e4c631740af",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "seo-aeo",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
-      "name": "seo-audit",
-      "source": "https://github.com/coreyhaines31/marketingskills",
-      "path": "skills/seo-audit",
-      "comparisonCommit": "5b2c0007766c6a1cf1d53fd8fc73e979e0821022",
-      "treeSha": "88e419e823dc951fc243243ec91e888c5088f7f1",
-      "trackingMethod": "gh skill install",
-      "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "seo-content",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
       "name": "ship-with-proof",
       "status": "local-or-unverified",
       "note": "No verified external upstream; not overwritten or attributed speculatively.",
@@ -810,12 +604,6 @@
       "trackingMethod": "gh skill install",
       "localBodyDiffers": false,
       "inKnowledgeBase": true
-    },
-    {
-      "name": "sol-loop-devin",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
     },
     {
       "name": "solar-climb",
@@ -884,12 +672,6 @@
       "inKnowledgeBase": false
     },
     {
-      "name": "telemetry-hunt",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
       "name": "thermo-fix-loop",
       "status": "local-or-unverified",
       "inKnowledgeBase": true,
@@ -954,12 +736,6 @@
       "trackingMethod": "gh skill install",
       "localBodyDiffers": false,
       "inKnowledgeBase": true
-    },
-    {
-      "name": "viz",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
     },
     {
       "name": "wayfinder",

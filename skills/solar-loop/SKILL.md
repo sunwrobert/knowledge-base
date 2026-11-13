@@ -28,7 +28,7 @@ Every loop is exactly one shape, and its name carries the shape word.
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------- | --------------------------- | ------------------------------------ | -------------------------------------------------------------------------------------------------------------- |
 | Hill climb | A number a harness in the session benchmarks: bytes, milliseconds                                                                   | It plateaus; no goal number | `<Metric> Climb — <repo>`            | [**solar-climb**](../solar-climb/SKILL.md)                                                                     |
 | Audit      | Findings one audit prompt returns over the code: unenforced invariants, laws no property test checks, throws that should be Results | It finds nothing            | `<Subject> Audit — <repo>`           | The audit's own prompt skill, such as [**find-unenforced-invariants**](../find-unenforced-invariants/SKILL.md) |
-| Hunt       | Findings in production telemetry above a floor, one fixed per run                                                                   | Never                       | `<Surface> Hunt — <repo or service>` | [**telemetry-hunt**](../telemetry-hunt/SKILL.md), or the surface's own skill                                   |
+| Hunt       | Findings in production telemetry above a floor, one fixed per run                                                                   | Never                       | `<Surface> Hunt — <repo or service>` | The surface's own skill                                                                                        |
 | Ops loop   | The queue it drains; no code change                                                                                                 | Never                       | `<Job> → #<channel>`                 | The system's runbook or skill                                                                                  |
 
 An audit's verifier is the proof [**ship-with-proof**](../ship-with-proof/SKILL.md) demands of its fix. An audit whose prompt only finds ships what [**audit-to-prs**](../audit-to-prs/SKILL.md) ships, which can be several PRs or none.
@@ -72,7 +72,7 @@ Climb: the Automation prompt in **solar-climb**.
 Hunt (a surface with its own skill names that skill instead):
 
 ```md
-Hunt <X> in @<owner>/<repo> with @skills:telemetry-hunt and ship one PR per run through @skills:ship-with-proof.
+Hunt <X> in @<owner>/<repo> with @skills:<hunt-skill> and ship one PR per run through @skills:ship-with-proof.
 Surface: <signal, scope, window>.
 Metric: <number, unit, direction>.
 Checks: <check classes, each by its term of art>.

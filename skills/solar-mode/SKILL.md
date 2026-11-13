@@ -21,8 +21,8 @@ Each line routes a situation to its owning skill; read that skill in full before
 - He asks to stack or build on his open PR, or PRs depend on each other → [**gh-stack**](../gh-stack/SKILL.md), a GitHub-native stack on `main` (`gh stack link`/`gh stack add`, or `gh stack link --base main <PRs bottom→top>`), never hand-set bases or Graphite. Never stack unasked; a PR that doesn't need its base's changes goes to `main` (`gh pr edit --base main`, then merge `origin/main`). Stack merge-ready → [**green-stack**](../green-stack/SKILL.md).
 - PR is up → [**review-loop**](../review-loop/SKILL.md) for one PR or a stack, right away, and for driving to approval, in this session when it owns the PR.
 - "100% equivalent?", "safe to merge?", or a refactor batch → [**equivalence-review**](../equivalence-review/SKILL.md). "What could this break?" → [**blast-radius**](../blast-radius/SKILL.md). Merge-ready batch → [**merge-risk**](../merge-risk/SKILL.md) per PR.
-- "sol loop", "sol-loop", `/sol-loop` → [**sol-loop**](../sol-loop/SKILL.md) where the harness has `delegate_task` (T3 Code); in Devin, [**sol-loop-devin**](../sol-loop-devin/SKILL.md).
-- "council", `/council`, "ask the council" → [**council**](../council/SKILL.md) where the harness has `orchestrator_capabilities` and `delegate_task` (T3 Code); in Devin, [**council-devin**](../council-devin/SKILL.md).
+- "sol loop", "sol-loop", `/sol-loop` → [**sol-loop**](../sol-loop/SKILL.md).
+- "council", `/council`, "ask the council" → [**council**](../council/SKILL.md).
 - Any non-trivial diff before review → [**thermo-fix-loop**](../thermo-fix-loop/SKILL.md) until a fresh pass finds nothing.
 - Debugging → [**principle-fix-root-causes**](../principle-fix-root-causes/SKILL.md). New requirement in an existing design → [**principle-redesign-from-first-principles**](../principle-redesign-from-first-principles/SKILL.md).
 - A new or changed lifecycle with modes (status flags, phase union, `transition()` or reducer) → a discriminated union per Code and design discipline, a fast-check property test over its rules, and [**statechart**](../statechart/SKILL.md) TLA+ only for a machine ship-with-proof step 2 calls high-risk.
@@ -35,10 +35,10 @@ Each line routes a situation to its owning skill; read that skill in full before
 - Recurring, bounded, measurable work → [**solar-loop**](../solar-loop/SKILL.md); finding candidates → [**solar-loop-scout**](../solar-loop-scout/SKILL.md).
 - Hill climb on a benchmarkable metric → [**solar-climb**](../solar-climb/SKILL.md).
 - Production-facing code (an external call, payment, queue, job, or endpoint) → [**observability-and-instrumentation**](../observability-and-instrumentation/SKILL.md), in the first PR, unasked. The repo's logging rules win. Every span and failure log carries the domain IDs and the upstream error's class, code, and message, so one search says what failed, where, and why.
-- Production telemetry question → the org's telemetry access instructions first, if any, then [**dd-logs**](../dd-logs/SKILL.md), [**dd-apm**](../dd-apm/SKILL.md), [**dd-monitors**](../dd-monitors/SKILL.md) where the org uses Datadog. Recurring telemetry hunt that picks a fix → [**telemetry-hunt**](../telemetry-hunt/SKILL.md).
+- Production telemetry question → the org's telemetry access instructions first, if any.
 - "Does this earn its keep?", "is this truly necessary?", "what does this add?" → [**earn-its-keep**](../earn-its-keep/SKILL.md).
 - "How does X work" or where code should live → [**how**](../how/SKILL.md). "Why is it this way" or a data-backed threshold → [**why**](../why/SKILL.md). Design before code → [**architect**](../architect/SKILL.md). "Tear this apart" → [**interrogate**](../interrogate/SKILL.md).
-- A diagram or chart he asks for → [**show-me**](../show-me/SKILL.md), colored per [**viz**](../viz/SKILL.md).
+- A diagram or chart he asks for → [**show-me**](../show-me/SKILL.md).
 - Session started by an automation (its prompt names the loop's skill) → once the run picks its target, rename the session to `<loop name>: <target>`, e.g. `Throw → Result: billing/credits.ts parse errors`; a run that finds nothing becomes `<loop name>: no finding`.
 - Unattended or multi-phase work → [**show-me-your-work**](../show-me-your-work/SKILL.md). Resuming earlier work → [**recall**](../recall/SKILL.md).
 
