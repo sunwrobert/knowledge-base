@@ -1,94 +1,89 @@
 ---
 name: solar-climb
 description: >-
-  One long-lived Devin session that owns a whole hill climb on one benchmarkable metric and ships one measured PR per tick until the metric plateaus. A `message_session` automation with `auto_create: true` messages the session on a schedule; each message is one tick. The session keeps its mission, frozen harness, ledger and frontier on its own VM, rebuilds context from them every tick, picks the next target from what earlier ticks learned, and keeps or reverts by benchmark-checklist. Use when an automation messages a climb session, or when asked for "/solar-climb", "a solar climb of X", "one session that keeps climbing X", or "a continuous hill climb".
+  One Devin run of a hill climb on one benchmarkable metric: audit the harness, try one measured change at a time with keep-or-revert by benchmark-checklist, audit the win, and ship one PR. Each automation trigger starts a fresh session; GitHub marker PRs are the only state. Use when an automation starts a climb run, or for "/solar-climb", "a solar climb of X", or "a continuous hill climb".
 metadata:
-  version: 1.0.0
+  version: 2.4.0
 ---
 
 # solar-climb
 
-A hill climb is a loop on a number a harness in this session can measure: bytes, milliseconds, a count. A metric without such a harness (a test count, a migration count, a telemetry hunt) is not a climb; those are burn-downs or hunts; use [**solar-loop**](../solar-loop/SKILL.md) for those.
+A hill climb targets a number a harness in this session measures (bytes, milliseconds, a count). Hunts belong to [**solar-loop**](../solar-loop/SKILL.md).
 
-One session runs the climb for its whole life. The automation prompt names the climb and its metric; everything else is decided by the session and written to disk, so a context summary or a VM restart loses nothing.
+One session is one run: baseline, audit, attempts, one PR, report. The climb's marker PRs are the only state: open, merged, or closed with their review and close reason.
+
+The run is unattended, so never stop to ask: decide, state the assumption in the PR body and report, and continue.
 
 ## Inputs, from the automation prompt
 
-- `climb`: a kebab-case slug. State lives in `~/climb/<climb>/`.
+- `climb`: kebab-case slug.
 - The repo and the scope the climb may change.
-- The metric: what is measured, its unit and direction. No goal number: the climb runs until it plateaus.
-- The dedupe marker for PR bodies, `<climb>-climb: <target>` unless the prompt names one.
-- Optional hints: a candidate harness command, a production gauge for target picking and field checks, rules the scope must keep (never drop a feature, findings must stay identical).
+- The metric: what is measured, unit, direction. It runs to plateau, with no goal number.
+- PR-body dedupe marker, `<climb>-climb: <target>` unless named.
+- Optional: a keep threshold, and hints (a harness command, a production gauge for picking and field checks).
 
-## State
+Decide whatever the prompt leaves open (harness, runs per side, keep threshold, regression tolerance, picker) and write it in the PR body's `## Method`. Reuse the `## Method` of the newest open or merged marker PR unless this run's audit proves it wrong; a run that changes it says why.
 
-All in `~/climb/<climb>/`. The climb works only in its own clone, `~/climb/<climb>/repo`, created on the first tick; it never edits another checkout. Read every file at the start of each tick; never rely on chat history.
+## Run
 
-- `mission.md`: the inputs as given, then the decisions frozen on the first tick: harness commands plus the content hash of each measurement script they run (the scripts that time, count or report, not the code under test), the benchmark-checklist answers that vetted it, run count per side, noise range, keep threshold, regression tolerance, target picker, field check, and the first baseline (value, unit, `main` SHA), which never changes. Changed only by the harness-change rule below.
-- `ledger.jsonl`: one line per attempt, `{tick, at, target, mechanism, limiter, base, head, delta, range, verdict, pr, pr_state, field}`, and one line per tick that made no attempt. `verdict` is `kept`, `reverted` (valid measurement that missed the threshold or regressed), `invalid` (a run that errored or did no work), `capped`, `empty` (no eligible target), `plateaued` or `resumed`. `head` carries the measured commit SHA. `pr_state` is `open`, `merged-pending-field`, `settled` or `rejected`. `field` is filled by a later tick.
-- `frontier.md`: ranked candidate targets with the evidence behind each, plus mechanisms already rejected per target and why. Rewritten every tick.
-- `baseline/`: the latest `main` measurement output, with its commit SHA.
-- `harness/`: any measurement script the climb wrote itself, outside the clone so cleanup never deletes it.
+1. **Read GitHub.** List the climb's marker PRs. Open ones claim their targets. Merged ones carry their method and measurements. Closed unmerged ones carry a rejected mechanism, never retried on that target. With 3 or more open, ship nothing: report `capped` with each PR's review and CI state. Never adopt, rebase or babysit an earlier PR; the PR watchdog routes its blockers.
+2. **Baseline.** Fresh clone, clean `origin/main`. Write the decision before running: the result that would change it and the noise floor ([**benchmark-checklist**](../benchmark-checklist/SKILL.md)). Measure `main`: two identical clean runs for a deterministic metric, at least 5 alternating runs per side for timing, compared by median.
+3. **Audit the harness** (below).
+4. **Profile and pick.** Rank targets from the harness breakdown or the production gauge by size times reach, skipping claimed targets and targets merged within 14 days. Profile the top one and name its limiter, the resource or code path that bounds it, from a profile or counters mapped to source.
+5. **Attempt**, one change at a time on `devin/<timestamp>-<climb>-<target-slug>`, each a hypothesis naming one mechanism grounded in the limiter. Keep only when the delta clears the keep threshold (at least twice the run-to-run range, and worth a reviewer's time), nothing else regresses past tolerance, error and work counts match `main`, and the limiter explains the delta. Otherwise revert it in full and never retry it. Log each attempt: hypothesis, change, before, after, delta, verdict.
+6. **Push past the first plateau.** After 3 reverted attempts, name the assumption they share, drop it, and take a larger step: another category, a combination of near misses, or the next target. Stop at the first kept change or after 6 attempts; with nothing kept, ship the unblocker per [**solar-loop**](../solar-loop/SKILL.md#every-run-ships). Its audit and PR body prove the rerun of the blocked step in place of a kept delta.
+7. **Audit the win** (below), then ship through [**ship-with-proof**](../ship-with-proof/SKILL.md), ready for review, to the repository's required approval and green CI in this run. PR body: marker, baseline and candidate as median and range with run counts and measured SHAs, limiter, mechanism in one sentence, the production gauge that field-checks it when the prompt names one, `## Method`, `## Audit`, and the attempt log. When a review fix touches the measured path, re-measure the new head; close a PR whose head no longer clears the threshold, with the measurement.
+8. **Report.**
 
-## First tick: freeze the mission
+## Audit
 
-1. Clone the repo to `~/climb/<climb>/repo`. Find or write the harness: use the prompt's hint or the repo's own measurement script, and put a script you write in `harness/`; read it per benchmark-checklist "Before you run anything".
-2. Vet it with [**benchmark-checklist**](../benchmark-checklist/SKILL.md), answering all seven questions with evidence from runs on `main`. Make it print error and work counts, so later ticks check questions 4 and 7 from its output.
-3. Measure noise: at least 5 runs on `main`. A deterministic metric (bundle bytes, file counts) proves it by two clean runs with identical output, and from then on one run per side is enough. A timing metric keeps 5 alternating runs per side on every tick.
-4. Set the keep threshold to at least twice the observed run-to-run range, and no lower than the smallest change worth a reviewer's time. Set the regression tolerance for everything else the harness reports.
-5. Choose the target picker: the harness's own breakdown, a production gauge, or both, ranked by size times reach.
-6. Write `mission.md`, an empty ledger, and the first `frontier.md`. Then continue with a normal tick.
+A number is a claim, and a claim survives only when a run proves it ([**principle-prove-it-works**](../principle-prove-it-works/SKILL.md)). Every run audits and drops what fails.
 
-## Every tick
+**The harness, before the first attempt:**
 
-1. Sync. Read the state files. In `~/climb/<climb>/repo`, fetch `main` and check out clean `main` whatever branch the clone is on. A climb branch (`devin/*-<climb>-*`), committed or not, with no ledger line and no PR is an interrupted attempt: log its target and mechanism as `invalid` and discard it. Dirty state on any other branch was not made by the climb: stop and report it, never discard it.
-2. Settle earlier PRs. First adopt any open PR in the climb's repo whose body carries the marker, whose branch matches `devin/*-<climb>-*` and whose author is the climb's owner, but which has no ledger line: add it with `pr_state` `open`, re-measure its head with the frozen harness, and finish its unfinished ship-with-proof gates before treating it as a normal open climb PR. A marker PR that fails those checks is a foreign claim: skip its target and leave the PR alone. For each ledger PR whose `pr_state` is `open` or `merged-pending-field`, read it with `gh pr view`. Merged with no field check in `mission.md`: set `settled`. Merged with a field check: read it once a production deploy contains the merge commit, record it in `field` and set `settled`; until then set `merged-pending-field` and re-read next tick. Closed unmerged: set `rejected` and mark its target rejected in `frontier.md` with the review reason.
-3. Cap. If 3 or more climb PRs are open and unmerged, ship nothing: drive the open ones through the repository's required review ([**review-loop**](../review-loop/SKILL.md)), then report. The climb does not outrun review.
-4. Re-baseline on current `main` with the frozen harness. If the ledger shows a plateau (see Plateau), report it and stop here. A baseline that moved since last tick because of someone else's change is noted in the report, not credited to the climb.
-5. Pick one target: the top of `frontier.md` after re-ranking with the new baseline, skipping targets claimed by an open PR's marker or merged within 14 days, and skipping a mechanism the ledger already rejected for that target. Profile before editing (benchmark-checklist question 1) and name the limiter and exactly one mechanism.
-6. Change one thing on branch `devin/<timestamp>-<climb>-<target-slug>` from `main`.
-7. Measure the candidate with the frozen harness, the same runs per side as `mission.md`, alternating sides for timing metrics. Keep only when the delta clears the keep threshold, nothing else regresses past tolerance, error and work counts match, and the limiter explains the delta (benchmark-checklist questions 3 to 7).
-8. Not kept: revert. If the base side errored or did no work, append an `invalid` line and leave the mechanism untried; repair the harness only when the harness-change rule applies (the harness is wrong or the measured code moved), and when `main` itself is broken, report that as the blocker without touching the harness. If only the candidate errored or did no work, the change broke the measured work: append a `reverted` line with the error, so the mechanism counts as rejected. Otherwise append a `reverted` line. Try at most one more mechanism, then report. A tick that ends at the cap or with no eligible target appends a `capped` or `empty` line.
-9. Kept: ship through [**ship-with-proof**](../ship-with-proof/SKILL.md). Append the `kept` line with the PR URL and `pr_state` `open` as soon as the PR opens. The PR body carries the marker, baseline and candidate as median and range with run counts and the measured SHA, the limiter, the mechanism in one sentence, and the field check. When a review or proof fix after that touches the measured path, rerun the frozen harness on the new head and update the PR body and the ledger line; a head that no longer clears the keep threshold gets its PR closed, its ledger line set to `reverted` with `pr_state` `rejected`, and its target marked rejected in `frontier.md`; the checkout then returns to clean `main`. One PR per tick. Never merge.
-10. Rewrite `frontier.md`: what this tick's profile revealed, the new limiter, and next candidates.
-11. Report.
+- **Sensitivity.** Plant a known regression on a scratch branch (extra bytes, a sleep on the measured path) and confirm the harness reports it at the expected size. A harness that misses it measures something else: fix it first.
+- **Field agreement.** Where the prompt names a production gauge, the harness runs the same work the gauge times, shown by matching steps and work counts; the two numbers may differ by statistic or machine. A harness that skips or caches that work measures something else: repairing it is this run's PR.
+- **Benchmark-checklist.** Answer all seven questions with evidence from this run's output, including error and work counts.
+- **Earlier claims.** Re-measure on current `main` what the newest merged marker PRs claimed. A win that is gone is a regression and the first target. A baseline someone else's change moved is noted, never credited.
 
-PR watchdog or reviewer messages about a climb PR arriving between ticks are handled when they arrive, on that PR's branch, before the next tick starts.
+**The win, before shipping:**
 
-## Harness changes
+- **Re-measure fresh.** Both sides from clean checkouts of the final SHAs, alternating, at the full run count.
+- **Rule out the cheap explanations** (benchmark-checklist "explain the number"): errors, skipped or cached work, code that never ran, a feature removed, a check weakened, noise, a change too small to matter end to end. Show each one false with evidence.
+- **Independent refutation.** A fresh subagent or child session that did not write the change gets only the claims, the diff and the harness, and tries to break each claim with a run, per [**interrogate**](../interrogate/SKILL.md). Fix what it proves or drop the win. Your own review, passing tests and CI are not this verdict.
 
-The harness changes only when a tick shows it is wrong: a benchmark-checklist question fails (it measured a cache, missed errors, timed work that never ran), or the repo moved the measured code. Re-vet the new harness, re-measure noise and threshold, record the reason and the old and new commands in `mission.md` and a ledger line with verdict `invalid`, and re-baseline. Never change the harness or lower the threshold to keep a candidate. A candidate that edits a hashed measurement script is measured with `main`'s copy of it; edits to the code under test, including build scripts the harness invokes, are measured as the candidate.
+Write the result as the PR body's `## Audit` table and the report's audit section: claim, command, output quoted, verdict (`held` or `dropped`).
 
 ## Plateau
 
-After 3 consecutive ticks with no `kept` line, counted by `tick` in the ledger (`capped` ticks, and ticks whose only lines are `invalid`, do not count), the climb has plateaued. Report `plateaued`, the limiter no mechanism moved, the total delta since the first baseline in `mission.md`, and tell the owner to disable the automation or redirect the climb to a new metric. Append a `plateaued` line with the baseline at that moment. Further ticks repeat the plateau report and open nothing until the owner changes the mission or `main`'s baseline moves past the keep threshold from that recorded value; then append a `resumed` line, and plateau counting restarts after it.
+When the newest 3 marker PRs closed unmerged below the threshold, none merged within 14 days, and this run keeps nothing, report `plateaued`: the limiter nothing moved, the total delta since the first marker PR, and tell the owner to disable the automation or redirect the climb.
 
 ## Report
 
-First line: `<climb> — <kept: target delta (base → head), PR link | reverted: target, best delta vs threshold | capped: N open PRs | plateaued>`. Then:
+First line: `<climb> — <kept: target delta (base → head), PR link | unblocker: what it unblocks, PR link | reverted: target, best delta vs threshold | capped: N open PRs | plateaued>`. Then:
 
-- Cumulative: first baseline → current `main`, with tick count and kept count.
-- This tick: the target, limiter, mechanism, measurements with run counts and range.
-- Field checks read this tick for merged PRs.
+- Audit: each claim, its command and verdict; anything dropped and why.
+- This run: target, limiter, the attempt log, measurements with run counts and range.
+- Merged marker PRs re-measured, on their production gauge where the PR names one.
 - Open climb PRs with review and CI state.
-- The next three frontier targets.
-- What was not measured and why.
+- Next three targets, and what was not measured and why.
 
 ## Automation
 
-Create it with **solar-loop**'s procedure (schemas, validate, approval-gated create), with these cells overriding its settings table: action `message_session` with `auto_create: true`; `max_concurrent_runs` 1 and `max_queue_depth` 0, so a tick still running absorbs the next trigger; `devin_mode` `fusion`; name `<Metric> Climb — <repo>`. The prompt is short:
+Create with **solar-loop**'s procedure; `max_concurrent_runs` 1 and `max_queue_depth` 0, so a running run absorbs the next trigger. Prompt, each line only when the run couldn't decide it:
 
 ```md
-Run one solar-climb tick with @skills:solar-climb for climb `<climb>` in @<owner>/<repo>.
+@skills:solar-climb climb `<climb>` in @<owner>/<repo>.
 Metric: <what is measured>, <unit>, <down|up>.
-Scope: <paths or packages>; <rules the scope must keep>.
+Scope: <paths or packages>; <what must stay the same>.
 Marker: `<climb>-climb: <target>`.
+Keep threshold: <rule, when it differs from step 5>.
 Hints: harness `<command>`; production gauge `<query>`.
 ```
 
 ## Rules
 
-- One target and one PR per tick.
-- A metric moved by removing a feature, skipping work, or weakening a check is not an improvement.
-- Never merge, enqueue, or enable auto-merge.
-- Never commit measurement output or state files.
+- One target and one PR per run, never merged, enqueued or set to auto-merge.
+- Removing a feature, skipping work or weakening a check is not an improvement.
+- The harness and threshold never change to keep a candidate.
+- Measurement output is never committed.
