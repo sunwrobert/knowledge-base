@@ -43,7 +43,7 @@ Generated pages and PNGs are deliverables, not source. Write them outside any re
 
 ## Style
 
-Neutral by default: off-white background, near-black text and code panels, one blue accent for ordinals and PR chips, a teal secondary for wire panels, green and red for diff rows. When the repository has design tokens (or a [`viz`](../viz/SKILL.md) palette is in use), replace the `:root` variables at the top of `CSS` in `scripts/build.py` with them; do not hand-style elsewhere. Inter is embedded from `references/Inter-subset.woff2` (Latin subset, OFL, license in `references/Inter-OFL.txt`) so the page has no network requests. Do not add a CDN font.
+Neutral by default: off-white background, near-black text and code panels, one blue accent for ordinals and PR chips, a teal secondary for wire panels, green and red for diff rows. When the repository has design tokens, replace the `:root` variables at the top of `CSS` in `scripts/build.py` with them; do not hand-style elsewhere. Inter is embedded from `references/Inter-subset.woff2` (Latin subset, OFL, license in `references/Inter-OFL.txt`) so the page has no network requests. Do not add a CDN font.
 
 ## Gotchas
 

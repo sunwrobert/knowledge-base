@@ -49,7 +49,7 @@ Use the show-me method: skip the preamble, keep prose brief, and give each scene
 
 Mixing views is fine when each scene uses the clearest one. Characters, illustration, and music are tools, not requirements. Pick the view a newcomer would follow with the sound off.
 
-Then choose the look: a restrained palette with one accent per idea, strong type hierarchy, and a background that stays out of the way. Follow the brand rules of the repository you are working in, and the [`viz`](../viz/SKILL.md) skill for color, chart chrome, emphasis, and fill opacity.
+Then choose the look: a restrained palette with one accent per idea, strong type hierarchy, and a background that stays out of the way. Follow the brand rules of the repository you are working in for color, chart chrome, emphasis, and fill opacity.
 
 ### 3. Write the scene list
 
