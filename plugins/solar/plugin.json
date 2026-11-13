@@ -1,0 +1,6 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "solar",
+  "version": "1.0.0",
+  "description": "Robert Sun's working style. solar-mode is the entry point; the plugin carries every skill solar-mode routes to, directly or through another skill, so installing it needs nothing else."
+}

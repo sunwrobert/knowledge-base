@@ -1,0 +1,16 @@
+{
+  "$schema": "https://code.claude.com/schemas/marketplace.json",
+  "name": "knowledge-base",
+  "owner": { "name": "Robert Sun", "url": "https://github.com/sunwrobert" },
+  "metadata": {
+    "description": "Robert Sun's agent skills and plugins",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "solar",
+      "source": "./plugins/solar",
+      "description": "solar-mode and every skill it routes to: proof-first shipping, review loops, stacks, principles, prose, visuals, telemetry and recurring loops."
+    }
+  ]
+}

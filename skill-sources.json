@@ -565,7 +565,7 @@
       "comparisonCommit": "301b02b12bff98e4688e6984af6556802322bbde",
       "treeSha": "1e8f1c0144e2b8f7859f5870329a31f8abc58193",
       "trackingMethod": "gh skill install",
-      "localBodyDiffers": true,
+      "localBodyDiffers": false,
       "inKnowledgeBase": true
     },
     {
@@ -818,12 +818,6 @@
       "note": "Personal skill; no external upstream."
     },
     {
-      "name": "solar-burn",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
       "name": "solar-climb",
       "status": "local-or-unverified",
       "inKnowledgeBase": true,
@@ -909,12 +903,6 @@
       "treeSha": "d9c8935dd560b3b6f5941247d04a1843f8c7cc35",
       "trackingMethod": "gh skills add",
       "localBodyDiffers": false,
-      "inKnowledgeBase": true
-    },
-    {
-      "name": "thermo-nuclear-review-fix-loop",
-      "status": "local-or-unverified",
-      "note": "No verified external upstream; not overwritten or attributed speculatively.",
       "inKnowledgeBase": true
     },
     {

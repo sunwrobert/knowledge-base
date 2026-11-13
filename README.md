@@ -6,16 +6,37 @@ Canonical repository for agent skills, scripts, and shared instructions. Use thi
 
 ```
 knowledge-base/
-├── AGENTS.md              # Shared agent instructions (code philosophy, etc.)
-├── CLAUDE.md -> AGENTS.md # Symlink for Claude Code compatibility
-├── scripts/               # Utility scripts
-├── setup/                 # New Mac setup: Brewfile, dotfiles, setup.sh
-└── skills/                # Portable agent skills
+├── skills/<skill>/                  # Every skill, as real files
+├── plugins/solar/                   # The solar plugin: solar-mode and all it needs
+├── .claude-plugin/marketplace.json  # Catalog for Claude Code and Codex
+├── .devin-plugin/plugin.json        # Meta-plugin for Devin
+├── docs/AGENTS.md                   # Shared agent instructions (code philosophy, etc.)
+├── scripts/                         # Utility scripts
+└── setup/                           # New Mac setup: Brewfile, dotfiles, setup.sh
 ```
 
-## Skills
+The repo follows the [Agent Plugins](https://agent-plugins.org) format, so Devin, Claude Code, Codex and Cursor read the same files. Contributor rules are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
-`skills/` holds 94 skills. Link them at user scope so every agent (Claude Code, Codex, Cursor, Pi) picks them up. The loop skips any name that already exists, so an employer's internal version of a skill keeps precedence on a work machine:
+## The solar plugin
+
+`plugins/solar` is the working style as one installable unit. `solar-mode` is its entry point, and the plugin holds every skill `solar-mode` routes to, directly or through another skill: 61 of the 101 skills here. `bun run validate` fails when a skill in the plugin links to one outside it.
+
+**Claude Code**
+
+```
+/plugin marketplace add sunwrobert/knowledge-base
+/plugin install solar@knowledge-base
+```
+
+**Codex**: `codex plugin marketplace add https://github.com/sunwrobert/knowledge-base.git`.
+
+**Devin**: Customize > Plugins > Add plugin > From repository > `sunwrobert/knowledge-base`, or `devin plugins install sunwrobert/knowledge-base#plugins/solar`.
+
+**Cursor**: install `plugins/solar` as an Agent Plugin.
+
+## All skills
+
+`skills/` holds 101 skills, 40 of them outside the solar plugin. Link them at user scope so every agent (Claude Code, Codex, Cursor, Pi) picks them up. The loop skips any name that already exists, so an employer's internal version of a skill keeps precedence on a work machine:
 
 ```bash
 mkdir -p ~/.agents/skills ~/.claude/skills
@@ -28,7 +49,6 @@ done
 
 - Skills with `metadata.github-repo` in their frontmatter are installed with `gh skill install <owner>/<repo> <path> --pin <sha> --dir skills` and stay byte-identical to that pin. Refresh them by reinstalling at a new pin, never by hand-editing. `.prettierignore` keeps the formatter off them.
 - The rest are personal skills. `skill-sources.json` records the source of every skill.
-- Start with `solar-mode` for the working style; it routes each step to the skill that owns it.
 
 ## Syncing With Other Repos
 
@@ -36,12 +56,12 @@ done
 - When editing instructions or scripts here, sync changes to consuming repos.
 - Scripts are designed to run from this repo's root (not portable to other projects).
 
-## Pointer-Style AGENTS.md
+## Pointer-style AGENTS.md
 
 Consuming repos should use a pointer to this repo's instructions:
 
 ```markdown
-READ ~/Repositories/knowledge-base/AGENTS.md BEFORE ANYTHING (skip if missing).
+READ ~/Repositories/knowledge-base/docs/AGENTS.md BEFORE ANYTHING (skip if missing).
 
 <!-- repo-specific rules below -->
 ```

@@ -12,6 +12,7 @@ bun install                    # Install dependencies
 bun run check                  # Lint with ultracite (type-aware)
 bun run check-types            # Typecheck with tsgo (native TS)
 bun run test:unit              # Run all unit tests
+bun run validate               # Check skills, plugins, and catalogs
 
 # Fixing
 bun run fix                    # Auto-fix lint/format issues
@@ -27,10 +28,13 @@ bun run test:unit <path>       # Run a single test file
 
 ```
 knowledge-base/
-├── skills/                    # Portable skill definitions and agent metadata
-├── scripts/                   # Utility scripts (run from repo root)
-├── AGENTS.md                  # Shared agent instructions
-└── CLAUDE.md -> AGENTS.md     # Symlink for Claude Code
+├── skills/<skill>/                  # Shared skills, real files
+├── plugins/<name>/plugin.json       # Agent Plugins 1.0 manifest
+├── plugins/<name>/skills/<skill>    # Symlink to ../../../skills/<skill>
+├── .claude-plugin/marketplace.json  # Catalog for Claude Code and Codex
+├── .devin-plugin/plugin.json        # Meta-plugin for Devin
+├── scripts/                         # Utility scripts (run from repo root)
+└── docs/AGENTS.md                   # Shared agent instructions
 ```
 
 ## Code Style
