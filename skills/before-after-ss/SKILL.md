@@ -14,7 +14,7 @@ Rendered pixels from the real app or Storybook, never a diagram. One row per cha
 
 - The diff or PR and its base ref (default `origin/main`).
 - How the surface renders locally. Use Storybook or the local dev stack, started the way the repository documents. Never edit seed files or app source just to enable a screenshot.
-- A Chrome exposing CDP (Devin: `http://localhost:29229`), or `playwright install chromium` for `--launch`.
+- A Chrome exposing CDP (`--cdp` or `CDP_ENDPOINT`; signed-in routes need it), or `playwright install chromium`. With no endpoint the script launches headless Chromium.
 
 ## Procedure
 
