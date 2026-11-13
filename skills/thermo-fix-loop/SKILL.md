@@ -1,15 +1,16 @@
 ---
 name: thermo-fix-loop
-description: Run a persistent thermo-nuclear code-quality review and repair loop. Use when the agent must review current changes, fix every actionable maintainability finding, and repeat complete review passes until a fresh pass returns no findings.
+description: Loop thermo-nuclear code-quality review and fixes until a fresh full pass finds nothing. Use when the agent must review current changes and fix every actionable maintainability finding.
+metadata:
+  version: 1.1.0
 ---
 
-# Thermo-Nuclear Review Fix Loop
+# Thermo-nuclear review fix loop
 
-1. Create a goal to run `$thermo-nuclear-code-quality-review` on the scoped changes, fix every actionable finding, repeat full reviews until clean, and complete the required verification. If an active goal already covers this exact objective, continue it instead of creating a duplicate.
-2. Load and apply `$thermo-nuclear-code-quality-review` in full. Review the entire current diff and relevant surrounding code, not only the last files changed.
-3. Fix every actionable finding while preserving unrelated work and behavior. Run the relevant scoped tests and repository-required verification after each fix pass.
-4. Run another complete thermo-nuclear review from the updated state. Do not limit subsequent passes to checking whether earlier findings were fixed.
-5. Repeat review, fix, and verification passes until a complete fresh review returns zero actionable findings. Do not stop merely because one pass was completed or because no new findings appeared while old findings remain.
-6. When the review is clean and verification passes, mark the goal complete. Report the number of review passes, the findings fixed, and the verification performed.
+1. Create a goal for this loop, or continue an active one that covers it.
+2. Apply `$thermo-nuclear-code-quality-review` in full to the whole current diff and its surrounding code.
+3. Fix every actionable finding without changing unrelated behavior, then run scoped tests and the repo's required verification.
+4. Re-review the whole updated diff from scratch, not just the earlier findings. Repeat to a fixed point: a fresh full pass with zero actionable findings.
+5. Mark the goal complete. Report the pass count, findings fixed, and verification run.
 
-If progress genuinely requires user input or new authority, report the exact blocker without claiming the loop is complete.
+Blocked on user input or new authority: report the exact blocker and leave the loop open.

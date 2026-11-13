@@ -28,16 +28,20 @@ skills/how
 skills/improve-animations
 skills/interrogate
 skills/merge-risk
+skills/observability-and-instrumentation
 skills/principle-build-the-lever
+skills/principle-encode-lessons-in-structure
+skills/principle-explain-the-number
 skills/principle-fix-root-causes
+skills/principle-laziness-protocol
 skills/principle-prove-it-works
 skills/principle-redesign-from-first-principles
 skills/principle-test-behavior-not-implementation
 skills/programmatic-seo
 skills/recall
 skills/review-animations
-skills/seo-audit
 skills/seo
+skills/seo-audit
 skills/show-me-your-work
 skills/sol-loop
 skills/statechart
@@ -49,3 +53,6 @@ skills/vercel-react-best-practices
 skills/why
 skills/workers-best-practices
 skills/wrangler
+
+# Plugin skills are symlinks into skills/; format them there.
+plugins/*/skills

@@ -1,68 +1,41 @@
 ---
 name: makefaster
-description: Autoresearch loop that makes the site in the current repo measurably faster. Baseline a user-felt metric with Lighthouse, walk a ranked checklist of performance techniques one hypothesis per iteration, finish with up to five of your own, keep or revert by the numbers, and record everything in a local results.json. Use when asked to make a site faster, improve LCP or Core Web Vitals, run a performance loop, or hunt frontend performance wins. Self-contained, no external CLI or leaderboard.
+description: >-
+  Autoresearch loop that makes the current repo's site measurably faster: a Lighthouse baseline of a user-felt metric, then a ranked checklist of performance techniques plus up to five hypotheses of your own, one per iteration, each kept or reverted by the numbers and recorded in a local results.json. Use to make a site faster, improve LCP or Core Web Vitals, or run a performance loop.
+metadata:
+  version: 1.1.1
 ---
 
 # The makefaster loop
 
-Make the site in the current directory measurably faster for real users, one
-disciplined experiment at a time. **Measure a user-felt metric first, change one
-hypothesis per iteration, keep or revert with numbers.** Take the run to
-completion in one session.
+Adapted from [jjcm/makefaster](https://github.com/jjcm/makefaster), except that it submits nothing. Run to completion in one session.
 
-This is a self-contained adaptation of the loop in
-[jjcm/makefaster](https://github.com/jjcm/makefaster). It runs Lighthouse
-directly and writes results locally. Nothing is submitted anywhere.
+## Session files
 
-## Session files (`.makefaster/` in the target repo)
+`.makefaster/` in the target repo, listed in `.git/info/exclude` and never committed, holds `results.json`, the Lighthouse profile and reports, and `improvements.json`: the ranked checklist that fixes the run's order and length, copied from this skill or from the path or URL the user gives.
 
-Create the directory on first use and add it to `.git/info/exclude`. Never
-commit it.
+## Progress lines
 
-| file                | what it is                                                                                                         |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| `improvements.json` | the ranked checklist. Copy `improvements.json` from this skill's directory, or take the path or URL the user gives |
-| `results.json`      | the session record, rewritten after every iteration                                                                |
-| `chrome-profile/`   | the isolated Chrome profile Lighthouse uses                                                                        |
-| `lh/*.json`         | one Lighthouse report per sample                                                                                   |
-
-`improvements.json` is **the order you work in and the length of the run**, not
-a script to apply blindly. Judge whether each category is viable here before
-spending an iteration on it, and skip the ones that are not.
-
-## Reporting progress
-
-Tell the user one short line as each step begins, using these tags and no
-others:
+One line as each step begins, with only these tags and no paths, commands, or diffs:
 
 ```
 [INITIALIZING] Building the production bundle and starting the server.
 [TEST] Running Lighthouse for the initial baseline.
 [CHECKLIST] Walking 49 categories in rank order, then up to 5 of my own.
-[SKIP] Precompress Static Assets — the CDN already compresses every text response.
+[SKIP] Precompress Static Assets, because the CDN already compresses every text response.
 [TRY] Lazy-Load Components
-[RESULT] -410ms / -14.2% cold LCP — kept.
+[RESULT] -410ms / -14.2% cold LCP, kept.
 [EXTRA] 5 follow-ups chosen: worker offload, srcset rungs, DNS prefetch, JSON slimming, sprite atlas.
 [DONE] Checklist and 5 extras finished with 6 keeps; stopping.
 ```
 
-One line, one sentence, one step. Say what you are doing, not which tool you
-are using. No file paths, command strings or diffs in these lines.
+## Step 0: serve the site
 
-## Step 0 — get the site running
+Serve the production build, never the dev server, and pick the entry page users hit first.
 
-Work out how the site is served (README, `package.json` scripts, Makefile,
-Procfile, docker-compose). Get it running locally and identify the entry page
-real users hit first. If the repo has a production build step, **measure the
-production build, not the dev server.** Dev servers lie about performance.
+## Step 1: baseline
 
-## Step 1 — baseline profile
-
-Use the heaviest-hitting **real, user-felt** metric you can measure on this
-machine, preferring:
-
-1. **Lighthouse**, launched exactly like this for every sample, with a distinct
-   report file per sample:
+1. Launch Lighthouse exactly like this for every sample:
 
    ```sh
    mkdir -p .makefaster/lh
@@ -71,200 +44,67 @@ machine, preferring:
      > .makefaster/lh/<label>.json
    ```
 
-   Read `audits.largest-contentful-paint.numericValue`,
-   `audits.interactive.numericValue`, `audits.first-contentful-paint.numericValue`,
-   `audits.total-blocking-time.numericValue`,
-   `audits.cumulative-layout-shift.numericValue` and
-   `categories.performance.score` from each report.
+   Read `audits.largest-contentful-paint.numericValue`, `audits.interactive.numericValue`, `audits.first-contentful-paint.numericValue`, `audits.total-blocking-time.numericValue`, `audits.cumulative-layout-shift.numericValue`, `categories.performance.score`.
 
-2. Last resort, only if Lighthouse cannot install or run here: **curl-level
-   timings** (TTFB, full transfer time, total bytes of the entry page and
-   critical assets). Weak but honest. Set `northStar: "ttfb"`, use `ttfbMs`
-   and `transferMs` in place of `lcpMs` and `ttiMs` everywhere in
-   `results.json`, and record in `profilingTool` that this is what you
-   measured.
+2. Only if Lighthouse cannot run: curl timings (TTFB, transfer time, bytes of the entry page and critical assets). Set `northStar: "ttfb"`, use `ttfbMs`/`transferMs` in place of `lcpMs`/`ttiMs` throughout `results.json`, and say so in `profilingTool`.
 
-### The measurement browser is never the user's browser
+Run Lighthouse in its own isolated `--user-data-dir`; without it Lighthouse opens a tab in the user's running Chrome. Never attach to the user's browser (`--port`, `connect`, `connectOverCDP`). `CHROME_PATH` picks the executable only.
 
-- Always launch a **dedicated headless Chrome** with the isolated
-  `--user-data-dir` above. A Chrome started without its own profile directory
-  while the user's Chrome is running opens a tab in _their_ browser.
-- Never pass `--port` to reuse an existing Chrome debugging port, and never
-  attach with `connect` or `connectOverCDP`. A running debuggable Chrome you
-  did not start is the user's.
-- `CHROME_PATH` may pick the executable. It never picks an existing session.
+- Measure cold and warm when possible (warm: `--disable-storage-reset` after a priming run on the same profile).
+- At least 3 runs per condition. Take the median; the spread is the noise floor.
+- The north star is LCP or its closest proxy. TTI is secondary; a TBT-derived proxy or reused LCP is noted in `profilingTool`.
+- Write the baseline to `results.json` before touching code.
 
-### Rules
+## Step 2: the whole checklist in rank order, then up to five extras
 
-- Measure **cold** (empty cache) and **warm** (second visit, cache primed)
-  whenever the tooling allows. For warm, run Lighthouse with
-  `--disable-storage-reset` after a priming run against the same profile.
-- **At least 3 runs per condition. Use the median.** Record the spread. That
-  spread is your **noise floor** and the keep/revert rule depends on it.
-- **North star** is LCP by default, or the closest proxy your tooling produces.
-  TTI is secondary. If the tool cannot produce TTI, use a TBT-derived proxy or
-  reuse LCP and say so in `profilingTool`.
-- Write the baseline into `results.json` **before touching any code**.
+The order is fixed so runs compare. Profiling decides viability and extras, never order.
 
-## Step 2 — the loop: the whole checklist in order, then up to five of your own
+For each category:
 
-**The order is not yours to choose, and neither is the length.** Work the
-checklist top to bottom, all of it, then add up to five hypotheses of your own.
-The run is `N + up to 5`, where `N` is the number of categories in
-`improvements.json`. A fixed order is what makes one run comparable to the next.
+1. Judge viability by reading, not by spending an iteration: already done? surface exists? plausibly on the critical path? One baseline request for the entry page and heaviest assets with `Accept-Encoding: gzip, br` answers every compression row (`content-encoding`) and caching row (`cache-control`, `etag`, content-hashed filenames).
+2. Not viable: `[SKIP] <category>, <one reason>` and no `iterations[]` row. Never skip an applicable category to finish sooner.
+3. Viable: `[TRY] <category>`. Make the smallest cleanly revertable change, rebuild and restart so the server serves it (also before the final pass), re-measure exactly like the baseline (same URL, run count, conditions, median), and keep or revert.
 
-Profiling still matters. It decides **whether** a category is viable here and
-**what** your extras should be. It does not decide the order.
+After a keep, skip the later rows it already covers and name it (`[SKIP] Enable Gzip Compression, covered by the precompression keep`): the kept row's `subsumes` list, plus any unlisted row the keep already does. Never skip a row because it resembles a miss.
 
-### 2a. Walk the checklist, one category per iteration
+If the entry page is a prebuilt artifact this repo doesn't build (downloaded tarball, vendored bundle, committed compiled SPA), try only server-side rows (compression, cache headers, the in-repo HTML template) and skip artifact-internal rows with a reason. Hand-editing compiled output is not a keep.
 
-For each category in rank order:
-
-1. **Check whether it is viable in this codebase.** A few minutes of reading,
-   not an iteration. Already done? Does the stack have this surface? Plausibly
-   on the critical path?
-
-   **Probe once, decide many.** One request for the entry page and its heaviest
-   assets with `Accept-Encoding: gzip, br` answers every compression row
-   (`content-encoding`), and the same response headers answer the caching rows
-   (`cache-control`, `etag`, content-hashed filenames). Take that look during
-   the baseline and reuse it.
-
-2. **Not viable → skip it, and say why.** `[SKIP] <category> — <one reason>`.
-   A skip costs no measurement and gets no row in `iterations[]`. Never spend an
-   iteration on something you already know does not apply, and never skip a
-   category that does apply to reach the end sooner.
-3. **Viable → spend one iteration on it.** `[TRY] <category>`, then:
-   - **Implement the smallest change that tests it.** Make it cleanly
-     revertable: commit it on the working branch, or keep the tree in a
-     `git stash`-able state.
-   - **Rebuild and restart** whatever the stack needs so the server is
-     serving the changed code, not the baseline artifact. Do the same before
-     the final pass.
-   - **Re-measure exactly like the baseline** (`[TEST] …`). Same URL, same run
-     count, same conditions, median again. Never compare a 1-run number to a
-     3-run median.
-   - **Keep or revert, by the numbers** (below).
-
-### After a keep, skip what it subsumes
-
-Some rows are the same technique under a narrower name. After a keep, skip any
-later row the kept change already covers, naming the keep:
-`[SKIP] Enable Gzip Compression — covered by the precompression keep`. A row
-may carry a `subsumes` list. Trust it, and apply the rule with or without it.
-Skip a row because the kept change already did it, never because it looks
-similar to something that missed.
-
-### When the LCP surface is a prebuilt artifact
-
-If the entry page is served from an artifact this repo does not build (a
-downloaded dashboard tarball, a vendored bundle, a compiled SPA committed as
-static files), you cannot rebuild its JS/CSS/fonts. Attempt only the rows you
-can change from this repo's server side: compression, cache headers, and the
-HTML document itself when the template is in-repo. Skip every artifact-internal
-row with a one-line reason. Hand-editing compiled output is not a keep.
-
-### 2b. Then up to five of your own
-
-When the checklist is exhausted, and only then, pick up to five hypotheses that
-were **not** on the board, shaped by what profiling showed in this codebase.
-Announce them as `[EXTRA] <n> follow-ups chosen: …`, then run them one at a
-time under the same keep/revert rules. Fewer than five is fine when you are out
-of honest ideas. Say so in `[DONE]` rather than padding the run.
+Extras come only after the checklist: up to five hypotheses not on it, from this codebase's profile ([jjcm/speedupskill](https://github.com/jjcm/speedupskill) is a measured technique catalog). Announce `[EXTRA] <n> follow-ups chosen: …` and run each under the same rules. Fewer is fine; say so in `[DONE]`.
 
 ### Keep or revert
 
-- A **serious improvement** means the north star improved beyond the measured
-  noise floor, AND by at least **5% or 20 ms**, whichever is larger for the
-  metric's scale. An FCP-only win that **regresses LCP does not count**.
-- Kept → `kept: true`.
-- Anything else → **revert completely**, no half-kept experiments, and record
-  `kept: false`. A revert costs only the iteration. Several in a row change
-  nothing about what you do next.
-- Report `[RESULT] <delta> — kept` or
-  `[RESULT] <delta> — reverted, below the noise floor`.
+- Keep (`kept: true`) only if the north star beats the noise floor and improves by at least 5% or 20 ms, whichever is larger. An FCP win that regresses LCP is not a keep.
+- Otherwise revert completely and record `kept: false`. A revert streak changes nothing.
+- `[RESULT] <delta>, kept` or `[RESULT] <delta>, reverted, below the noise floor`.
 
-### Every measurement is a row with numbers in it
+### Record every measurement
 
-Rewrite `results.json` the moment a `[TEST]` finishes, with:
-
-- a **generic `name`** (never blank), `description`, `category`, `notes`;
-- **`deltaMs` and `deltaPct`**, the north-star change against the previous kept
-  state, negative when faster;
-- **`measured`**, the absolute medians per mode, same shape as `baseline`;
-- **`kept`**, `true` or `false`, never absent.
-
-On a keep, also refresh `results.final` for the modes you measured.
-
-Never append a row with no numbers. A miss is a row too. A skip is not a row.
-Keep the file valid JSON at all times.
+Rewrite `results.json` (valid JSON at all times) when each `[TEST]` finishes: generic `name` (never blank), `description`, `category`, `notes`, `deltaMs`/`deltaPct` (north star vs previous kept state, negative when faster), `measured` (medians per mode, `baseline` shape), `kept` (always present). On a keep, refresh `results.final`. Misses are rows; skips are not; no row without numbers.
 
 ## Naming an improvement
 
-`name`, `category` and `description` describe a **generic technique** that
-could apply to any site. Site-specific detail (files touched, byte counts, why
-you reverted) goes in `notes`.
+`name`, `category`, and `description` name a generic technique as a present-tense instruction to the next site. Site detail (files, bytes, revert reason) goes in `notes`. The three generic fields never contain proper nouns, file or module names, sizes, versions, counts, CSS classes, routes, process footnotes like `(second attempt)`, or changelog voice (`Added…`): `Lazy-load Hidden 262KB Changelog Rocket.gif` becomes `Lazy-load unseen images`, and `Playfair Display 4 Weights → 1` becomes `Reduce font payload`.
 
-None of the three generic fields may contain product or component proper nouns,
-file or module names, byte sizes, versions or counts, CSS classes, route or API
-paths, process footnotes such as `(second attempt)`, or changelog voice
-(`Added…`, `Removed…`). Write a technique in the present tense as an
-instruction to the next site.
+Reuse a checklist category's name and description when one fits. One technique is one category (`Lazy-load the Settings Modal` and `Lazy-load the JSON Editor` are the same). Use `category: null` when nothing fits and no generic name works.
 
-| bad (one repo)                                | good (generic technique)  |
-| --------------------------------------------- | ------------------------- |
-| `Lazy-load Chat Side-pane Components`         | `Lazy-load components`    |
-| `Lazy-load Hidden 262KB Changelog Rocket.gif` | `Lazy-load unseen images` |
-| `Playfair Display 4 Weights → 1`              | `Reduce font payload`     |
-| `Remove Duplicate 1MB Basic_examples Fetch`   | `Skip redundant fetches`  |
+## Step 3: stop rule
 
-Prefer an existing checklist category name whenever one fits, and reuse its
-description. Do not invent a category per component type. `Lazy-load the
-Settings Modal` and `Lazy-load the JSON Editor` are one technique. Leave
-`category` as `null` when nothing fits and you cannot phrase a generic name.
+Stop only when every category is tried or skipped in rank order and the extras are spent or you are out of honest ideas (`stoppedReason: "checklist-complete"`), or when the user stops you (`"user"`). No miss limit or run count ends the session.
 
-## Step 3 — the stop rule
+Before exit:
 
-Stop when **both** halves are done:
-
-1. every checklist category has been tried or skipped, in rank order, and
-2. your extras are done: budget spent, or no honest hypothesis left.
-
-Then set `stoppedReason: "checklist-complete"`. Set `"user"` whenever the user
-asks you to stop.
-
-**There is no miss limit and no run count that ends the session.** Do not stop
-at five measurements, do not stop on a streak of reverts, do not cut the
-checklist short to get to your own ideas, and do not skip a category to save
-time.
-
-Before you exit:
-
-1. Run one final full measurement pass (cold + warm) and write it to
-   `results.final`.
-2. If the kept changes are on a branch you can push and the user asked for a
-   PR, open one with the measured deltas in the description and put its URL in
-   `site.prUrl`. Do not open one otherwise.
-3. Set `stoppedReason`, make sure every iteration is recorded, and report
-   `[DONE] <one sentence>` with the keep count and the baseline-to-final
-   north-star delta.
+1. Final full pass (cold and warm) into `results.final`.
+2. Only if the user asked and the branch is pushable, open a PR with the measured deltas and put its URL in `site.prUrl`.
+3. Set `stoppedReason`, confirm every iteration is recorded, and report `[DONE] <one sentence>` with the keep count and the baseline-to-final north-star delta.
 
 ## Discipline
 
-- Measure first. A change you cannot measure is a change you revert.
-- One change per iteration. Entangled changes teach nothing.
-- Numbers decide, not vibes. "It should be faster" is not a keep.
-- Do not merge lab harnesses, profiling scripts, or rejected experiments into
-  the site. Keep them in `.makefaster/` or delete them.
-- Reject known traps: preloading grid thumbnails, `fetchpriority` washes,
-  caching error responses, `srcset` rungs bigger than the CSS slot.
-- Copy the _shape_ of known wins, not the file names. The measured technique
-  catalog at [jjcm/speedupskill](https://github.com/jjcm/speedupskill) is worth
-  reading when picking extras.
+- Lab harnesses, profiling scripts, and rejected experiments stay in `.makefaster/` or get deleted, never in the site.
+- Known traps: preloading grid thumbnails, `fetchpriority` washes, caching error responses, `srcset` rungs bigger than the CSS slot.
 
 ## `results.json` schema
 
-All times are milliseconds. Deltas are negative when the site got faster.
+Times in milliseconds.
 
 ```json
 {
@@ -277,10 +117,7 @@ All times are milliseconds. Deltas are negative when the site got faster.
     "cold": { "lcpMs": 2400, "ttiMs": 3900, "fcpMs": 1400, "tbtMs": 310, "cls": 0.08, "score": 72 },
     "warm": { "lcpMs": 1100, "ttiMs": 1700, "fcpMs": 600, "tbtMs": 120 }
   },
-  "final": {
-    "cold": { "lcpMs": 1750, "ttiMs": 3050, "fcpMs": 1150, "tbtMs": 190, "cls": 0.03, "score": 91 },
-    "warm": { "lcpMs": 780, "ttiMs": 1240, "fcpMs": 420, "tbtMs": 70 }
-  },
+  "final": { "cold": { "lcpMs": 1750, "ttiMs": 3050 }, "warm": { "lcpMs": 780, "ttiMs": 1240 } },
   "iterations": [
     {
       "n": 1,
@@ -293,34 +130,13 @@ All times are milliseconds. Deltas are negative when the site got faster.
       "deltaMs": -260,
       "deltaPct": -10.8,
       "kept": true
-    },
-    {
-      "n": 2,
-      "name": "Preload LCP image",
-      "description": "Preload the image the largest contentful paint waits on",
-      "category": "Preload LCP Image",
-      "notes": "Preloaded the first 8 grid thumbnails; LCP regressed, reverted",
-      "phase": "checklist",
-      "measured": { "cold": { "lcpMs": 2290, "ttiMs": 3750 } },
-      "deltaMs": 150,
-      "deltaPct": 7.0,
-      "kept": false
     }
   ],
   "stoppedReason": "checklist-complete"
 }
 ```
 
-Field notes:
-
-- `site` is optional. `site.url` is the bare domain if the repo makes it
-  obvious. `site.prUrl` only when a PR was opened.
-- `baseline` / `final` are medians per mode. `lcpMs` and `ttiMs` are required
-  per included mode. `fcpMs`, `tbtMs`, `cls`, `score` are welcome extras.
-  `final` is re-measured after the last kept change and again before exit.
-- `iterations[].measured` is required on every measured iteration, kept or
-  reverted. `deltaMs` / `deltaPct` compare the median to the previous kept
-  state.
-- `iterations[].phase` is `"checklist"` or `"extra"`, so a session that
-  stopped early cannot read as a finished one.
-- `stoppedReason` is `"checklist-complete"`, `"user"`, or `null` while running.
+- `site` is optional: `site.url` is the bare domain when obvious, `site.prUrl` only when a PR was opened.
+- `baseline` and `final` are medians per mode: `lcpMs` and `ttiMs` required per included mode, `fcpMs`, `tbtMs`, `cls`, `score` optional. Re-measure `final` after the last keep and again before exit.
+- `iterations[].phase` is `"checklist"` or `"extra"`.
+- `stoppedReason` is `null` while running.

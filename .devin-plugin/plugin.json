@@ -1,0 +1,15 @@
+{
+  "name": "knowledge-base",
+  "version": "1.0.0",
+  "description": "Meta-plugin for Robert Sun's agent plugins. Installing this repo installs every plugin listed in requiredPlugins.",
+  "author": { "name": "Robert Sun" },
+  "license": "MIT",
+  "keywords": ["skills", "plugins", "solar-mode"],
+  "requiredPlugins": [
+    {
+      "source": "git-subdir",
+      "url": "https://github.com/sunwrobert/knowledge-base.git",
+      "path": "plugins/solar"
+    }
+  ]
+}

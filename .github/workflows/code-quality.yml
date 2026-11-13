@@ -28,3 +28,6 @@ jobs:
 
       - name: Unit tests
         run: bun run test:unit
+
+      - name: Validate skills and plugins
+        run: bun run validate
