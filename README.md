@@ -19,7 +19,7 @@ The repo follows the [Agent Plugins](https://agent-plugins.org) format, so Devin
 
 ## The solar plugin
 
-`plugins/solar` is the working style as one installable unit. `solar-mode` is its entry point, and the plugin holds every skill `solar-mode` routes to, directly or through another skill: 53 of the 74 skills here. `bun run validate` fails when a skill in the plugin links to one outside it.
+`plugins/solar` is the working style as one installable unit. `solar-mode` is its entry point, and the plugin holds every skill `solar-mode` routes to, directly or through another skill: 53 of the 73 skills here. `bun run validate` fails when a skill in the plugin links to one outside it.
 
 **Claude Code**
 
@@ -36,7 +36,7 @@ The repo follows the [Agent Plugins](https://agent-plugins.org) format, so Devin
 
 ## All skills
 
-`skills/` holds 74 skills, 21 of them outside the solar plugin. Link them at user scope so every agent (Claude Code, Codex, Cursor, Pi) picks them up. The loop skips any name that already exists, so an employer's internal version of a skill keeps precedence on a work machine:
+`skills/` holds 73 skills, 20 of them outside the solar plugin. Link them at user scope so every agent (Claude Code, Codex, Cursor, Pi) picks them up. The loop skips any name that already exists, so an employer's internal version of a skill keeps precedence on a work machine:
 
 ```bash
 mkdir -p ~/.agents/skills ~/.claude/skills

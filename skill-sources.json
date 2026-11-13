@@ -652,12 +652,6 @@
       "inKnowledgeBase": true
     },
     {
-      "name": "sync-kb",
-      "status": "local-or-unverified",
-      "inKnowledgeBase": true,
-      "note": "Personal skill; no external upstream."
-    },
-    {
       "name": "teach",
       "source": "https://github.com/cursor/plugins",
       "path": "pstack/skills/teach",
