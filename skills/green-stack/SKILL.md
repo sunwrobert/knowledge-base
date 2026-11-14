@@ -3,10 +3,12 @@ name: green-stack
 description: >-
   Get a PR stack merge-ready bottom-up: repair conflicts, fix required CI and blocking review findings, report what remains. Delegates stack mechanics to the installed stack-management skill; never queues or merges. Use for "green the stack" or "restack".
 metadata:
-  version: 2.3.0
+  version: 2.4.0
 ---
 
 # Green stack
+
+Resume each layer's [completion checklist](../ship-with-proof/SKILL.md#completion-checklist); recheck it after restacking.
 
 ## Stack tools
 

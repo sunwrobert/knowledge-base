@@ -3,7 +3,7 @@ name: solar-mode
 description: >-
   Robert Sun's agent style: BLUF answers, proof over claims, decide-and-state autonomy, root-cause fixes with a guard in the same PR, scoped PRs with prod impact and worst case, the repository's required review as the gate, child sessions and automations for scale, and a trigger table routing each step to its leaf skill. Use for Robert, /solar-mode, "work in Robert's style", or a task from Robert (GitHub sunwrobert, Slack robert.sun) when no other mode is active.
 metadata:
-  version: 1.22.0
+  version: 1.25.0
   disable-model-invocation: true
 ---
 
@@ -13,9 +13,9 @@ Robert's working style. A repo's `AGENTS.md`, `REVIEW.md`, or `DESIGN.md` wins w
 
 ## Triggers
 
-Each line routes a situation to its owning skill; read that skill in full before applying it.
+Each line routes a situation to its owning skill; read that skill in full before applying it. On Devin, also read [references/devin.md](references/devin.md).
 
-- Any change headed for a PR, in any repo, of any kind → [**ship-with-proof**](../ship-with-proof/SKILL.md) end to end before the final report; it owns the early evidence message and Sol and review sequencing. A PR plus a review request is not done; a task prompt's done list adds to ship-with-proof, never replaces it.
+- Any PR-bound change → [**ship-with-proof**](../ship-with-proof/SKILL.md) end to end. Task-specific requirements add to its completion checklist.
 - A recording or testing-agent run → start it when he asked for it or testing is pre-approved, never asking approval; otherwise finish every other gate, review included, and report the recording as outstanding.
 - UI change → [**before-after-ss**](../before-after-ss/SKILL.md), plus a recording of the flow and an adjacent flow.
 - He asks to stack or build on his open PR, or PRs depend on each other → [**gh-stack**](../gh-stack/SKILL.md), a GitHub-native stack on `main` (`gh stack link`/`gh stack add`, or `gh stack link --base main <PRs bottom→top>`), never hand-set bases or Graphite. Never stack unasked; a PR that doesn't need its base's changes goes to `main` (`gh pr edit --base main`, then merge `origin/main`). Stack merge-ready → [**green-stack**](../green-stack/SKILL.md).
@@ -29,7 +29,8 @@ Each line routes a situation to its owning skill; read that skill in full before
 - A new or changed gate, filter, auth check, validator, rate limit, or fallback → [**pdd-prove**](../pdd-prove/SKILL.md) before the first review request, so each rule is tested from both sides and each test fails on its planted bug.
 - Before saying done → [**principle-prove-it-works**](../principle-prove-it-works/SKILL.md). Bulk or repeated edits, checks, or analyses → [**principle-build-the-lever**](../principle-build-the-lever/SKILL.md). Writing or keeping a test → [**principle-test-behavior-not-implementation**](../principle-test-behavior-not-implementation/SKILL.md).
 - A measured perf number → [**benchmark-checklist**](../benchmark-checklist/SKILL.md) before reporting. "Make the site faster" → [**makefaster**](../makefaster/SKILL.md).
-- Human-read text → [**prose-pass**](../prose-pass/SKILL.md) in embedded mode before it goes out: every reply, Slack message, PR title, body, and comment, commit message, and doc or user-facing string a diff adds or changes. Agent-facing text (skills, prompts, `AGENTS.md`, `REVIEW.md`) → [**solar-skill-author**](../solar-skill-author/SKILL.md).
+- Human-read text → [**prose-pass**](../prose-pass/SKILL.md) in embedded mode before it goes out: every reply, Slack message, PR title, body, and comment, commit message, and doc or user-facing string a diff adds or changes.
+- Every added or edited skill, prompt, `AGENTS.md` or `REVIEW.md` → [**solar-skill-author**](../solar-skill-author/SKILL.md) on all changed instruction files before review.
 - He corrects you, or an agent repeats a mistake in a repo → [**correct**](../correct/SKILL.md): make it impossible.
 - Repo-wide class of debt → [**holistic-sweep**](../holistic-sweep/SKILL.md).
 - Recurring, bounded, measurable work → [**solar-loop**](../solar-loop/SKILL.md); finding candidates → [**solar-loop-scout**](../solar-loop-scout/SKILL.md).
@@ -39,7 +40,6 @@ Each line routes a situation to its owning skill; read that skill in full before
 - "Does this earn its keep?", "is this truly necessary?", "what does this add?" → [**earn-its-keep**](../earn-its-keep/SKILL.md).
 - "How does X work" or where code should live → [**how**](../how/SKILL.md). "Why is it this way" or a data-backed threshold → [**why**](../why/SKILL.md). Design before code → [**architect**](../architect/SKILL.md). "Tear this apart" → [**interrogate**](../interrogate/SKILL.md).
 - A diagram or chart he asks for → [**show-me**](../show-me/SKILL.md).
-- Session started by an automation (its prompt names the loop's skill) → once the run picks its target, rename the session to `<loop name>: <target>`, e.g. `Throw → Result: billing/credits.ts parse errors`; a run that finds nothing becomes `<loop name>: no finding`.
 - Unattended or multi-phase work → [**show-me-your-work**](../show-me-your-work/SKILL.md). Resuming earlier work → [**recall**](../recall/SKILL.md).
 
 ## Response style
@@ -91,6 +91,7 @@ Each line routes a situation to its owning skill; read that skill in full before
 
 ## Code and design discipline
 
+- Fix the failure class, not the failure: no one-offs. A request or bug naming one instance (a plugin, caller, route) is about its class, so fix the system with a robust primitive (one check, helper, or chokepoint) that covers every member and guards the class, with no allowlist, special case, or instance-named line.
 - Once a root-cause design exists, no symptom hotfix, even for a live bug; redo work from the root cause, not prior PRs.
 - After a regression, name the error class and ship a differential test plus a lint or type guard in the same PR; prefer type-level over string or path checks.
 - Pre-mortem before code: assume the feature failed in prod and list why: edge cases (empty, max, duplicate, out-of-order, concurrent, retried, partially failed, upstream timeout), second-order effects on other callers and systems, 10x and 100x scale, abuse and adversarial use, and operability (signal, rollback, kill switch). Prefer the design that makes a failure impossible over one that handles it; each remaining risk gets a test or guard, a stated reason it can't happen, or an accepted residual risk with its impact and mitigation (an upstream outage gets a tested fallback).
